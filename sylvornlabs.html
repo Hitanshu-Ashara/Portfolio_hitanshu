@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sylvorn Labs | Case Study – Ashara Hitanshu</title>
+    <meta name="description" content="Case study for Sylvorn Labs – A modern, minimalist SaaS company website by UX Designer Ashara Hitanshu.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --font-serif: 'Instrument Serif', serif;
+            --font-sans: 'Outfit', sans-serif;
+            --border: 2px solid var(--black);
+            --pad-sm: 2rem;
+            --pad-md: 4rem;
+            --pad-lg: 8rem;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        ::selection { background: var(--black); color: var(--white); }
+        body { background-color: var(--white); color: var(--black); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        .serif { font-family: var(--font-serif); }
+        .uppercase { text-transform: uppercase; }
+        .container { max-width: 1920px; margin: 0 auto; border-left: var(--border); border-right: var(--border); min-height: 100vh; }
+
+        /* Nav */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: var(--pad-sm) var(--pad-md); border-bottom: var(--border); }
+        .logo { font-size: 1.5rem; font-weight: 800; text-decoration: none; color: var(--black); font-family: var(--font-serif); letter-spacing: -0.02em; }
+        .back-link { font-weight: 600; text-decoration: none; color: var(--black); font-size: 1.1rem; position: relative; padding-bottom: 4px; }
+        .back-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: var(--black); transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; }
+        .back-link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+        /* Hero */
+        .cs-hero { padding: var(--pad-lg) var(--pad-md); text-align: center; border-bottom: var(--border); }
+        .cs-type { display: inline-block; padding: 0.5rem 1.5rem; border: 1px solid var(--black); font-weight: 500; font-size: 0.9rem; letter-spacing: 0.08em; margin-bottom: 3rem; }
+        .cs-title { font-size: clamp(3rem, 8vw, 8rem); line-height: 0.9; margin-bottom: 1.5rem; letter-spacing: -0.02em; font-weight: 400; }
+        .cs-desc { font-size: clamp(1.25rem, 2vw, 1.5rem); max-width: 820px; margin: 0 auto; font-weight: 300; line-height: 1.6; }
+
+        /* Sections */
+        .cs-section { display: grid; grid-template-columns: 280px 1fr; border-bottom: var(--border); }
+        .cs-section-label { padding: var(--pad-md); border-right: var(--border); font-size: 1.25rem; font-weight: 700; letter-spacing: 0.05em; }
+        .cs-section-content { padding: var(--pad-md); font-size: 1.15rem; font-weight: 300; line-height: 1.7; }
+        .cs-section-content p { margin-bottom: 1.5rem; }
+        .cs-section-content p:last-child { margin-bottom: 0; }
+        .cs-section-content ul { list-style-type: square; margin-left: 1.5rem; }
+        .cs-section-content li { margin-bottom: 0.6rem; }
+
+        /* Two-col grid inside content */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+        .two-col:last-child { margin-bottom: 0; }
+        .col-block h5 { font-family: var(--font-serif); font-size: 1.75rem; margin-bottom: 1.25rem; font-weight: 400; letter-spacing: -0.01em; }
+
+        /* Outcome */
+        .outcome-text { font-size: clamp(1.35rem, 2.5vw, 1.75rem); line-height: 1.4; max-width: 860px; font-weight: 300; }
+
+        /* Insight */
+        .insight-box { background: var(--black); color: var(--white); padding: var(--pad-md); }
+        .insight-box h4 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1.25rem; font-weight: 400; line-height: 1; }
+        .insight-box p { font-size: 1.2rem; font-weight: 300; max-width: 900px; line-height: 1.7; margin-bottom: 1rem; }
+        .insight-box ul { list-style-type: square; margin-left: 1.5rem; font-size: 1.1rem; font-weight: 300; }
+        .insight-box li { margin-bottom: 0.5rem; }
+
+        /* Footer */
+        footer { display: flex; justify-content: space-between; align-items: center; padding: var(--pad-sm) var(--pad-md); border-top: var(--border); font-weight: 700; }
+        .footer-nav-link { font-weight: 600; text-decoration: none; color: var(--black); font-size: 1rem; letter-spacing: 0.05em; position: relative; padding-bottom: 4px; }
+        .footer-nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: var(--black); transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; }
+        .footer-nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+        @media (max-width: 1024px) {
+            .cs-section { grid-template-columns: 1fr; }
+            .cs-section-label { border-right: none; border-bottom: var(--border); padding-bottom: 2rem; }
+            .two-col { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        @media (max-width: 768px) {
+            footer { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <nav>
+        <a href="index.html" class="logo uppercase">Ashara</a>
+        <a href="index.html#work" class="back-link uppercase">&larr; Back to Work</a>
+    </nav>
+
+    <header class="cs-hero">
+        <div class="cs-type uppercase">UI/UX Design &bull; Website Design &bull; SaaS / Tech Branding</div>
+        <h1 class="cs-title serif">Sylvorn Labs</h1>
+        <p class="cs-desc">A modern, minimalist website designed for a SaaS and software solutions company, focused on creating a strong brand presence, showcasing services, and building trust through a clean and structured digital experience.</p>
+    </header>
+
+    <!-- Overview -->
+    <section class="cs-section">
+        <div class="cs-section-label uppercase">Overview</div>
+        <div class="cs-section-content">
+            <div class="two-col">
+                <div class="col-block">
+                    <h5>Problem Statement</h5>
+                    <p>New and emerging tech companies often struggle to present their vision, services, and credibility effectively. Many SaaS websites are either too cluttered or fail to communicate their value clearly, leading to poor user engagement and weak brand perception.</p>
+                </div>
+                <div class="col-block">
+                    <h5>Solution</h5>
+                    <p>Designed a clean and scalable website experience that communicates Sylvorn Labs' vision, services, and expertise through structured layouts, minimal design, and strong visual hierarchy — ensuring clarity, trust, and engagement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Execution -->
+    <section class="cs-section">
+        <div class="cs-section-label uppercase">Execution</div>
+        <div class="cs-section-content">
+            <div class="two-col">
+                <div class="col-block">
+                    <h5>Key Features</h5>
+                    <ul>
+                        <li>Strong Hero Section with brand messaging and CTA</li>
+                        <li>Multi-page website (Work, Product, Blog, About, Careers, Contact, Solutions)</li>
+                        <li>Service and technology showcase sections</li>
+                        <li>Case study pages with detailed breakdowns</li>
+                        <li>Blog system with categories, filters, and author details</li>
+                        <li>Contact form (budget, timeline, category inputs)</li>
+                        <li>Email capture with "Notify Me" functionality</li>
+                        <li>Countdown timer for launch engagement</li>
+                        <li>Social media integration</li>
+                        <li>Fully responsive design (desktop + mobile)</li>
+                        <li>Scalable design system for future expansion</li>
+                    </ul>
+                </div>
+                <div class="col-block">
+                    <h5>Design Style</h5>
+                    <ul>
+                        <li><strong>Tone:</strong> Minimal, futuristic, and professional</li>
+                        <li><strong>Colors:</strong> Navy Blue (#10174A) with white for strong contrast</li>
+                        <li><strong>Typography:</strong> Modern display font (Mad Tommy)</li>
+                        <li><strong>UI Elements:</strong> Clean layouts, structured grids, subtle animations</li>
+                        <li><strong>Experience Focus:</strong> Clarity, trust-building, and brand authority</li>
+                    </ul>
+
+                    <h5 style="margin-top: 2.5rem;">My Role (UX Designer)</h5>
+                    <ul>
+                        <li>Designed complete website structure and user flow</li>
+                        <li>Created wireframes and high-fidelity UI screens</li>
+                        <li>Built a consistent design system and layout framework</li>
+                        <li>Structured multi-page navigation and content hierarchy</li>
+                        <li>Designed complex pages (Work, Blog, Contact forms)</li>
+                        <li>Focused on brand storytelling and visual consistency</li>
+                        <li>Ensured responsive design across devices</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--black); padding-top: 2.5rem; margin-top: 1rem; display: flex; gap: 6rem;">
+                <div>
+                    <p style="font-weight: 600; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem;">Tools Used</p>
+                    <p style="font-size: 1.25rem; margin: 0;">Figma</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Outcome -->
+    <section class="cs-section">
+        <div class="cs-section-label uppercase">Outcome</div>
+        <div class="cs-section-content">
+            <p class="outcome-text">A complete SaaS website experience that effectively communicates the company's vision, builds credibility, and provides a scalable foundation for future growth and product expansion.</p>
+        </div>
+    </section>
+
+    <!-- Insight -->
+    <div class="insight-box">
+        <h4 class="serif">Important Insight</h4>
+        <p>This project highlights brand-driven UX thinking combined with scalable system design. It showcases the ability to:</p>
+        <ul>
+            <li>Design multi-page, content-heavy websites</li>
+            <li>Translate brand vision into a cohesive digital experience</li>
+            <li>Structure complex information architecture</li>
+            <li>Create scalable design systems for growing products</li>
+            <li>Balance aesthetics with business goals</li>
+        </ul>
+        <p style="margin-top: 1.5rem; font-size: 1rem; opacity: 0.7;">This positions a UX designer as someone who can handle real-world SaaS products and company-level design systems — not just individual screens.</p>
+    </div>
+
+    <footer>
+        <span class="uppercase">© 2026 Ashara Hitanshu</span>
+        <a href="index.html#work" class="footer-nav-link uppercase">All Projects &rarr;</a>
+    </footer>
+
+</div>
+</body>
+</html>

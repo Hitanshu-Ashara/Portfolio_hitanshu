@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PADMSHAKTI | Case Study</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --black: #000000; --white: #FFFFFF; --font-serif: 'Instrument Serif', serif; --font-sans: 'Outfit', sans-serif; --border: 2px solid var(--black); --pad-sm: 2rem; --pad-md: 4rem; --pad-lg: 8rem; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        ::selection { background: var(--black); color: var(--white); }
+        body { background-color: var(--white); color: var(--black); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        .serif { font-family: var(--font-serif); }
+        .uppercase { text-transform: uppercase; }
+        .container { max-width: 1920px; margin: 0 auto; border-left: var(--border); border-right: var(--border); min-height: 100vh; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: var(--pad-sm) var(--pad-md); border-bottom: var(--border); }
+        .logo { font-size: 1.5rem; font-weight: 800; text-decoration: none; color: var(--black); font-family: var(--font-serif); }
+        .back-link { font-weight: 600; text-decoration: none; color: var(--black); font-size: 1.1rem; border-bottom: 1px solid transparent; transition: border-color 0.3s ease; }
+        .back-link:hover { border-color: var(--black); }
+        .cs-hero { padding: var(--pad-lg) var(--pad-md); text-align: center; border-bottom: var(--border); }
+        .cs-title { font-size: clamp(3rem, 8vw, 8rem); line-height: 0.9; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+        .cs-type { display: inline-block; padding: 0.5rem 1.5rem; border: 1px solid var(--black); font-weight: 500; letter-spacing: 0.05em; margin-bottom: 3rem; }
+        .cs-desc { font-size: clamp(1.25rem, 2vw, 1.5rem); max-width: 800px; margin: 0 auto; font-weight: 300; }
+        .cs-section { display: grid; grid-template-columns: 1fr 2.5fr; border-bottom: var(--border); }
+        .cs-section-title { padding: var(--pad-md); border-right: var(--border); font-size: 1.5rem; font-weight: 600; }
+        .cs-section-content { padding: var(--pad-md); font-size: 1.2rem; font-weight: 300; }
+        .cs-section-content p { margin-bottom: 1.5rem; }
+        .cs-section-content ul { list-style-type: square; margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        .cs-section-content li { margin-bottom: 0.5rem; }
+        .insight-box { background: var(--black); color: var(--white); padding: var(--pad-md); }
+        .insight-box h4 { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 400; }
+        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .meta-grid:last-child { margin-bottom: 0; }
+        .meta-item h5 { font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 1rem; font-weight: 400; }
+        footer { display: flex; justify-content: space-between; padding: var(--pad-sm) var(--pad-md); font-weight: 700; }
+        @media (max-width: 1024px) {
+            .cs-section { grid-template-columns: 1fr; }
+            .cs-section-title { border-right: none; border-bottom: var(--border); padding-bottom: 2rem; }
+            .meta-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <nav>
+        <a href="index.html" class="logo uppercase">Ashara</a>
+        <a href="index.html#work" class="back-link uppercase">&larr; Back to Work</a>
+    </nav>
+
+    <header class="cs-hero">
+        <div class="cs-type uppercase">UI/UX Design • E-commerce Website</div>
+        <h1 class="cs-title serif">PADMSHAKTI</h1>
+        <p class="cs-desc">A modern e-commerce platform designed for a premium gifting brand, focusing on personalized gifting experiences, seamless product discovery, and elegant visual storytelling across corporate, event, and personal needs.</p>
+    </header>
+
+    <section class="cs-section">
+        <div class="cs-section-title uppercase">Overview</div>
+        <div class="cs-section-content">
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <h5>Problem Statement</h5>
+                    <p>Most gifting platforms are cluttered, generic, and lack emotional connection. Users struggle to find meaningful, customized gifts while businesses need scalable solutions for bulk and corporate gifting.</p>
+                </div>
+                <div class="meta-item">
+                    <h5>Solution</h5>
+                    <p>Designed a clean, premium e-commerce experience that simplifies gifting through intuitive navigation, curated categories, and personalization-focused flows. The platform blends emotional storytelling with functional shopping.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cs-section">
+        <div class="cs-section-title uppercase">Execution</div>
+        <div class="cs-section-content">
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <h5>Key Features</h5>
+                    <ul>
+                        <li>Smart Product Categorization (Corporate, Event, Personalized)</li>
+                        <li>Advanced Filters & Sorting for quick discovery</li>
+                        <li>Personalized Gifting Experience</li>
+                        <li>Seamless Cart & Checkout Flow</li>
+                        <li>User Profile & Order Management System</li>
+                        <li>Trust-focused sections (quality, delivery)</li>
+                    </ul>
+                </div>
+                <div class="meta-item">
+                    <h5>Design Style</h5>
+                    <ul>
+                        <li><strong>Tone:</strong> Premium, modern, trustworthy</li>
+                        <li><strong>Colors:</strong> Very Peri (primary) with soft neutrals</li>
+                        <li><strong>Typography:</strong> Clean, modern sans-serif</li>
+                        <li><strong>UI Elements:</strong> Structured layouts, minimal clutter, elegant spacing</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <h5>My Role (UX Designer)</h5>
+                    <ul>
+                        <li>Designed complete user journey from discovery to checkout</li>
+                        <li>Created wireframes and high-fidelity UI screens</li>
+                        <li>Defined visual identity aligned with brand tone</li>
+                        <li>Designed scalable system for future expansion</li>
+                    </ul>
+                </div>
+                <div class="meta-item">
+                    <h5>Tools Used</h5>
+                    <p>Figma</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cs-section">
+        <div class="cs-section-title uppercase">Outcome</div>
+        <div class="cs-section-content">
+            <p style="font-size: 1.5rem; line-height: 1.4; max-width: 800px; margin-bottom: 0;">A structured and visually refined e-commerce experience that improves product discovery, enhances user trust, and supports both individual and bulk gifting needs in a seamless way.</p>
+        </div>
+    </section>
+
+    <div class="insight-box">
+        <h4 class="serif">Important Insight</h4>
+        <p style="font-size: 1.25rem;">This project demonstrates end-to-end e-commerce UX thinking — not just UI. It includes complex flows like filtering, checkout, and personalization, which shows strong real-world product design capability beyond basic screens.</p>
+    </div>
+
+    <footer>
+        <span class="uppercase">© 2026 Ashara Hitanshu</span>
+        <a href="substracker.html" class="back-link uppercase" style="color: var(--black);">Next Project &rarr;</a>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashara Hitanshu | UI/Product Designer</title>
     <!-- SEO Best Practices -->
-    <meta name="description" content="Portfolio of Ashara Hitanshu, a UI-focused Product Designer creating clean SaaS experiences with strong UX thinking.">
+    <meta name="description"
+        content="Portfolio of Ashara Hitanshu, a UI-focused Product Designer creating clean SaaS experiences with strong UX thinking.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --black: #000000;
@@ -44,11 +48,22 @@
         }
 
         /* Utility Classes */
-        .serif { font-family: var(--font-serif); }
-        .uppercase { text-transform: uppercase; }
-        .divider { border-bottom: var(--border); }
-        .grid { display: grid; }
-        
+        .serif {
+            font-family: var(--font-serif);
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .divider {
+            border-bottom: var(--border);
+        }
+
+        .grid {
+            display: grid;
+        }
+
         .container {
             max-width: 1920px;
             margin: 0 auto;
@@ -64,7 +79,7 @@
             letter-spacing: -0.02em;
             font-weight: 400;
         }
-        
+
         h2 {
             font-size: clamp(3rem, 10vw, 10rem);
             line-height: 0.9;
@@ -152,9 +167,10 @@
         .hero h1 {
             text-transform: none;
             margin-bottom: 2.5rem;
-            margin-left: -0.05em; /* Optical alignment stringency */
+            margin-left: -0.05em;
+            /* Optical alignment stringency */
         }
-        
+
         .hero-bottom {
             display: block;
             margin-top: 1rem;
@@ -334,22 +350,67 @@
             justify-content: space-between;
             align-items: center;
             transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: default;
+            cursor: pointer;
+            user-select: none;
         }
-        
+
         .skill-item:last-child {
             border-bottom: none;
         }
 
-        .skill-item::after {
-            content: '↗';
-            font-family: var(--font-sans);
-            font-weight: 500;
+        .skill-arrow {
+            font-size: 1.75rem;
+            font-weight: 300;
+            line-height: 1;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .skill-item:hover {
+        .skill-item.open .skill-arrow {
+            transform: rotate(45deg);
+        }
+
+        .skill-item:hover,
+        .skill-item.open {
             background: var(--black);
             color: var(--white);
+        }
+
+        .skill-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .skill-panel.open {
+            max-height: 800px;
+            border-bottom: var(--border);
+        }
+
+        .skill-panel-inner {
+            padding: var(--pad-md);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            border-top: var(--border);
+        }
+
+        .skill-panel p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.75;
+            margin-bottom: 1.25rem;
+            color: #222;
+        }
+
+        .skill-panel p:last-child { margin-bottom: 0; }
+
+        .skill-panel-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: block;
         }
 
         /* Contact Section */
@@ -371,7 +432,7 @@
             font-size: 1.5rem;
             padding: 1.75rem 4.5rem;
         }
-        
+
         .contact .btn:hover {
             background: var(--white);
             color: var(--black);
@@ -405,7 +466,7 @@
             transform-origin: left;
             transition: transform 0.3s ease;
         }
-        
+
         .social-links a:hover::after {
             transform: scaleX(0);
             transform-origin: right;
@@ -429,25 +490,32 @@
                 --pad-md: 2rem;
                 --pad-lg: 4rem;
             }
+
             .hero-bottom {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-            .project-header, .project-details {
+
+            .project-header,
+            .project-details {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1.5rem;
             }
+
             .project-row p {
                 max-width: 100%;
             }
+
             .about-grid {
                 grid-template-columns: 1fr;
             }
+
             .about-text {
                 border-right: none;
                 border-bottom: var(--border);
             }
+
             .social-links {
                 flex-wrap: wrap;
                 gap: 2rem;
@@ -458,138 +526,209 @@
             .nav-links {
                 display: none;
             }
+
             footer {
                 flex-direction: column;
                 gap: 1rem;
                 text-align: center;
             }
+
             .section-header {
                 flex-direction: column;
                 gap: 1rem;
             }
+
             .skill-item {
                 font-size: 1.5rem;
             }
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    
-    <!-- Header -->
-    <nav>
-        <a href="#" class="logo uppercase">Ashara</a>
-        <div class="nav-links uppercase">
-            <a href="#work">Work</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
+    <div class="container">
 
-    <!-- Hero Section -->
-    <section class="hero divider">
-        <div class="hero-content">
-            <div class="role-tag uppercase">UI-focused Product Designer</div>
-            <h1 class="serif">Ashara<br>Hitanshu</h1>
-            <div class="hero-bottom">
-                <p class="hero-subtitle">Creating clean, scalable SaaS experiences with strong UX thinking.</p>
-                <a href="#work" class="btn uppercase">View Work</a>
+        <!-- Header -->
+        <nav>
+            <a href="#" class="logo uppercase">Ashara</a>
+            <div class="nav-links uppercase">
+                <a href="#work">Work</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
             </div>
-        </div>
-    </section>
+        </nav>
 
-    <!-- Projects Section -->
-    <section id="work" class="divider">
-        <div class="section-header">
-            <h2 class="serif uppercase">Selected<br>Work</h2>
-            <span class="section-number">(01)</span>
-        </div>
-
-        <div class="projects-list">
-            
-            <!-- Project 1 -->
-            <a href="#" class="project-row">
-                <div class="project-header">
-                    <h3 class="serif">Subscription Manager App</h3>
-                    <span class="project-type uppercase">Mobile App (iOS)</span>
+        <!-- Hero Section -->
+        <section class="hero divider">
+            <div class="hero-content">
+                <div class="role-tag uppercase">UX Designer</div>
+                <h1 class="serif">Ashara<br>Hitanshu</h1>
+                <div class="hero-bottom">
+                    <p class="hero-subtitle">Creating clean, scalable SaaS experiences with strong UX thinking.</p>
+                    <a href="#work" class="btn uppercase">View Work</a>
                 </div>
-                <div class="project-details">
-                    <p>A smart subscription tracking app that helps users manage recurring payments and avoid unnecessary spending.</p>
-                    <span class="view-link uppercase">View Case Study &rarr;</span>
-                </div>
-            </a>
-
-            <!-- Project 2 -->
-            <a href="#" class="project-row">
-                <div class="project-header">
-                    <h3 class="serif">Padmskti</h3>
-                    <span class="project-type uppercase">E-commerce Website</span>
-                </div>
-                <div class="project-details">
-                    <p>A modern e-commerce experience focused on clean UI, product clarity, and smooth user flow.</p>
-                    <span class="view-link uppercase">View Case Study &rarr;</span>
-                </div>
-            </a>
-
-            <!-- Project 3 -->
-            <a href="#" class="project-row" style="border-bottom: none;">
-                <div class="project-header">
-                    <h3 class="serif">Sylvorn Labs</h3>
-                    <span class="project-type uppercase">SaaS Website</span>
-                </div>
-                <div class="project-details">
-                    <p>A SaaS company website designed with a focus on clarity, conversion, and structured layout.</p>
-                    <span class="view-link uppercase">View Case Study &rarr;</span>
-                </div>
-            </a>
-
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="divider">
-        <div class="section-header">
-            <h2 class="serif uppercase">About<br>Designer</h2>
-            <span class="section-number">(02)</span>
-        </div>
-
-        <div class="about-grid">
-            <div class="about-text">
-                <p class="serif" style="font-size: clamp(1.8rem, 3.5vw, 3.5rem); margin-bottom: 3rem; line-height: 1.1;">Designing with uncompromising constraint to command attention.</p>
-                <p>I am a product designer specializing in pure, structural interfaces. Inspired heavily by print editorial constraints, I strip away the unnecessary, applying severe typographic hierarchies to digital SaaS products.</p>
-                <p>My work thrives on pure high contrast logic, rigid grid adherence, and the purposeful elimination of decorative elements. Form relies exclusively on structural integrity.</p>
             </div>
-            <div class="skills">
-                <div class="skill-item uppercase">UI Design & Logic</div>
-                <div class="skill-item uppercase">UX Architecture</div>
-                <div class="skill-item uppercase">Figma Mastery</div>
-                <div class="skill-item uppercase">Design Systems</div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="work" class="divider">
+            <div class="section-header">
+                <h2 class="serif uppercase">Selected<br>Work</h2>
+                <span class="section-number">(01)</span>
             </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2 class="serif uppercase">Let's work<br>together</h2>
-        <a href="mailto:hello@example.com" class="btn uppercase">Initiate Contact</a>
-        
-        <div class="social-links uppercase">
-            <a href="#">Email</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">Twitter</a>
-            <a href="#">Dribbble</a>
-        </div>
-    </section>
+            <div class="projects-list">
 
-    <!-- Footer -->
-    <footer>
-        <span class="uppercase">© 2026 Ashara Hitanshu</span>
-        <span class="uppercase">All Rights Reserved</span>
-        <span class="uppercase">Strictly Monochrome</span>
-    </footer>
+                <!-- Project 1 -->
+                <a href="soulfultone.html" class="project-row">
+                    <div class="project-header">
+                        <h3 class="serif">SoulfulTone</h3>
+                        <span class="project-type uppercase">Landing Page &amp; Web</span>
+                    </div>
+                    <div class="project-details">
+                        <p>A calming and emotionally driven website introducing an affirmation app, focusing on
+                            minimalism and peaceful user experience.</p>
+                        <span class="view-link uppercase">View Case Study &rarr;</span>
+                    </div>
+                </a>
 
-</div>
+                <!-- Project 2 -->
+                <a href="padmshakti.html" class="project-row">
+                    <div class="project-header">
+                        <h3 class="serif">PADMSHAKTI</h3>
+                        <span class="project-type uppercase">E-commerce Website</span>
+                    </div>
+                    <div class="project-details">
+                        <p>A modern e-commerce platform for a premium gifting brand, focusing on personalized
+                            experiences and elegant visual storytelling.</p>
+                        <span class="view-link uppercase">View Case Study &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="substracker.html" class="project-row">
+                    <div class="project-header">
+                        <h3 class="serif">SubStracker</h3>
+                        <span class="project-type uppercase">Mobile App Design</span>
+                    </div>
+                    <div class="project-details">
+                        <p>A clean and intuitive mobile app designed to help users track, manage, and optimize their
+                            subscription spending efficiently.</p>
+                        <span class="view-link uppercase">View Case Study &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Project 4 -->
+                <a href="sylvornlabs.html" class="project-row" style="border-bottom: none;">
+                    <div class="project-header">
+                        <h3 class="serif">Sylvorn Labs</h3>
+                        <span class="project-type uppercase">SaaS Website</span>
+                    </div>
+                    <div class="project-details">
+                        <p>A modern, minimalist website for a SaaS company focused on strong brand presence, service
+                            clarity, and trust-building digital experience.</p>
+                        <span class="view-link uppercase">View Case Study &rarr;</span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="divider">
+            <div class="section-header">
+                <h2 class="serif uppercase">About<br>Designer</h2>
+                <span class="section-number">(02)</span>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text">
+                    <span style="display: inline-block; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; padding: 0.4rem 1rem; border: 1px solid var(--black);">Clarity through structure</span>
+                    <p class="serif"
+                        style="font-size: clamp(1.8rem, 3.5vw, 3.5rem); margin-bottom: 3rem; line-height: 1.1;">
+                        Designing with uncompromising constraint to command attention.</p>
+                    <p>I am a UI/UX designer specializing in structured interfaces for mobile apps and web platforms. Inspired by editorial design principles, I focus on clarity, hierarchy, and reducing unnecessary complexity.</p>
+                    <p>My approach emphasizes strong grid systems, high contrast layouts, and intuitive user flows — ensuring every interface is purposeful and easy to navigate.</p>
+                    <p>With experience in both internship and freelance work, I design solutions that balance usability with clean, scalable structure.</p>
+                </div>
+                <div class="skills">
+                    <div class="skill-item uppercase" id="skill-uidesign" onclick="toggleSkill('uidesign')">
+                        <span>UI Design &amp; Logic</span>
+                        <span class="skill-arrow">+</span>
+                    </div>
+                    <div class="skill-panel" id="panel-uidesign">
+                        <div class="skill-panel-inner">
+                            <div>
+                                <span class="skill-panel-label">UI Design &amp; Logic</span>
+                                <p>I design interfaces by controlling what the user sees first.</p>
+                                <p>My approach is rooted in visual hierarchy — ensuring that the most important action or information is immediately clear. I decide what comes first by focusing on the primary action the user needs to take, and everything else supports that decision.</p>
+                            </div>
+                            <div>
+                                <p>Hierarchy is created through a combination of typography, spacing, and structured layout systems. I use size, weight, and contrast to guide attention, while spacing and alignment create clarity and separation between elements.</p>
+                                <p>Every screen is built with intention. No element is placed without purpose, and no visual noise is introduced without reason.</p>
+                                <p>The result is interfaces that feel clear, focused, and easy to navigate.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-item uppercase" id="skill-uxarch" onclick="toggleSkill('uxarch')">
+                        <span>UX Architecture</span>
+                        <span class="skill-arrow">+</span>
+                    </div>
+                    <div class="skill-panel" id="panel-uxarch"></div>
+                    <div class="skill-item uppercase" id="skill-figma" onclick="toggleSkill('figma')">
+                        <span>Figma Mastery</span>
+                        <span class="skill-arrow">+</span>
+                    </div>
+                    <div class="skill-panel" id="panel-figma"></div>
+                    <div class="skill-item uppercase" id="skill-ds" onclick="toggleSkill('ds')">
+                        <span>Design Systems</span>
+                        <span class="skill-arrow">+</span>
+                    </div>
+                    <div class="skill-panel" id="panel-ds"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <h2 class="serif uppercase">Let's work<br>together</h2>
+            <a href="mailto:hello@example.com" class="btn uppercase">Initiate Contact</a>
+
+            <div class="social-links uppercase">
+                <a href="#">Email</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Twitter</a>
+                <a href="#">Dribbble</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <span class="uppercase">© 2026 Ashara Hitanshu</span>
+            <span class="uppercase">All Rights Reserved</span>
+            <span class="uppercase">Strictly Monochrome</span>
+        </footer>
+
+    </div>
 
 </body>
+
+<script>
+    function toggleSkill(id) {
+        const item = document.getElementById('skill-' + id);
+        const panel = document.getElementById('panel-' + id);
+        if (!panel || !panel.innerHTML.trim()) return; // skip empty panels
+        const isOpen = item.classList.contains('open');
+        // Close all open panels first
+        document.querySelectorAll('.skill-item.open').forEach(el => el.classList.remove('open'));
+        document.querySelectorAll('.skill-panel.open').forEach(el => el.classList.remove('open'));
+        // If it wasn't open, open it
+        if (!isOpen) {
+            item.classList.add('open');
+            panel.classList.add('open');
+        }
+    }
+</script>
+
 </html>
