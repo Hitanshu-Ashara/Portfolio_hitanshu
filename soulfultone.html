@@ -3,134 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoulfulTone | Case Study</title>
+    <title>SoulfulTone | Real Client Project</title>
+    <meta name="description" content="SoulfulTone — A premium affirmation platform designed as a calming, emotionally engaging digital experience with minimalism, immersive visuals, and peaceful interactions.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --black: #000000; --white: #FFFFFF; --font-serif: 'Instrument Serif', serif; --font-sans: 'Outfit', sans-serif; --border: 2px solid var(--black); --pad-sm: 2rem; --pad-md: 4rem; --pad-lg: 8rem; }
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --font-serif: 'Instrument Serif', serif;
+            --font-sans: 'Outfit', sans-serif;
+            --border: 2px solid var(--black);
+            --pad-sm: 2rem;
+            --pad-md: 4rem;
+            --pad-lg: 8rem;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         ::selection { background: var(--black); color: var(--white); }
-        body { background-color: var(--white); color: var(--black); font-family: var(--font-sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            font-family: var(--font-sans);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
         .serif { font-family: var(--font-serif); }
         .uppercase { text-transform: uppercase; }
-        .container { max-width: 1920px; margin: 0 auto; border-left: var(--border); border-right: var(--border); min-height: 100vh; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: var(--pad-sm) var(--pad-md); border-bottom: var(--border); }
-        .logo { font-size: 1.5rem; font-weight: 800; text-decoration: none; color: var(--black); font-family: var(--font-serif); }
-        .back-link { font-weight: 600; text-decoration: none; color: var(--black); font-size: 1.1rem; border-bottom: 1px solid transparent; transition: border-color 0.3s ease; }
+        .container {
+            max-width: 1920px;
+            margin: 0 auto;
+            border-left: var(--border);
+            border-right: var(--border);
+            min-height: 100vh;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--pad-sm) var(--pad-md);
+            border-bottom: var(--border);
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--black);
+            font-family: var(--font-serif);
+        }
+        .back-link {
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--black);
+            font-size: 1.1rem;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
         .back-link:hover { border-color: var(--black); }
-        .cs-hero { padding: var(--pad-lg) var(--pad-md); text-align: center; border-bottom: var(--border); }
-        .cs-title { font-size: clamp(3rem, 8vw, 8rem); line-height: 0.9; margin-bottom: 1.5rem; letter-spacing: -0.02em; }
-        .cs-type { display: inline-block; padding: 0.5rem 1.5rem; border: 1px solid var(--black); font-weight: 500; letter-spacing: 0.05em; margin-bottom: 3rem; }
-        .cs-desc { font-size: clamp(1.25rem, 2vw, 1.5rem); max-width: 800px; margin: 0 auto; font-weight: 300; }
-        .cs-section { display: grid; grid-template-columns: 1fr 2.5fr; border-bottom: var(--border); }
-        .cs-section-title { padding: var(--pad-md); border-right: var(--border); font-size: 1.5rem; font-weight: 600; }
-        .cs-section-content { padding: var(--pad-md); font-size: 1.2rem; font-weight: 300; }
+
+        /* Hero */
+        .cs-hero {
+            padding: var(--pad-lg) var(--pad-md);
+            text-align: center;
+            border-bottom: var(--border);
+        }
+        .cs-title {
+            font-size: clamp(3rem, 8vw, 8rem);
+            line-height: 0.9;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        .cs-type {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--black);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            margin-bottom: 3rem;
+        }
+        .cs-desc {
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            max-width: 860px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Sections */
+        .cs-section {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            border-bottom: var(--border);
+        }
+        .cs-section-title {
+            padding: var(--pad-md);
+            border-right: var(--border);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .cs-section-content {
+            padding: var(--pad-md);
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
         .cs-section-content p { margin-bottom: 1.5rem; }
-        .cs-section-content ul { list-style-type: square; margin-left: 1.5rem; margin-bottom: 1.5rem; }
+        .cs-section-content ul {
+            list-style-type: square;
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
         .cs-section-content li { margin-bottom: 0.5rem; }
-        .insight-box { background: var(--black); color: var(--white); padding: var(--pad-md); }
-        .insight-box h4 { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1rem; font-weight: 400; }
-        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+
+        /* Meta grid */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
         .meta-grid:last-child { margin-bottom: 0; }
-        .meta-item h5 { font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 1rem; font-weight: 400; }
-        footer { display: flex; justify-content: space-between; padding: var(--pad-sm) var(--pad-md); font-weight: 700; }
+        .meta-item h5 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        /* Insight / highlight box */
+        .insight-box {
+            background: var(--black);
+            color: var(--white);
+            padding: var(--pad-md);
+        }
+        .insight-box h4 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        /* Tags row */
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            border: 1px solid var(--black);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        /* Screens list */
+        .screens-list {
+            counter-reset: screen-count;
+            list-style: none;
+            margin-left: 0;
+        }
+        .screens-list li {
+            counter-increment: screen-count;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.12);
+            display: flex;
+            align-items: baseline;
+            gap: 1.25rem;
+            font-size: 1.15rem;
+        }
+        .screens-list li::before {
+            content: "0" counter(screen-count);
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            opacity: 0.35;
+            flex-shrink: 0;
+        }
+        .screens-list li:last-child { border-bottom: none; }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--pad-sm) var(--pad-md);
+            font-weight: 700;
+        }
+
+        /* Responsive */
         @media (max-width: 1024px) {
             .cs-section { grid-template-columns: 1fr; }
             .cs-section-title { border-right: none; border-bottom: var(--border); padding-bottom: 2rem; }
             .meta-grid { grid-template-columns: 1fr; gap: 1.5rem; }
         }
+        @media (max-width: 640px) {
+            :root { --pad-md: 2rem; --pad-lg: 4rem; }
+            nav { padding: 1.5rem 2rem; }
+            footer { flex-direction: column; gap: 1rem; align-items: flex-start; }
+        }
     </style>
 </head>
 <body>
 <div class="container">
+
+    <!-- Navigation -->
     <nav>
         <a href="index.html" class="logo uppercase">Ashara</a>
         <a href="index.html#work" class="back-link uppercase">&larr; Back to Work</a>
     </nav>
 
+    <!-- Hero -->
     <header class="cs-hero">
-        <div class="cs-type uppercase">UI/UX Design • Landing Page & Web Experience</div>
+        <div class="cs-type uppercase">Real Client Project &nbsp;·&nbsp; UI/UX Design &nbsp;·&nbsp; Web Experience</div>
         <h1 class="cs-title serif">SoulfulTone</h1>
-        <p class="cs-desc">A calming and emotionally driven website designed to introduce an affirmation app, focusing on minimalism, soft visuals, and peaceful user experience to create a sense of mental comfort and clarity.</p>
+        <p class="cs-desc">A premium affirmation platform website designed to create a calming and emotionally engaging digital experience — combining minimalism, immersive visuals, and peaceful interactions that help users explore affirmation content with clarity and comfort.</p>
     </header>
 
+    <!-- Overview -->
     <section class="cs-section">
         <div class="cs-section-title uppercase">Overview</div>
         <div class="cs-section-content">
+            <p>SoulfulTone was designed as a modern subscription-based affirmation website that introduces users to a peaceful wellness experience through thoughtful visual storytelling and clean interaction design.</p>
+            <p>The website combines emotional design principles with a structured user journey, allowing users to explore the platform, access affirmation content, and subscribe through a seamless and distraction-free experience.</p>
+        </div>
+    </section>
+
+    <!-- Objective -->
+    <section class="cs-section">
+        <div class="cs-section-title uppercase">Objective</div>
+        <div class="cs-section-content">
+            <p>Create a premium and emotionally driven website experience that helps users:</p>
+            <ul>
+                <li>Discover affirmation content</li>
+                <li>Log into the platform effortlessly</li>
+                <li>Explore subscription plans</li>
+                <li>Feel calm, focused, and emotionally connected throughout the journey</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="cs-section">
+        <div class="cs-section-title uppercase">Key Features</div>
+        <div class="cs-section-content">
+            <ul>
+                <li>Emotion-driven Hero Section with immersive visuals</li>
+                <li>Minimal Navigation System for better focus</li>
+                <li>Clean Login Experience</li>
+                <li>Subscription Plan Selection Flow</li>
+                <li>Informational Blog &amp; About Pages</li>
+                <li>Fully Responsive Mobile &amp; Desktop Layouts</li>
+                <li>Smooth visual hierarchy with distraction-free UI</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Screens Designed -->
+    <section class="cs-section">
+        <div class="cs-section-title uppercase">Screens Designed</div>
+        <div class="cs-section-content">
+            <ol class="screens-list">
+                <li>Landing Page</li>
+                <li>Login Page</li>
+                <li>Subscription Page</li>
+                <li>Blog Page</li>
+                <li>About Page</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Design Direction -->
+    <section class="cs-section">
+        <div class="cs-section-title uppercase">Design Direction</div>
+        <div class="cs-section-content">
             <div class="meta-grid">
                 <div class="meta-item">
-                    <h5>Problem Statement</h5>
-                    <p>Many mental wellness platforms feel either too clinical or overly complex. Users looking for emotional support need a calm, distraction-free environment that feels safe, simple, and soothing.</p>
+                    <h5>Tone</h5>
+                    <p>Soulful, calming, modern, emotionally driven</p>
                 </div>
                 <div class="meta-item">
-                    <h5>Solution</h5>
-                    <p>Designed a soulful, minimalist web experience using soft pastel colors, clean typography, and gentle spacing to create a peaceful digital environment that encourages users to explore affirmations effortlessly.</p>
+                    <h5>Visual Style</h5>
+                    <ul>
+                        <li>Minimal dark UI</li>
+                        <li>Soft glowing accents</li>
+                        <li>Clean layouts with airy spacing</li>
+                        <li>Rounded UI components</li>
+                        <li>Subtle depth &amp; shadow system</li>
+                        <li>Premium wellness-inspired interface</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <h5>Typography</h5>
+                    <p>Modern, clean, and highly readable typography focused on emotional softness and clarity.</p>
+                </div>
+                <div class="meta-item">
+                    <h5>Design Process</h5>
+                    <div class="tag-row">
+                        <span class="tag">Moodboarding</span>
+                        <span class="tag">Layout Exploration</span>
+                        <span class="tag">Final UI</span>
+                    </div>
+                    <p style="margin-top:1.25rem; margin-bottom:0;">Focused heavily on emotional visual exploration to ensure the interface felt immersive, premium, and calming — rather than overly corporate or clinical.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- My Role -->
     <section class="cs-section">
-        <div class="cs-section-title uppercase">Execution</div>
+        <div class="cs-section-title uppercase">My Role</div>
         <div class="cs-section-content">
             <div class="meta-grid">
                 <div class="meta-item">
-                    <h5>Key Features</h5>
+                    <h5>End-to-End Designer</h5>
                     <ul>
-                        <li>Emotion-driven Hero Section with calming visuals</li>
-                        <li>Minimal Navigation System for clarity and focus</li>
-                        <li>Soft UI Feature Cards explaining app benefits</li>
-                        <li>Clean Login & Subscription Flow</li>
-                        <li>Informational Blog & About Pages</li>
-                        <li>Fully Responsive Design (Mobile-first approach)</li>
-                    </ul>
-                </div>
-                <div class="meta-item">
-                    <h5>Design Style</h5>
-                    <ul>
-                        <li><strong>Tone:</strong> Soulful, calming, warm</li>
-                        <li><strong>Colors:</strong> Soft pastels & light gradients</li>
-                        <li><strong>Typography:</strong> Modern, rounded, clean</li>
-                        <li><strong>UI Elements:</strong> Rounded edges, airy spacing, minimal shadows</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="meta-grid">
-                <div class="meta-item">
-                    <h5>My Role (UX Designer)</h5>
-                    <ul>
-                        <li>Created full user flow</li>
-                        <li>Designed wireframes & UI screens</li>
-                        <li>Defined visual direction and emotional tone</li>
-                        <li>Focused on simplicity & user comfort</li>
+                        <li>Defined the visual direction and emotional tone</li>
+                        <li>Created layout explorations and interface concepts</li>
+                        <li>Designed complete responsive UI screens</li>
+                        <li>Built structured user flows for login and subscriptions</li>
+                        <li>Maintained consistency across all pages and components</li>
                     </ul>
                 </div>
                 <div class="meta-item">
                     <h5>Tools Used</h5>
-                    <p>Figma</p>
+                    <div class="tag-row">
+                        <span class="tag">Figma</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Outcome -->
     <section class="cs-section">
         <div class="cs-section-title uppercase">Outcome</div>
         <div class="cs-section-content">
-            <p style="font-size: 1.5rem; line-height: 1.4; max-width: 800px; margin-bottom: 0;">A visually soothing and structured web experience that balances emotional storytelling with usability, making the affirmation app feel approachable and peaceful.</p>
+            <p style="font-size: 1.5rem; line-height: 1.4; max-width: 800px; margin-bottom: 0;">The final result was a visually immersive and emotionally engaging web experience that balances modern aesthetics with usability. The platform successfully communicates a sense of calmness and clarity while guiding users naturally through content discovery and subscription flows.</p>
         </div>
     </section>
 
+    <!-- Insight box -->
     <div class="insight-box">
-        <h4 class="serif">Important Insight</h4>
-        <p style="font-size: 1.25rem;">This project is not just UI—it shows emotional UX design, highlighting the ability to create environments that evoke a specific feeling and comfort, going beyond standard visual interfaces.</p>
+        <h4 class="serif">Design Insight</h4>
+        <p style="font-size: 1.25rem;">The design process focused heavily on emotional visual exploration — ensuring the interface felt immersive, premium, and calming rather than overly corporate or clinical. This project demonstrates the ability to create environments that evoke a specific feeling and comfort, going well beyond standard visual interfaces.</p>
     </div>
 
+    <!-- Footer -->
     <footer>
         <span class="uppercase">© 2026 Ashara Hitanshu</span>
         <a href="padmshakti.html" class="back-link uppercase" style="color: var(--black);">Next Project &rarr;</a>
     </footer>
+
 </div>
 </body>
 </html>

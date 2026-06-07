@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Command Center | Ashara Hitanshu</title>
+    <meta name="description" content="Personal Finance Operating System for Ashara Hitanshu. Private ledger tracking debts, PG rent runway, and monthly budgets.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           DESIGN TOKENS — Premium Monochrome
+        ============================================================ */
+        :root {
+            --ink:         #111111;
+            --ink-mid:     #555555;
+            --ink-light:   #999999;
+            --line:        #e8e8e8;
+            --line-strong: #111111;
+            --bg:          #ffffff;
+            --bg-subtle:   #fafafa;
+
+            --font-serif: 'Instrument Serif', serif;
+            --font-sans:  'Outfit', sans-serif;
+
+            /* Spacing scale */
+            --sp-2:  8px;
+            --sp-3:  12px;
+            --sp-4:  16px;
+            --sp-5:  20px;
+            --sp-6:  24px;
+            --sp-8:  32px;
+            --sp-10: 40px;
+            --sp-12: 48px;
+            --sp-16: 64px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        ::selection { background: var(--ink); color: var(--bg); }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-sans);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+
+        /* ============================================================
+           UTILITIES
+        ============================================================ */
+        .serif   { font-family: var(--font-serif); }
+        .upper   { text-transform: uppercase; }
+        .label   {
+            font-size: 10px; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--ink-light);
+        }
+        .divider-h  { width: 100%; height: 1px; background: var(--line); }
+        .divider-v  { width: 1px; background: var(--line); align-self: stretch; }
+
+        /* ============================================================
+           AUTH GATE
+        ============================================================ */
+        #auth-gate {
+            position: fixed; inset: 0;
+            background: var(--bg); z-index: 9999;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: var(--sp-8);
+        }
+        .auth-container {
+            width: 100%; max-width: 420px;
+            border: 1px solid var(--line-strong);
+            padding: var(--sp-10);
+            text-align: center;
+        }
+        .auth-logo {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--ink-light);
+            margin-bottom: var(--sp-8);
+            display: block;
+        }
+        .auth-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            line-height: 0.92; font-weight: 400;
+            margin-bottom: var(--sp-3);
+        }
+        .auth-subtitle {
+            font-size: 10px; font-weight: 600;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--ink-light);
+            margin-bottom: var(--sp-10);
+        }
+        .auth-form { display: flex; flex-direction: column; gap: var(--sp-4); }
+        .auth-input {
+            border: none; border-bottom: 2px solid var(--ink);
+            padding: 10px 8px; font-size: 1.8rem;
+            font-family: monospace; letter-spacing: 0.3em;
+            text-align: center; outline: none;
+            background: transparent;
+            transition: border-color 0.2s;
+        }
+        .auth-input:focus { border-color: var(--ink-light); }
+        .auth-btn {
+            background: var(--ink); color: var(--bg);
+            border: 1px solid var(--ink);
+            padding: var(--sp-4) var(--sp-6);
+            font-weight: 600; font-size: 13px;
+            letter-spacing: 0.08em; cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            font-family: var(--font-sans);
+        }
+        .auth-btn:hover { background: var(--bg); color: var(--ink); }
+        .auth-error {
+            color: var(--ink); font-weight: 600;
+            font-size: 11px; margin-top: var(--sp-2);
+            visibility: hidden; letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .auth-footer-note {
+            font-size: 10px; margin-top: var(--sp-8);
+            color: var(--ink-light); letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        /* ============================================================
+           DASHBOARD WRAPPER
+        ============================================================ */
+        #dashboard-content {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* ============================================================
+           NAV
+        ============================================================ */
+        nav {
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 var(--sp-10);
+            border-bottom: 1px solid var(--line);
+            background: var(--bg);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .nav-left { display: flex; align-items: center; gap: var(--sp-4); }
+        .logo {
+            font-size: 1.1rem; font-weight: 800;
+            text-decoration: none; color: var(--ink);
+            letter-spacing: -0.02em;
+        }
+        .nav-divider { width: 1px; height: 20px; background: var(--line); }
+        .nav-title {
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--ink-light);
+        }
+        .nav-right { display: flex; align-items: center; gap: var(--sp-6); }
+        .nav-time {
+            font-size: 13px; font-weight: 600;
+            letter-spacing: 0.04em; color: var(--ink-mid);
+            font-variant-numeric: tabular-nums;
+        }
+        .status-badge {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 10px; font-weight: 600;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: var(--ink-light);
+        }
+        .status-dot {
+            width: 6px; height: 6px;
+            background: var(--ink);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid var(--line);
+            padding: 6px 14px;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.06em; text-transform: uppercase;
+            cursor: pointer; color: var(--ink-mid);
+            font-family: var(--font-sans);
+            transition: all 0.15s;
+        }
+        .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+        .btn-solid {
+            background: var(--ink); color: var(--bg);
+            border: 1px solid var(--ink);
+            padding: 8px 18px;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.06em; text-transform: uppercase;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            transition: all 0.15s;
+        }
+        .btn-solid:hover { background: var(--ink-mid); border-color: var(--ink-mid); }
+        .btn-text {
+            background: transparent; border: none;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.06em; text-transform: uppercase;
+            cursor: pointer; color: var(--ink-mid);
+            font-family: var(--font-sans);
+            transition: color 0.15s;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .btn-text:hover { color: var(--ink); }
+
+        /* ============================================================
+           KPI STRIP
+        ============================================================ */
+        .kpi-strip {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            padding: var(--sp-10) var(--sp-10);
+            gap: 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .kpi-card {
+            padding: 0 var(--sp-8);
+            border-right: 1px solid var(--line);
+            display: flex; flex-direction: column;
+            gap: var(--sp-2);
+        }
+        .kpi-card:first-child { padding-left: 0; }
+        .kpi-card:last-child { border-right: none; }
+        .kpi-card.clickable { cursor: pointer; }
+        .kpi-card.clickable:hover .kpi-value { text-decoration: underline; text-underline-offset: 4px; }
+        .kpi-label-row {
+            display: flex; justify-content: space-between;
+            align-items: center;
+        }
+        .kpi-value {
+            font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+            font-weight: 700; line-height: 1;
+            letter-spacing: -0.02em; color: var(--ink);
+        }
+        .kpi-sub {
+            font-size: 10px; font-weight: 500;
+            color: var(--ink-light); letter-spacing: 0.03em;
+        }
+        .kpi-tag {
+            font-size: 9px; color: var(--ink-light);
+            letter-spacing: 0.05em; text-transform: uppercase;
+        }
+
+        /* ============================================================
+           FIRST SCREEN — 2 COLUMN LAYOUT
+        ============================================================ */
+        .fold-panel {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            border-bottom: 1px solid var(--line);
+        }
+        .fold-left { border-right: 1px solid var(--line); }
+        .fold-right { background: var(--bg-subtle); }
+
+        /* Section header bar */
+        .section-header {
+            padding: var(--sp-5) var(--sp-8);
+            border-bottom: 1px solid var(--line);
+            display: flex; justify-content: space-between;
+            align-items: center;
+        }
+        .section-name {
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--ink-light);
+        }
+        .section-meta {
+            font-size: 11px; font-weight: 500;
+            color: var(--ink-light);
+        }
+
+        /* Chart container */
+        .chart-area {
+            padding: var(--sp-6) var(--sp-8);
+            border-bottom: 1px solid var(--line);
+        }
+        .chart-svg-wrap {
+            width: 100%;
+            height: 200px;
+        }
+        .chart-svg { width: 100%; height: 100%; }
+
+        .chart-legend {
+            display: flex; gap: var(--sp-6);
+            justify-content: center;
+            padding-top: var(--sp-3);
+        }
+        .legend-item {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 10px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            color: var(--ink-mid);
+        }
+        .legend-swatch-solid { width: 10px; height: 10px; background: var(--ink); }
+        .legend-swatch-stripe {
+            width: 10px; height: 10px;
+            background: repeating-linear-gradient(45deg, #111 0, #111 1.5px, transparent 1.5px, transparent 5px);
+            border: 1px solid var(--ink);
+        }
+
+        /* Projection summary micro-cards */
+        .proj-strip {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1px; background: var(--line);
+            border-top: 1px solid var(--line);
+        }
+        .proj-card {
+            background: var(--bg);
+            padding: var(--sp-4) var(--sp-8);
+        }
+        .proj-card-val { font-size: 1rem; font-weight: 700; margin-top: 3px; }
+
+        /* Timeline table */
+        .timeline-area { border-bottom: 1px solid var(--line); }
+        .timeline-header-row {
+            display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+            padding: var(--sp-3) var(--sp-8);
+            background: var(--bg-subtle);
+            border-bottom: 1px solid var(--line);
+        }
+        .timeline-header-row span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mid); }
+        .timeline-rows-wrap { overflow-y: auto; }
+        .timeline-row {
+            display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+            padding: var(--sp-3) var(--sp-8);
+            font-size: 13px;
+            border-bottom: 1px solid var(--line);
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+        .timeline-row:last-child { border-bottom: none; }
+        .timeline-row:hover { background: var(--bg-subtle); }
+        .timeline-row.active { background: var(--ink); color: var(--bg); }
+        .tl-expand-row {
+            padding: var(--sp-3) var(--sp-8);
+            border-top: 1px solid var(--line);
+        }
+        .month-detail { display: none; padding: var(--sp-6) var(--sp-8); border-top: 1px solid var(--line); }
+        .month-detail.open { display: block; }
+        .month-detail-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-light); margin-bottom: var(--sp-4); }
+        .month-detail-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); }
+        .month-detail-item { display: flex; flex-direction: column; gap: 3px; }
+        .month-detail-name { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-light); }
+        .month-detail-val { font-size: 1rem; font-weight: 700; }
+
+        /* ============================================================
+           RIGHT PANEL — TRACKERS
+        ============================================================ */
+        .tracker-section {
+            padding: var(--sp-6) var(--sp-6);
+            border-bottom: 1px solid var(--line);
+        }
+        .tracker-section:last-child { border-bottom: none; }
+        .tracker-top-row {
+            display: flex; justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: var(--sp-4);
+        }
+        .tracker-name { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-light); }
+        .tracker-count { font-size: 11px; font-weight: 600; color: var(--ink-mid); }
+        .tracker-progress-row {
+            display: flex; align-items: baseline; gap: var(--sp-4);
+            margin-bottom: var(--sp-4);
+        }
+        .tracker-pct { font-size: 2rem; font-weight: 700; line-height: 1; letter-spacing: -0.02em; }
+        .tracker-remaining-wrap { display: flex; flex-direction: column; gap: 2px; }
+        .tracker-remaining { font-size: 13px; font-weight: 700; }
+        .tracker-remaining-label { font-size: 10px; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.05em; }
+        .progress-track { width: 100%; height: 3px; background: var(--line); margin-bottom: var(--sp-4); }
+        .progress-fill { height: 100%; background: var(--ink); width: 0%; transition: width 0.4s ease; }
+        .pill-strip { display: flex; flex-wrap: wrap; gap: 4px; }
+        .pill {
+            width: 30px; height: 24px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 9px; font-weight: 700; letter-spacing: 0.04em;
+            border: 1px solid var(--line);
+            cursor: pointer; transition: all 0.1s;
+            color: var(--ink-mid); user-select: none;
+        }
+        .pill:hover { border-color: var(--ink); color: var(--ink); }
+        .pill.paid { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+        /* ============================================================
+           RUNWAY CHART SECTION (standalone full-width)
+        ============================================================ */
+        .runway-section {
+            border-bottom: 1px solid var(--line);
+        }
+        .runway-body {
+            padding: var(--sp-6) var(--sp-10);
+        }
+        .runway-metrics-row {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: var(--sp-8);
+            margin-bottom: var(--sp-6);
+            padding-bottom: var(--sp-6);
+            border-bottom: 1px solid var(--line);
+        }
+        .runway-metric { display: flex; flex-direction: column; gap: 4px; }
+        .runway-metric-val { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; }
+        .cashflow-svg-wrap { width: 100%; height: 140px; }
+
+        /* ============================================================
+           WORKSPACE SECTION
+        ============================================================ */
+        .workspace-section { border-bottom: 1px solid var(--line); }
+        .workspace-tab-bar {
+            display: flex; align-items: center;
+            border-bottom: 1px solid var(--line);
+            padding: 0 var(--sp-8);
+            gap: 0;
+        }
+        .workspace-tab-label {
+            font-size: 10px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--ink-light);
+            padding: var(--sp-4) 0;
+            margin-right: var(--sp-6);
+        }
+        .ws-tab {
+            padding: var(--sp-4) var(--sp-5);
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.06em; text-transform: uppercase;
+            cursor: pointer; border: none; background: transparent;
+            border-bottom: 2px solid transparent;
+            font-family: var(--font-sans); color: var(--ink-mid);
+            transition: all 0.15s;
+            margin-bottom: -1px;
+        }
+        .ws-tab.active { color: var(--ink); border-bottom-color: var(--ink); }
+        .ws-tab:hover { color: var(--ink); }
+        .ws-pane { display: none; }
+        .ws-pane.active { display: block; }
+        .ws-pane-body { padding: var(--sp-8) var(--sp-10); }
+
+        /* Month tab strip */
+        .month-tab-strip {
+            display: flex; gap: var(--sp-2); overflow-x: auto;
+            padding-bottom: var(--sp-4); margin-bottom: var(--sp-6);
+        }
+        .m-tab {
+            padding: 4px 10px; font-size: 10px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.05em;
+            border: 1px solid var(--line); cursor: pointer;
+            background: transparent; color: var(--ink-mid);
+            white-space: nowrap; font-family: var(--font-sans);
+            transition: all 0.1s;
+        }
+        .m-tab.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+        .m-tab:hover { border-color: var(--ink); color: var(--ink); }
+
+        /* Expense/Income summary block */
+        .summary-cards {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: var(--sp-4); margin-bottom: var(--sp-6);
+        }
+        .summary-card {
+            padding: var(--sp-5) var(--sp-6);
+            border: 1px solid var(--line);
+            border-radius: 0;
+            display: flex; flex-direction: column; gap: var(--sp-2);
+        }
+        .summary-card-val { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; }
+        .summary-card-limit-row { display: flex; align-items: center; gap: var(--sp-2); margin-top: 2px; }
+        .limit-input {
+            width: 72px; border: none; border-bottom: 1px solid var(--line);
+            padding: 2px 0; font-size: 13px;
+            font-family: var(--font-sans); font-weight: 600;
+            outline: none; background: transparent; color: var(--ink);
+        }
+        .limit-input:focus { border-bottom-color: var(--ink); }
+
+        /* Action button row */
+        .action-row {
+            display: flex; gap: var(--sp-3);
+            margin-bottom: var(--sp-4);
+        }
+
+        /* Budget warning */
+        .budget-warn {
+            display: none; align-items: center; gap: var(--sp-3);
+            padding: var(--sp-3) var(--sp-5);
+            border: 1px solid var(--ink);
+            margin-bottom: var(--sp-4);
+        }
+        .budget-warn-text { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* Expandable detail sections */
+        .detail-section { display: none; }
+        .detail-section.open { display: block; }
+
+        /* Table */
+        .data-table { width: 100%; border: 1px solid var(--line); margin-bottom: var(--sp-4); }
+        .data-table-head {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            padding: var(--sp-3) var(--sp-5);
+            background: var(--bg-subtle);
+            border-bottom: 1px solid var(--line);
+        }
+        .data-table-head span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-mid); }
+        .data-table-rows { max-height: 220px; overflow-y: auto; }
+        .data-row {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            padding: var(--sp-3) var(--sp-5);
+            font-size: 13px; border-bottom: 1px solid var(--line);
+            align-items: center; transition: background 0.1s;
+        }
+        .data-row:last-child { border-bottom: none; }
+        .data-row:hover { background: var(--bg-subtle); }
+        .del-btn {
+            font-size: 10px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.04em;
+            background: transparent; border: none;
+            cursor: pointer; color: var(--ink-light);
+            font-family: var(--font-sans);
+            transition: color 0.1s; text-decoration: underline;
+        }
+        .del-btn:hover { color: var(--ink); }
+
+        /* Add forms */
+        .add-form {
+            display: grid;
+            grid-template-columns: 2fr 1fr 0.7fr 1fr auto;
+            gap: var(--sp-3); align-items: end;
+            padding: var(--sp-5) var(--sp-6);
+            background: var(--bg-subtle);
+            border: 1px solid var(--line);
+        }
+        .form-field { display: flex; flex-direction: column; gap: 4px; }
+        .form-input, .form-select {
+            border: none; border-bottom: 1px solid var(--line);
+            padding: 6px 0; font-family: var(--font-sans);
+            font-size: 13px; font-weight: 500;
+            outline: none; background: transparent; color: var(--ink);
+            transition: border-color 0.1s; width: 100%;
+        }
+        .form-input:focus, .form-select:focus { border-bottom-color: var(--ink); }
+        .form-select { cursor: pointer; }
+
+        /* Income total display */
+        .income-total-row {
+            display: flex; align-items: baseline; gap: var(--sp-3);
+            margin-bottom: var(--sp-6);
+            padding-bottom: var(--sp-6);
+            border-bottom: 1px solid var(--line);
+        }
+        .income-total-val { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
+
+        /* Income table (wider columns) */
+        .income-table-head, .income-data-row {
+            grid-template-columns: 2fr 1fr 1fr 1fr auto !important;
+        }
+
+        /* Recurring rules */
+        .recurring-form {
+            display: grid; grid-template-columns: 1.5fr 1fr 0.8fr 0.8fr 1fr auto;
+            gap: var(--sp-3); align-items: end;
+            padding: var(--sp-5) var(--sp-6);
+            background: var(--bg-subtle);
+            border: 1px solid var(--line);
+            margin-bottom: var(--sp-4);
+        }
+        .rule-list { display: flex; flex-direction: column; gap: var(--sp-2); }
+        .rule-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: var(--sp-3) var(--sp-5);
+            font-size: 13px; border: 1px solid var(--line);
+        }
+
+        /* ============================================================
+           UPCOMING PAYMENTS (Calendar replacement)
+        ============================================================ */
+        .upcoming-section { border-bottom: 1px solid var(--line); }
+        .upcoming-body { padding: var(--sp-6) var(--sp-10); }
+        .upcoming-list { display: flex; flex-direction: column; gap: 1px; background: var(--line); margin-bottom: var(--sp-6); }
+        .upcoming-item {
+            display: grid; grid-template-columns: 60px 1fr 120px 80px;
+            align-items: center;
+            padding: var(--sp-4) var(--sp-5);
+            background: var(--bg);
+            gap: var(--sp-4);
+        }
+        .upcoming-day { font-size: 11px; font-weight: 700; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.05em; }
+        .upcoming-name { font-size: 13px; font-weight: 600; }
+        .upcoming-amount { font-size: 13px; font-weight: 700; text-align: right; }
+        .upcoming-status {
+            font-size: 9px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.06em; text-align: right;
+        }
+        .status-paid { color: var(--ink-light); }
+        .status-pending { color: var(--ink); }
+        .calendar-toggle-row {
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        #calendar-body { display: none; padding-top: var(--sp-6); }
+        #calendar-body.open { display: block; }
+        .calendar-inner {
+            display: grid; grid-template-columns: 1.4fr 1fr;
+            gap: var(--sp-10);
+        }
+        .calendar-grid {
+            display: grid; grid-template-columns: repeat(7, 1fr);
+            border-top: 1px solid var(--line);
+            border-left: 1px solid var(--line);
+        }
+        .cal-cell-header {
+            padding: 6px 4px; border-bottom: 1px solid var(--line);
+            border-right: 1px solid var(--line); text-align: center;
+            font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--ink-light);
+            background: var(--bg-subtle);
+        }
+        .calendar-cell {
+            aspect-ratio: 1.2; padding: 6px;
+            border-bottom: 1px solid var(--line);
+            border-right: 1px solid var(--line);
+            position: relative; cursor: pointer;
+            transition: background 0.1s;
+        }
+        .calendar-cell-num { font-size: 11px; font-weight: 600; }
+        .calendar-cell:hover { background: var(--bg-subtle); }
+        .calendar-cell.has-event { border: 1.5px solid var(--ink); }
+        .calendar-event-indicator {
+            position: absolute; bottom: 4px; right: 4px;
+            font-size: 8px; font-weight: 700;
+            color: var(--ink-light); text-transform: uppercase;
+        }
+        .calendar-cell.selected { background: var(--ink); color: var(--bg); }
+        .calendar-cell.selected .calendar-event-indicator { color: rgba(255,255,255,0.6); }
+        .cal-detail-panel {
+            border: 1px solid var(--line); padding: var(--sp-6);
+            display: flex; flex-direction: column; gap: var(--sp-4);
+        }
+        .cal-detail-date { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-light); }
+        .cal-detail-title { font-size: 1.4rem; font-weight: 400; }
+        .cal-data-row { display: flex; justify-content: space-between; align-items: center; padding: var(--sp-2) 0; border-bottom: 1px solid var(--line); }
+        .cal-data-row:last-of-type { border-bottom: none; }
+        .cal-data-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-light); }
+        .cal-data-val { font-size: 13px; font-weight: 700; }
+        .cal-instruction { font-size: 12px; font-style: italic; color: var(--ink-light); text-align: center; padding: var(--sp-4); }
+        .cal-category { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-light); padding-top: var(--sp-3); border-top: 1px solid var(--line); }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        footer {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: var(--sp-5) var(--sp-10);
+            border-top: 1px solid var(--line);
+            font-size: 10px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            color: var(--ink-light);
+        }
+        footer a { color: var(--ink-light); text-decoration: none; transition: color 0.15s; }
+        footer a:hover { color: var(--ink); }
+
+        /* ============================================================
+           FUNDING GAP OVERLAY
+        ============================================================ */
+        #gap-backdrop {
+            position: fixed; inset: 0;
+            background: rgba(17,17,17,0.3);
+            z-index: 2000; opacity: 0; pointer-events: none;
+            transition: opacity 0.2s;
+            backdrop-filter: blur(2px);
+        }
+        #gap-backdrop.open { opacity: 1; pointer-events: auto; }
+        #gap-breakdown-panel {
+            position: fixed; top: 0; right: 0;
+            width: min(420px, 92vw); height: 100vh;
+            background: var(--bg);
+            border-left: 1px solid var(--line);
+            box-shadow: -8px 0 40px rgba(0,0,0,0.08);
+            z-index: 2001; padding: var(--sp-10);
+            display: flex; flex-direction: column; justify-content: space-between;
+            transform: translateX(100%); transition: transform 0.25s ease;
+        }
+        #gap-breakdown-panel.open { transform: translateX(0); }
+        .gap-panel-title { font-size: 1.4rem; font-weight: 400; letter-spacing: -0.01em; margin-bottom: var(--sp-6); }
+        .gap-panel-subtitle { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-light); margin-bottom: var(--sp-4); }
+        .gap-rows { display: flex; flex-direction: column; gap: 1px; background: var(--line); }
+        .gap-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: var(--sp-4) var(--sp-5); background: var(--bg);
+        }
+        .gap-row-label { font-size: 12px; font-weight: 500; color: var(--ink-mid); }
+        .gap-row-val { font-size: 14px; font-weight: 700; }
+        .gap-row.total { background: var(--ink); color: var(--bg); }
+        .gap-row.total .gap-row-label { color: rgba(255,255,255,0.7); font-size: 11px; }
+        .gap-row.total .gap-row-val { font-size: 1.4rem; }
+        .gap-equation { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-light); margin-top: var(--sp-4); }
+        .gap-panel-close {
+            position: absolute; top: var(--sp-8); right: var(--sp-8);
+            background: transparent; border: none; cursor: pointer;
+            font-size: 18px; color: var(--ink-light);
+            transition: color 0.15s; line-height: 1;
+        }
+        .gap-panel-close:hover { color: var(--ink); }
+
+        /* Hidden elements for JS (breakdown values) */
+        #breakdown-loan, #breakdown-rent, #breakdown-living, #breakdown-conv, #breakdown-pg-pending, #breakdown-cash, #breakdown-total-gap { display: none; }
+
+        @media (max-width: 1024px) {
+            #gap-breakdown-panel { top: auto; bottom: 0; width: 100%; height: 60vh; border-left: none; border-top: 1px solid var(--line); transform: translateY(100%); }
+            #gap-breakdown-panel.open { transform: translateY(0); }
+        }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 1100px) {
+            .fold-panel { grid-template-columns: 1fr; }
+            .fold-left { border-right: none; border-bottom: 1px solid var(--line); }
+            .fold-right { display: grid; grid-template-columns: 1fr 1fr; background: var(--bg); }
+            .tracker-section { border-right: 1px solid var(--line); }
+            .tracker-section:nth-child(2n) { border-right: none; }
+        }
+        @media (max-width: 900px) {
+            .kpi-strip { padding: var(--sp-6) var(--sp-6); }
+            .kpi-card { padding: 0 var(--sp-5); }
+            nav { padding: 0 var(--sp-6); }
+            .section-header, .chart-area { padding-left: var(--sp-6); padding-right: var(--sp-6); }
+            .ws-pane-body, .runway-body, .upcoming-body { padding: var(--sp-6); }
+        }
+        @media (max-width: 700px) {
+            .kpi-strip { grid-template-columns: repeat(2, 1fr); padding: var(--sp-5) var(--sp-5); gap: var(--sp-5) 0; }
+            .kpi-card { border-right: 1px solid var(--line); padding: 0 var(--sp-5); }
+            .kpi-card:nth-child(2n) { border-right: none; }
+            .kpi-card:nth-child(n+3) { border-top: 1px solid var(--line); padding-top: var(--sp-5); }
+            .kpi-card:first-child { padding-left: 0; }
+            .fold-right { grid-template-columns: 1fr; }
+            .summary-cards { grid-template-columns: 1fr 1fr; }
+            .month-detail-grid { grid-template-columns: repeat(2, 1fr); }
+            .runway-metrics-row { grid-template-columns: repeat(2, 1fr); }
+            .add-form { grid-template-columns: 1fr 1fr; }
+            .upcoming-item { grid-template-columns: 48px 1fr 90px; }
+            .upcoming-status { display: none; }
+            .calendar-inner { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =====================================================
+         AUTH GATE
+    ===================================================== -->
+    <div id="auth-gate">
+        <div class="auth-container">
+            <span class="auth-logo serif">Ashara</span>
+            <h2 class="auth-title serif">Financial<br>Command Center</h2>
+            <p class="auth-subtitle">Private Ledger</p>
+            <form class="auth-form" onsubmit="handleAuthSubmit(event)">
+                <div style="display:flex; flex-direction:column; gap:8px; text-align:left;">
+                    <label for="passcode-input" style="font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-light);">Security Key</label>
+                    <input type="password" id="passcode-input" class="auth-input" autocomplete="off" autofocus placeholder="••••">
+                </div>
+                <button type="submit" class="auth-btn" style="margin-top:8px;">Access Dashboard</button>
+                <div id="auth-error-msg" class="auth-error">Invalid key — access denied</div>
+            </form>
+            <div class="auth-footer-note">Session encrypted • Private access only</div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         DASHBOARD
+    ===================================================== -->
+    <div id="dashboard-content">
+
+        <!-- NAV -->
+        <nav>
+            <div class="nav-left">
+                <a href="index.html" class="logo serif">Ashara</a>
+                <div class="nav-divider"></div>
+                <span class="nav-title">Financial Command Center</span>
+            </div>
+            <div class="nav-right">
+                <span class="nav-time" id="live-time">00:00:00</span>
+                <div class="status-badge"><span class="status-dot"></span>Secure</div>
+                <button class="btn-ghost" onclick="logout()">Lock Session</button>
+            </div>
+        </nav>
+
+        <!-- =========================================================
+             KPI STRIP
+        ========================================================= -->
+        <section class="kpi-strip">
+            <div class="kpi-card">
+                <div class="kpi-label-row">
+                    <span class="label">Available Cash</span>
+                    <span class="kpi-tag">KPI-01</span>
+                </div>
+                <div class="kpi-value" id="kpi-balance">₹0</div>
+                <div class="kpi-sub">Cash on hand today</div>
+            </div>
+            <div class="kpi-card clickable" onclick="toggleGapBreakdown()" title="Click for breakdown">
+                <div class="kpi-label-row">
+                    <span class="label">Funding Gap</span>
+                    <span class="kpi-tag" id="gap-toggle-icon" style="cursor:pointer;">View ↗</span>
+                </div>
+                <div class="kpi-value" id="kpi-gap">₹0</div>
+                <div class="kpi-sub">Outstanding deficit</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label-row">
+                    <span class="label">Total Income</span>
+                    <span class="kpi-tag">KPI-02</span>
+                </div>
+                <div class="kpi-value" id="kpi-income">₹0</div>
+                <div class="kpi-sub">Accrued capital</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label-row">
+                    <span class="label">Expenses Paid</span>
+                    <span class="kpi-tag">KPI-03</span>
+                </div>
+                <div class="kpi-value" id="kpi-paid">₹0</div>
+                <div class="kpi-sub">Settled outflows</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label-row">
+                    <span class="label">Cash Runway</span>
+                    <span class="kpi-tag">KPI-05</span>
+                </div>
+                <div class="kpi-value" id="kpi-runway">0.0m</div>
+                <div class="kpi-sub">Months survivable</div>
+            </div>
+        </section>
+
+        <!-- =========================================================
+             FIRST-FOLD: CHART LEFT + TRACKERS RIGHT
+        ========================================================= -->
+        <div class="fold-panel">
+
+            <!-- LEFT: Inflow vs Outflow -->
+            <div class="fold-left">
+                <div class="section-header">
+                    <span class="section-name">Cash Flow Projection</span>
+                    <span class="section-meta" id="forecast-max-text">15-Month Timeline</span>
+                </div>
+                <div class="chart-area">
+                    <div class="chart-svg-wrap">
+                        <svg class="chart-svg" id="forecast-chart-svg" viewBox="0 0 700 280" preserveAspectRatio="none">
+                            <defs>
+                                <pattern id="pat-stripes-d" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                                    <line x1="0" y1="0" x2="0" y2="10" stroke="#111" stroke-width="2"/>
+                                </pattern>
+                            </defs>
+                            <g id="forecast-grid-lines"></g>
+                            <g id="forecast-bars"></g>
+                            <g id="forecast-labels"></g>
+                        </svg>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item"><div class="legend-swatch-solid"></div><span>Monthly Inflow</span></div>
+                        <div class="legend-item"><div class="legend-swatch-stripe"></div><span>Monthly Outflow</span></div>
+                    </div>
+                </div>
+
+                <!-- Projection summary micro-cards -->
+                <div class="proj-strip">
+                    <div class="proj-card">
+                        <span class="label">Total Inflow (15m)</span>
+                        <div class="proj-card-val" id="proj-summary-inflow">₹0</div>
+                    </div>
+                    <div class="proj-card">
+                        <span class="label">Total Outflow (15m)</span>
+                        <div class="proj-card-val" id="proj-summary-outflow">₹0</div>
+                    </div>
+                    <div class="proj-card">
+                        <span class="label">Net Difference</span>
+                        <div class="proj-card-val" id="proj-summary-net">₹0</div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="timeline-area">
+                    <div class="timeline-header-row">
+                        <span>Month</span><span>Status</span>
+                        <span style="text-align:right;">Outflow</span>
+                        <span style="text-align:right;">Inflow</span>
+                    </div>
+                    <div class="timeline-rows-wrap" id="timeline-rows-container"></div>
+                    <div class="tl-expand-row">
+                        <button class="btn-text" id="toggle-projection-btn" onclick="toggleProjectionExpansion()">View Full Projection →</button>
+                    </div>
+                    <div class="month-detail" id="month-drawer">
+                        <div class="month-detail-title" id="drawer-month-title">Month Details</div>
+                        <div class="month-detail-grid" id="drawer-grid"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Trackers -->
+            <div class="fold-right">
+
+                <!-- EMI Tracker -->
+                <div class="tracker-section">
+                    <div class="section-header" style="background:transparent;">
+                        <span class="section-name">Education Loan EMI</span>
+                        <span class="section-meta" id="emi-count-text">0 / 15 Paid</span>
+                    </div>
+                    <div style="padding: var(--sp-5) var(--sp-6);">
+                        <div class="tracker-top-row">
+                            <div style="display:flex; flex-direction:column; gap:2px;">
+                                <div class="tracker-pct" id="emi-percent">0%</div>
+                                <span class="label">Repayment Complete</span>
+                            </div>
+                            <div class="tracker-remaining-wrap" style="text-align:right;">
+                                <div class="tracker-remaining" id="emi-remaining-debt">₹88,500</div>
+                                <div class="tracker-remaining-label">Remaining Loan</div>
+                            </div>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="emi-progress-bar"></div>
+                        </div>
+                        <div class="label" style="margin-bottom: var(--sp-3);">Toggle installment to mark paid</div>
+                        <div class="pill-strip" id="emi-grid-container"></div>
+                    </div>
+                </div>
+
+                <!-- PG Rent Tracker -->
+                <div class="tracker-section">
+                    <div class="section-header" style="background:transparent;">
+                        <span class="section-name">PG Rent</span>
+                        <span class="section-meta" id="pg-count-text">0 / 5 Paid</span>
+                    </div>
+                    <div style="padding: var(--sp-5) var(--sp-6);">
+                        <div class="tracker-top-row">
+                            <div style="display:flex; flex-direction:column; gap:2px;">
+                                <div class="tracker-pct" id="pg-percent">0%</div>
+                                <span class="label">Rent Paid</span>
+                            </div>
+                            <div class="tracker-remaining-wrap" style="text-align:right;">
+                                <div class="tracker-remaining" id="pg-remaining-rent">₹60,000</div>
+                                <div class="tracker-remaining-label">Remaining Rent</div>
+                            </div>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="pg-progress-bar"></div>
+                        </div>
+                        <div class="label" style="margin-bottom: var(--sp-3);">Toggle month to mark paid</div>
+                        <div class="pill-strip" id="pg-grid-container"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- =========================================================
+             RUNWAY CHART — Standalone Section
+        ========================================================= -->
+        <div class="runway-section">
+            <div class="section-header">
+                <span class="section-name">Cumulative Cash Runway</span>
+                <span class="section-meta">15-Month Projection</span>
+            </div>
+            <div class="runway-body">
+                <div class="runway-metrics-row">
+                    <div class="runway-metric">
+                        <span class="label">Current Runway</span>
+                        <div class="runway-metric-val" id="runway-metric-current">0.0m</div>
+                    </div>
+                    <div class="runway-metric">
+                        <span class="label">Projected Deficit</span>
+                        <div class="runway-metric-val" id="runway-metric-deficit">₹0</div>
+                    </div>
+                    <div class="runway-metric">
+                        <span class="label">Total Obligations</span>
+                        <div class="runway-metric-val" id="runway-metric-obligations">₹0</div>
+                    </div>
+                    <div class="runway-metric">
+                        <span class="label" id="runway-hover-label">Hover a data point</span>
+                        <div class="runway-metric-val" id="runway-hover-val">—</div>
+                    </div>
+                </div>
+                <div class="cashflow-svg-wrap">
+                    <svg class="chart-svg" id="cashflow-timeline-svg" viewBox="0 0 700 130" preserveAspectRatio="none"></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             WORKSPACE — TABBED
+        ========================================================= -->
+        <div class="workspace-section">
+            <div class="workspace-tab-bar">
+                <span class="workspace-tab-label">Ledger</span>
+                <button class="ws-tab active" id="ws-tab-expenses" onclick="switchWorkspaceTab('expenses')">Expenses</button>
+                <button class="ws-tab" id="ws-tab-income" onclick="switchWorkspaceTab('income')">Income</button>
+                <button class="ws-tab" id="ws-tab-recurring" onclick="switchWorkspaceTab('recurring')">Recurring</button>
+            </div>
+
+            <!-- EXPENSES PANE -->
+            <div class="ws-pane active" id="ws-expenses">
+                <div class="section-header">
+                    <span class="section-name">Monthly Expense Manager</span>
+                    <span class="section-meta">Budget Ledger</span>
+                </div>
+                <div class="ws-pane-body">
+                    <div class="month-tab-strip" id="expense-month-tabs"></div>
+
+                    <!-- Warning -->
+                    <div class="budget-warn" id="expense-warning-box">
+                        <span>⚠</span>
+                        <span class="budget-warn-text" id="expense-warning-msg">Budget exceeded</span>
+                    </div>
+
+                    <!-- Summary Cards (always visible) -->
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <span class="label">Total Spent</span>
+                            <div class="summary-card-val" id="exp-total-spent">₹0</div>
+                        </div>
+                        <div class="summary-card">
+                            <span class="label">Monthly Cap</span>
+                            <div class="summary-card-limit-row">
+                                <input type="number" class="limit-input" id="exp-monthly-limit" min="0" step="500" onchange="updateMonthlyLimit()">
+                                <span style="font-size:10px; color:var(--ink-light); text-transform:uppercase; letter-spacing:0.04em;">Set</span>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <span class="label">Available Budget</span>
+                            <div class="summary-card-val" id="exp-avail-budget">₹0</div>
+                        </div>
+                    </div>
+
+                    <!-- Action buttons -->
+                    <div class="action-row">
+                        <button class="btn-ghost" id="btn-view-expenses" onclick="toggleExpenseDetails()">View Expenses ↓</button>
+                        <button class="btn-ghost" id="btn-add-expense" onclick="toggleExpenseForm()">Add Expense +</button>
+                    </div>
+
+                    <!-- Expandable: Expense Table -->
+                    <div class="detail-section" id="expense-table-section">
+                        <div class="data-table">
+                            <div class="data-table-head">
+                                <span>Expense</span><span>Amount</span><span>Day</span><span>Category</span><span></span>
+                            </div>
+                            <div class="data-table-rows" id="expense-items-list"></div>
+                        </div>
+                    </div>
+
+                    <!-- Expandable: Add Expense Form -->
+                    <div class="detail-section" id="expense-form-section">
+                        <form onsubmit="addCustomExpense(event)" class="add-form">
+                            <div class="form-field">
+                                <label class="label">Expense Name</label>
+                                <input type="text" id="add-exp-name" class="form-input" required placeholder="e.g. Internet">
+                            </div>
+                            <div class="form-field">
+                                <label class="label">Amount (₹)</label>
+                                <input type="number" id="add-exp-amt" class="form-input" min="0" required placeholder="399">
+                            </div>
+                            <div class="form-field">
+                                <label class="label">Day (1–30)</label>
+                                <input type="number" id="add-exp-day" class="form-input" min="1" max="30" placeholder="15">
+                            </div>
+                            <div class="form-field">
+                                <label class="label">Category</label>
+                                <select id="add-exp-cat" class="form-select">
+                                    <option value="Food">Food</option>
+                                    <option value="Utilities">Utilities</option>
+                                    <option value="Travel">Travel</option>
+                                    <option value="Leisures">Leisures</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-solid" style="align-self:end;">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INCOME PANE -->
+            <div class="ws-pane" id="ws-income">
+                <div class="section-header">
+                    <span class="section-name">Income Manager</span>
+                    <span class="section-meta">Cash Inflows</span>
+                </div>
+                <div class="ws-pane-body">
+                    <div class="month-tab-strip" id="income-month-tabs"></div>
+
+                    <!-- Income total (always visible) -->
+                    <div class="income-total-row">
+                        <span class="label">Month Total</span>
+                        <div class="income-total-val" id="inc-monthly-total">₹0</div>
+                    </div>
+
+                    <!-- Action buttons -->
+                    <div class="action-row">
+                        <button class="btn-ghost" id="btn-view-income" onclick="toggleIncomeDetails()">View Entries ↓</button>
+                        <button class="btn-ghost" id="btn-add-income" onclick="toggleIncomeForm()">Add Income +</button>
+                    </div>
+
+                    <!-- Expandable: Income Table -->
+                    <div class="detail-section" id="income-table-section">
+                        <div class="data-table">
+                            <div class="data-table-head income-table-head">
+                                <span>Source</span><span>Amount</span><span>Day</span><span>Type</span><span></span>
+                            </div>
+                            <div class="data-table-rows" id="income-items-list"></div>
+                        </div>
+                    </div>
+
+                    <!-- Expandable: Add Income Form -->
+                    <div class="detail-section" id="income-form-section">
+                        <form onsubmit="addCustomIncome(event)" class="add-form">
+                            <div class="form-field">
+                                <label class="label">Source Name</label>
+                                <input type="text" id="add-inc-source" class="form-input" required placeholder="e.g. Freelance">
+                            </div>
+                            <div class="form-field">
+                                <label class="label">Amount (₹)</label>
+                                <input type="number" id="add-inc-amt" class="form-input" min="0" required placeholder="15000">
+                            </div>
+                            <div class="form-field">
+                                <label class="label">Day (1–30)</label>
+                                <input type="number" id="add-inc-day" class="form-input" min="1" max="30" placeholder="10">
+                            </div>
+                            <div class="form-field">
+                                <label class="label">Type</label>
+                                <select id="add-inc-type" class="form-select">
+                                    <option value="Freelance">Freelance</option>
+                                    <option value="Client Project">Client Project</option>
+                                    <option value="Internship">Internship</option>
+                                    <option value="Salary">Salary</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-solid" style="align-self:end;">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECURRING PANE -->
+            <div class="ws-pane" id="ws-recurring">
+                <div class="section-header">
+                    <span class="section-name">Recurring Income Contracts</span>
+                    <span class="section-meta">Auto-generate income across months</span>
+                </div>
+                <div class="ws-pane-body">
+                    <form onsubmit="generateAutoIncome(event)" class="recurring-form">
+                        <div class="form-field">
+                            <label class="label">Contract Name</label>
+                            <input type="text" id="auto-inc-name" class="form-input" required placeholder="e.g. Salary">
+                        </div>
+                        <div class="form-field">
+                            <label class="label">Amount (₹/mo)</label>
+                            <input type="number" id="auto-inc-amt" class="form-input" min="0" required placeholder="25000">
+                        </div>
+                        <div class="form-field">
+                            <label class="label">Start Month</label>
+                            <select id="auto-inc-start" class="form-select"></select>
+                        </div>
+                        <div class="form-field">
+                            <label class="label">End Month</label>
+                            <select id="auto-inc-end" class="form-select"></select>
+                        </div>
+                        <div class="form-field">
+                            <label class="label">Frequency</label>
+                            <select id="auto-inc-freq" class="form-select">
+                                <option value="Monthly">Monthly</option>
+                                <option value="Quarterly">Quarterly</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-solid" style="align-self:end;">Configure</button>
+                    </form>
+                    <div class="rule-list" id="auto-rules-list-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             UPCOMING PAYMENTS (Calendar collapsed replacement)
+        ========================================================= -->
+        <div class="upcoming-section">
+            <div class="section-header">
+                <span class="section-name">Month 1 — Upcoming Payments</span>
+                <span class="section-meta">Disbursement Schedule</span>
+            </div>
+            <div class="upcoming-body">
+                <div class="upcoming-list" id="upcoming-payments-list">
+                    <!-- Dynamically populated -->
+                </div>
+                <div class="calendar-toggle-row">
+                    <button class="btn-text" onclick="toggleCalendarSection()" id="cal-toggle-btn">Show Full Calendar →</button>
+                </div>
+
+                <!-- Calendar (hidden by default) -->
+                <div id="calendar-body">
+                    <div class="calendar-inner">
+                        <div>
+                            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-light); margin-bottom:var(--sp-4);">Month 01 — Payment Calendar</div>
+                            <div class="calendar-grid" id="calendar-grid-container"></div>
+                        </div>
+                        <div class="cal-detail-panel" id="calendar-detail-drawer">
+                            <div>
+                                <div class="cal-detail-date" id="cal-date-label">Select a payment day</div>
+                                <h4 class="cal-detail-title serif" id="cal-title-label">—</h4>
+                            </div>
+                            <div id="cal-body-content">
+                                <div class="cal-instruction">Click a highlighted date to view payment details.</div>
+                            </div>
+                            <div class="cal-category" id="cal-category-label">System Ready</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <span>© 2026 Ashara Hitanshu</span>
+            <a href="index.html">Back to Profile →</a>
+            <span>Private Finance OS</span>
+        </footer>
+
+    </div><!-- /#dashboard-content -->
+
+    <!-- =========================================================
+         FUNDING GAP OVERLAY PANEL
+    ========================================================= -->
+    <div id="gap-backdrop" onclick="toggleGapBreakdown()"></div>
+    <div id="gap-breakdown-panel">
+        <button class="gap-panel-close" onclick="toggleGapBreakdown()">✕</button>
+        <div>
+            <div class="label" style="margin-bottom:var(--sp-3);">Funding Gap</div>
+            <h3 class="gap-panel-title serif">Gap Breakdown</h3>
+            <div class="gap-panel-subtitle">Obligations vs Available Cash</div>
+            <div class="gap-rows">
+                <div class="gap-row">
+                    <span class="gap-row-label">Course Loan Remaining</span>
+                    <span class="gap-row-val" id="breakdown-loan">₹0</span>
+                </div>
+                <div class="gap-row">
+                    <span class="gap-row-label">PG Rent Remaining</span>
+                    <span class="gap-row-val" id="breakdown-rent">₹0</span>
+                </div>
+                <div class="gap-row">
+                    <span class="gap-row-label">Living Budget Remaining</span>
+                    <span class="gap-row-val" id="breakdown-living">₹0</span>
+                </div>
+                <div class="gap-row">
+                    <span class="gap-row-label">Convenience Fee</span>
+                    <span class="gap-row-val" id="breakdown-conv">₹0</span>
+                </div>
+                <div class="gap-row">
+                    <span class="gap-row-label">PG Deposit Pending</span>
+                    <span class="gap-row-val" id="breakdown-pg-pending">₹0</span>
+                </div>
+                <div class="gap-row">
+                    <span class="gap-row-label">Less: Available Cash</span>
+                    <span class="gap-row-val" id="breakdown-cash">−₹0</span>
+                </div>
+                <div class="gap-row total">
+                    <span class="gap-row-label">Total Funding Gap</span>
+                    <span class="gap-row-val" id="breakdown-total-gap">₹0</span>
+                </div>
+            </div>
+        </div>
+        <div class="gap-equation">Equation: Gap = Total Obligations − Available Cash</div>
+    </div>
+
+    <script>
+        // ============================================================
+        // XSS PROTECTION
+        // ============================================================
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str.replace(/[&<>'"]/g, t => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[t]||t));
+        }
+
+        // ============================================================
+        // STATE & CONFIG
+        // ============================================================
+        const stateKey = "focos_os_state";
+        const defaults = {
+            earnings: 28000, courseFee: 88500, courseDuration: 5,
+            loanTenure: 15, emiAmount: 5900, pgRentAmount: 12000,
+            pgDuration: 5, livingExpenseAmount: 3000, convenienceFeePaid: 3000,
+            travelExpense: 3000, pgDepositPendingPaid: false,
+            paidEmis: Array(15).fill(false), paidPgRent: Array(5).fill(false),
+            monthlyLimits: Array(15).fill(3000),
+            loggedExpenses: [], loggedIncomes: [], recurringIncomes: []
+        };
+        let state = {};
+        let currentExpenseMonthIndex = 0;
+        let currentIncomeMonthIndex = 0;
+        let selectedForecastMonthIndex = 0;
+        let currentSelectedCalDay = null;
+
+        // ============================================================
+        // LOCAL STORAGE
+        // ============================================================
+        function loadState() {
+            const stored = localStorage.getItem(stateKey);
+            if (stored) {
+                try {
+                    state = JSON.parse(stored);
+                    for (let key in defaults) {
+                        if (state[key] === undefined) state[key] = defaults[key];
+                    }
+                } catch(e) { state = JSON.parse(JSON.stringify(defaults)); }
+            } else { state = JSON.parse(JSON.stringify(defaults)); }
+        }
+        function saveState() { localStorage.setItem(stateKey, JSON.stringify(state)); }
+
+        // ============================================================
+        // AUTH
+        // ============================================================
+        function checkSession() {
+            if (sessionStorage.getItem('auth_finance') === 'true') {
+                document.getElementById('auth-gate').style.display = 'none';
+                document.getElementById('dashboard-content').style.display = 'flex';
+                initializeDashboard();
+            }
+        }
+        function handleAuthSubmit(e) {
+            e.preventDefault();
+            const val = document.getElementById('passcode-input').value;
+            const err = document.getElementById('auth-error-msg');
+            if (val === '0408') {
+                sessionStorage.setItem('auth_finance', 'true');
+                document.getElementById('auth-gate').style.display = 'none';
+                document.getElementById('dashboard-content').style.display = 'flex';
+                err.style.visibility = 'hidden';
+                initializeDashboard();
+            } else {
+                err.style.visibility = 'visible';
+                document.getElementById('passcode-input').value = '';
+                document.getElementById('passcode-input').focus();
+            }
+        }
+        function logout() { sessionStorage.removeItem('auth_finance'); window.location.reload(); }
+
+        // ============================================================
+        // LIVE TIME
+        // ============================================================
+        function updateLiveTime() {
+            const now = new Date();
+            document.getElementById('live-time').innerText =
+                `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
+        }
+
+        // ============================================================
+        // FINANCIAL CALCULATIONS (unchanged logic)
+        // ============================================================
+        function calculateFinances() {
+            const numPaidEmis = state.paidEmis.filter(Boolean).length;
+            const remainingLoan = (state.loanTenure - numPaidEmis) * state.emiAmount;
+            const emiPaidTotal = numPaidEmis * state.emiAmount;
+            const numPaidRents = state.paidPgRent.filter(Boolean).length;
+            const remainingPgRent = (state.pgDuration - numPaidRents) * state.pgRentAmount;
+            const rentPaidTotal = numPaidRents * state.pgRentAmount;
+            const basePaidTotal = 5000 + 2000 + state.convenienceFeePaid + state.travelExpense;
+            const loggedExpM1 = state.loggedExpenses.filter(e => parseInt(e.month)===1).reduce((s,i)=>s+i.amount,0);
+            const loggedIncM1 = state.loggedIncomes.filter(i => parseInt(i.month)===1).reduce((s,i)=>s+i.amount,0);
+            const loggedExpAll = state.loggedExpenses.reduce((s,i)=>s+i.amount,0);
+            const loggedIncAll = state.loggedIncomes.reduce((s,i)=>s+i.amount,0);
+            let recurringTotal = 0;
+            for (let m=1;m<=state.loanTenure;m++) recurringTotal += getRecurringIncomeForMonth(m);
+            const totalIncome = state.earnings + loggedIncAll + recurringTotal;
+            const availableCashIncome = state.earnings + loggedIncM1 + getRecurringIncomeForMonth(1);
+            const pgPendingPaidAmt = state.pgDepositPendingPaid ? 10000 : 0;
+            const expensesPaid = basePaidTotal + emiPaidTotal + rentPaidTotal + loggedExpM1 + pgPendingPaidAmt;
+            const currentBalance = availableCashIncome - expensesPaid;
+            let livingRemaining = 0;
+            for (let i=0;i<5;i++) {
+                const spent = state.loggedExpenses.filter(e=>parseInt(e.month)===(i+1)).reduce((s,x)=>s+x.amount,0);
+                livingRemaining += Math.max(0, state.monthlyLimits[i] - spent);
+            }
+            const pgPendingRemaining = state.pgDepositPendingPaid ? 0 : 10000;
+            const remainingObligationsSum = remainingLoan + remainingPgRent + livingRemaining + pgPendingRemaining;
+            const fundingGap = Math.max(0, remainingObligationsSum - currentBalance);
+            const monthlyFixedOutflow = state.pgRentAmount + state.livingExpenseAmount;
+            const survivalRunway = monthlyFixedOutflow > 0 ? (currentBalance / monthlyFixedOutflow) : 99.9;
+            return {
+                currentBalance, totalIncome, expensesPaid, fundingGap, survivalRunway,
+                remainingLoan, remainingPgRent, livingRemaining, convenienceRemaining: 0,
+                remainingPgPending: pgPendingRemaining, remainingObligationsSum,
+                numPaidEmis, numPaidRents
+            };
+        }
+
+        function getRecurringIncomeForMonth(month) {
+            let total = 0;
+            state.recurringIncomes.forEach(r => {
+                const s = parseInt(r.startMonth), e = parseInt(r.endMonth);
+                if (month >= s && month <= e) {
+                    if (r.frequency === 'Monthly') total += r.amount;
+                    else if (r.frequency === 'Quarterly' && (month-s)%3===0) total += r.amount;
+                }
+            });
+            return total;
+        }
+
+        // ============================================================
+        // MONTHLY FORECAST DATA
+        // ============================================================
+        function generateMonthlyForecastData() {
+            const months = [];
+            for (let m=1;m<=state.loanTenure;m++) {
+                let pgRent=0, livingOutflow=0, emi=0, loggedExp=0, status="DEBT RUNOFF";
+                if (m<=state.courseDuration) { if (!state.paidPgRent[m-1]) pgRent=state.pgRentAmount; status="COURSE PERIOD"; }
+                if (!state.paidEmis[m-1]) emi=state.emiAmount;
+                if (m===1) status="CRITICAL SETUP";
+                state.loggedExpenses.forEach(exp => { if (parseInt(exp.month)===m) loggedExp+=exp.amount; });
+                livingOutflow = m<=5 ? Math.max(state.monthlyLimits[m-1], loggedExp) : loggedExp;
+                const pgPending = (m===1 && !state.pgDepositPendingPaid) ? 10000 : 0;
+                const totalOutflow = pgRent + emi + pgPending + livingOutflow;
+                let loggedInc=0;
+                state.loggedIncomes.forEach(inc => { if (parseInt(inc.month)===m) loggedInc+=inc.amount; });
+                const totalInflow = (m===1?state.earnings:0) + loggedInc + getRecurringIncomeForMonth(m);
+                months.push({
+                    month:m, status, pgRent, emi, loggedExp, pgPending,
+                    living:(m<=5?Math.max(0,state.monthlyLimits[m-1]-loggedExp):0),
+                    inflow:totalInflow, outflow:totalOutflow
+                });
+            }
+            return months;
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        function initializeDashboard() {
+            updateLiveTime();
+            setInterval(updateLiveTime, 1000);
+            populateMonthDropdowns();
+            renderExpenseTabs();
+            renderIncomeTabs();
+            selectedForecastMonthIndex = 0;
+            updateAllData();
+        }
+
+        function populateMonthDropdowns() {
+            ['auto-inc-start','auto-inc-end'].forEach(id => {
+                const sel = document.getElementById(id);
+                sel.innerHTML = '';
+                for (let i=1;i<=15;i++) {
+                    const opt = document.createElement('option');
+                    opt.value = i;
+                    opt.text = `Month ${i.toString().padStart(2,'0')}`;
+                    sel.appendChild(opt);
+                }
+            });
+            document.getElementById('auto-inc-start').value = 6;
+            document.getElementById('auto-inc-end').value = 15;
+        }
+
+        function updateAllData() {
+            const c = calculateFinances();
+
+            // KPIs
+            document.getElementById('kpi-balance').innerText = `₹${c.currentBalance.toLocaleString('en-IN')}`;
+            document.getElementById('kpi-income').innerText  = `₹${c.totalIncome.toLocaleString('en-IN')}`;
+            document.getElementById('kpi-paid').innerText   = `₹${c.expensesPaid.toLocaleString('en-IN')}`;
+            document.getElementById('kpi-gap').innerText    = `₹${c.fundingGap.toLocaleString('en-IN')}`;
+            document.getElementById('kpi-runway').innerText = `${c.survivalRunway.toFixed(1)}m`;
+
+            // Gap breakdown (visible in overlay)
+            document.getElementById('breakdown-loan').innerText      = `₹${c.remainingLoan.toLocaleString('en-IN')}`;
+            document.getElementById('breakdown-rent').innerText      = `₹${c.remainingPgRent.toLocaleString('en-IN')}`;
+            document.getElementById('breakdown-living').innerText    = `₹${c.livingRemaining.toLocaleString('en-IN')}`;
+            document.getElementById('breakdown-conv').innerText      = `₹${c.convenienceRemaining.toLocaleString('en-IN')}`;
+            document.getElementById('breakdown-pg-pending').innerText= `₹${c.remainingPgPending.toLocaleString('en-IN')}`;
+            document.getElementById('breakdown-cash').innerText      = `−₹${c.currentBalance.toLocaleString('en-IN')}`;
+            document.getElementById('breakdown-total-gap').innerText = `₹${c.fundingGap.toLocaleString('en-IN')}`;
+
+            // Runway metrics
+            document.getElementById('runway-metric-current').innerText     = `${c.survivalRunway.toFixed(1)}m`;
+            document.getElementById('runway-metric-deficit').innerText     = `₹${c.fundingGap.toLocaleString('en-IN')}`;
+            document.getElementById('runway-metric-obligations').innerText = `₹${c.remainingObligationsSum.toLocaleString('en-IN')}`;
+
+            // Trackers
+            renderEmiGrid(c.numPaidEmis);
+            renderPgRentGrid(c.numPaidRents);
+
+            // Workspace
+            renderExpenseDrawerDetails();
+            renderIncomeDrawerDetails();
+
+            // Charts
+            const md = generateMonthlyForecastData();
+            const tI = md.reduce((s,d)=>s+d.inflow,0);
+            const tO = md.reduce((s,d)=>s+d.outflow,0);
+            const net = tI - tO;
+            document.getElementById('proj-summary-inflow').innerText  = `₹${tI.toLocaleString('en-IN')}`;
+            document.getElementById('proj-summary-outflow').innerText = `₹${tO.toLocaleString('en-IN')}`;
+            document.getElementById('proj-summary-net').innerText     = (net<0?'−':'') + `₹${Math.abs(net).toLocaleString('en-IN')}`;
+
+            renderForecastChart(md);
+            renderTimelineRows(md);
+            renderCashFlowTimeline(md);
+            renderCalendar();
+            renderUpcomingPayments();
+        }
+
+        // ============================================================
+        // FUNDING GAP OVERLAY
+        // ============================================================
+        let gapPanelOpen = false;
+        function toggleGapBreakdown() {
+            gapPanelOpen = !gapPanelOpen;
+            document.getElementById('gap-breakdown-panel').classList.toggle('open', gapPanelOpen);
+            document.getElementById('gap-backdrop').classList.toggle('open', gapPanelOpen);
+            document.getElementById('gap-toggle-icon').innerText = gapPanelOpen ? 'Close ✕' : 'View ↗';
+        }
+        window.addEventListener('keydown', e => { if (e.key==='Escape' && gapPanelOpen) toggleGapBreakdown(); });
+
+        // ============================================================
+        // EMI TRACKER
+        // ============================================================
+        function renderEmiGrid(n) {
+            const c = document.getElementById('emi-grid-container');
+            c.innerHTML = '';
+            for (let i=0;i<15;i++) {
+                const p = document.createElement('div');
+                p.className = `pill ${state.paidEmis[i]?'paid':''}`;
+                p.id = `emi-card-${i}`;
+                p.title = `EMI ${i+1}: ₹${state.emiAmount.toLocaleString('en-IN')} — ${state.paidEmis[i]?'PAID':'PENDING'}`;
+                p.setAttribute('onclick',`toggleEmi(${i})`);
+                p.innerText = (i+1).toString().padStart(2,'0');
+                c.appendChild(p);
+            }
+            const pct = Math.round((n/state.loanTenure)*100);
+            document.getElementById('emi-count-text').innerText = `${n} / 15 Paid`;
+            document.getElementById('emi-percent').innerText = `${pct}%`;
+            document.getElementById('emi-progress-bar').style.width = `${pct}%`;
+            document.getElementById('emi-remaining-debt').innerText = `₹${((state.loanTenure-n)*state.emiAmount).toLocaleString('en-IN')}`;
+        }
+        function toggleEmi(i) { state.paidEmis[i] = !state.paidEmis[i]; saveState(); updateAllData(); }
+
+        // ============================================================
+        // PG RENT TRACKER
+        // ============================================================
+        function renderPgRentGrid(n) {
+            const c = document.getElementById('pg-grid-container');
+            c.innerHTML = '';
+            for (let i=0;i<5;i++) {
+                const p = document.createElement('div');
+                p.className = `pill ${state.paidPgRent[i]?'paid':''}`;
+                p.id = `pg-card-${i}`;
+                p.title = `PG Rent M${i+1}: ₹${state.pgRentAmount.toLocaleString('en-IN')} — ${state.paidPgRent[i]?'PAID':'PENDING'}`;
+                p.setAttribute('onclick',`togglePgRent(${i})`);
+                p.innerText = (i+1).toString().padStart(2,'0');
+                c.appendChild(p);
+            }
+            const pct = Math.round((n/state.pgDuration)*100);
+            document.getElementById('pg-count-text').innerText = `${n} / 5 Paid`;
+            document.getElementById('pg-percent').innerText = `${pct}%`;
+            document.getElementById('pg-progress-bar').style.width = `${pct}%`;
+            document.getElementById('pg-remaining-rent').innerText = `₹${((state.pgDuration-n)*state.pgRentAmount).toLocaleString('en-IN')}`;
+        }
+        function togglePgRent(i) { state.paidPgRent[i] = !state.paidPgRent[i]; saveState(); updateAllData(); }
+
+        // ============================================================
+        // FORECAST CHART
+        // ============================================================
+        function renderForecastChart(md) {
+            const bC = document.getElementById('forecast-bars');
+            const lC = document.getElementById('forecast-labels');
+            const gC = document.getElementById('forecast-grid-lines');
+            bC.innerHTML=''; lC.innerHTML=''; gC.innerHTML='';
+            const xS=50,xE=670,yZ=240,yMH=210,bW=14;
+            const spacing=(xE-xS)/15;
+            const maxV = Math.max(...md.map(d=>Math.max(d.inflow,d.outflow)),1000);
+            const gridY=[30,82.5,135,187.5,240];
+            const gridV=[maxV,maxV*.75,maxV*.5,maxV*.25,0];
+            gridY.forEach((y,idx) => {
+                const l=document.createElementNS("http://www.w3.org/2000/svg","line");
+                l.setAttribute("x1",45);l.setAttribute("y1",y);l.setAttribute("x2",680);l.setAttribute("y2",y);
+                l.setAttribute("stroke","#e8e8e8");l.setAttribute("stroke-width","1");
+                if(idx===4) l.setAttribute("stroke","#111");
+                gC.appendChild(l);
+                const t=document.createElementNS("http://www.w3.org/2000/svg","text");
+                t.setAttribute("x",8);t.setAttribute("y",y+4);t.setAttribute("font-size","9");
+                t.setAttribute("font-weight","600");t.setAttribute("font-family","Outfit,sans-serif");t.setAttribute("fill","#999");
+                const rv=gridV[idx];
+                t.textContent = rv===0?'₹0': rv>=1000?`₹${(Math.round(rv/100)/10+'k').replace('.0k','k')}`:`₹${Math.round(rv)}`;
+                gC.appendChild(t);
+            });
+            md.forEach((d,i) => {
+                const xB = xS + i*spacing + (spacing-(bW*2+4))/2;
+                if (d.inflow>0) {
+                    const r=document.createElementNS("http://www.w3.org/2000/svg","rect");
+                    const h=(d.inflow/maxV)*yMH;
+                    r.setAttribute("x",xB);r.setAttribute("y",yZ-h);r.setAttribute("width",bW);r.setAttribute("height",h);
+                    r.setAttribute("fill","#111");r.style.cursor="pointer";
+                    r.addEventListener('click',()=>selectTimelineMonth(i));
+                    bC.appendChild(r);
+                }
+                if (d.outflow>0) {
+                    const r=document.createElementNS("http://www.w3.org/2000/svg","rect");
+                    const h=(d.outflow/maxV)*yMH;
+                    r.setAttribute("x",xB+bW+3);r.setAttribute("y",yZ-h);r.setAttribute("width",bW);r.setAttribute("height",h);
+                    r.setAttribute("fill","url(#pat-stripes-d)");r.setAttribute("stroke","#111");r.setAttribute("stroke-width","1");
+                    r.style.cursor="pointer";
+                    r.addEventListener('mouseover',()=>r.setAttribute("fill","#555"));
+                    r.addEventListener('mouseout',()=>r.setAttribute("fill","url(#pat-stripes-d)"));
+                    r.addEventListener('click',()=>selectTimelineMonth(i));
+                    bC.appendChild(r);
+                }
+                const lbl=document.createElementNS("http://www.w3.org/2000/svg","text");
+                lbl.setAttribute("x",xB+bW);lbl.setAttribute("y",260);lbl.setAttribute("text-anchor","middle");
+                lbl.setAttribute("font-size","10");lbl.setAttribute("font-weight","600");
+                lbl.setAttribute("font-family","Outfit,sans-serif");lbl.setAttribute("fill","#999");
+                lbl.textContent=`M${d.month.toString().padStart(2,'0')}`;
+                lC.appendChild(lbl);
+            });
+        }
+
+        let isProjectionExpanded = false;
+        function toggleProjectionExpansion() {
+            isProjectionExpanded = !isProjectionExpanded;
+            document.getElementById('toggle-projection-btn').innerText =
+                isProjectionExpanded ? '← Collapse' : 'View Full Projection →';
+            renderTimelineRows(generateMonthlyForecastData());
+        }
+
+        function renderTimelineRows(md) {
+            const c = document.getElementById('timeline-rows-container');
+            c.innerHTML = '';
+            (isProjectionExpanded ? md : md.slice(0,3)).forEach(d => {
+                const idx = d.month-1;
+                const row = document.createElement('div');
+                row.className = `timeline-row ${idx===selectedForecastMonthIndex?'active':''}`;
+                row.id = `timeline-row-${idx}`;
+                row.setAttribute('onclick',`selectTimelineMonth(${idx})`);
+                row.innerHTML = `
+                    <span style="font-weight:600;">Month ${d.month.toString().padStart(2,'0')}</span>
+                    <span style="font-size:11px; color:inherit; opacity:0.7; text-transform:uppercase; letter-spacing:0.04em;">${d.status}</span>
+                    <span style="text-align:right; font-weight:600;">₹${d.outflow.toLocaleString('en-IN')}</span>
+                    <span style="text-align:right; font-weight:700;">₹${d.inflow.toLocaleString('en-IN')}</span>
+                `;
+                c.appendChild(row);
+            });
+            updateTimelineDetails(md[selectedForecastMonthIndex]);
+        }
+
+        function selectTimelineMonth(idx) {
+            if (idx>=3 && !isProjectionExpanded) toggleProjectionExpansion();
+            document.querySelectorAll('.timeline-row').forEach(r=>r.classList.remove('active'));
+            selectedForecastMonthIndex = idx;
+            const ar = document.getElementById(`timeline-row-${idx}`);
+            if (ar) ar.classList.add('active');
+            updateTimelineDetails(generateMonthlyForecastData()[idx]);
+        }
+
+        function updateTimelineDetails(data) {
+            document.getElementById('month-drawer').classList.add('open');
+            document.getElementById('drawer-month-title').innerText = `Month ${data.month.toString().padStart(2,'0')} — ${data.status}`;
+            let pgHtml = data.month===1 ? `<div class="month-detail-item"><div class="month-detail-name">PG Deposit</div><div class="month-detail-val">₹${data.pgPending.toLocaleString('en-IN')}</div></div>` : '';
+            document.getElementById('drawer-grid').innerHTML = `
+                <div class="month-detail-item"><div class="month-detail-name">PG Rent</div><div class="month-detail-val">₹${data.pgRent.toLocaleString('en-IN')}</div></div>
+                <div class="month-detail-item"><div class="month-detail-name">EMI</div><div class="month-detail-val">₹${data.emi.toLocaleString('en-IN')}</div></div>
+                <div class="month-detail-item"><div class="month-detail-name">Logged Expenses</div><div class="month-detail-val">₹${data.loggedExp.toLocaleString('en-IN')}</div></div>
+                <div class="month-detail-item"><div class="month-detail-name">Living Buffer</div><div class="month-detail-val">₹${data.living.toLocaleString('en-IN')}</div></div>
+                ${pgHtml}
+                <div class="month-detail-item"><div class="month-detail-name">Total Inflow</div><div class="month-detail-val" style="font-weight:700;">₹${data.inflow.toLocaleString('en-IN')}</div></div>
+                <div class="month-detail-item"><div class="month-detail-name">Total Outflow</div><div class="month-detail-val" style="font-weight:700;">₹${data.outflow.toLocaleString('en-IN')}</div></div>
+            `;
+        }
+
+        // ============================================================
+        // RUNWAY CHART
+        // ============================================================
+        function renderCashFlowTimeline(md) {
+            const svg = document.getElementById('cashflow-timeline-svg');
+            svg.innerHTML = '';
+            const w=700,h=130,padX=45,padY=20;
+            const points=[];
+            const c = calculateFinances();
+            let cum = c.currentBalance;
+            for (let m=1;m<=15;m++) {
+                let inf=0,out=0;
+                if (m===1) {
+                    if (!state.paidPgRent[0]) out+=state.pgRentAmount;
+                    if (!state.paidEmis[0]) out+=state.emiAmount;
+                    if (!state.pgDepositPendingPaid) out+=10000;
+                    const spent=state.loggedExpenses.filter(e=>parseInt(e.month)===1).reduce((s,i)=>s+i.amount,0);
+                    out+=Math.max(0,state.monthlyLimits[0]-spent);
+                } else {
+                    inf+=state.loggedIncomes.filter(i=>parseInt(i.month)===m).reduce((s,i)=>s+i.amount,0)+getRecurringIncomeForMonth(m);
+                    if (m<=5) {
+                        if (!state.paidPgRent[m-1]) out+=state.pgRentAmount;
+                        const spent=state.loggedExpenses.filter(e=>parseInt(e.month)===m).reduce((s,i)=>s+i.amount,0);
+                        out+=Math.max(state.monthlyLimits[m-1],spent);
+                    } else {
+                        out+=state.loggedExpenses.filter(e=>parseInt(e.month)===m).reduce((s,i)=>s+i.amount,0);
+                    }
+                    if (!state.paidEmis[m-1]) out+=state.emiAmount;
+                }
+                cum=(cum+inf)-out;
+                points.push({m,val:cum});
+            }
+            let mn=Math.min(...points.map(p=>p.val));
+            let mx=Math.max(...points.map(p=>p.val));
+            if (!isFinite(mn)) mn=0;
+            if (!isFinite(mx)) mx=15000;
+            const diff=(mx-mn)||1;
+
+            // Y-labels
+            [[mx,padY],[mn,h-padY]].forEach(([rv,yy]) => {
+                const t=document.createElementNS("http://www.w3.org/2000/svg","text");
+                t.setAttribute("x",padX-4);t.setAttribute("y",yy+3);
+                t.setAttribute("font-size","8");t.setAttribute("font-weight","600");
+                t.setAttribute("font-family","Outfit,sans-serif");t.setAttribute("fill","#999");
+                t.setAttribute("text-anchor","end");
+                const neg=rv<0; const abs=Math.abs(rv);
+                t.textContent = `${neg?'−':''}₹${abs>=1000?(Math.round(abs/100)/10+'k').replace('.0k','k'):Math.round(abs)}`;
+                svg.appendChild(t);
+            });
+
+            const pathData = points.map((p,i) => {
+                const x = padX+(i*(w-padX*2)/14);
+                const val = isFinite(p.val)?p.val:0;
+                const y = h-padY-((val-mn)/diff)*(h-padY*2);
+                return `${i===0?'M':'L'} ${x} ${y}`;
+            }).join(' ');
+
+            const path=document.createElementNS("http://www.w3.org/2000/svg","path");
+            path.setAttribute("d",pathData);path.setAttribute("fill","none");
+            path.setAttribute("stroke","#111");path.setAttribute("stroke-width","2");
+            svg.appendChild(path);
+
+            points.forEach((p,i) => {
+                const x=padX+(i*(w-padX*2)/14);
+                const val=isFinite(p.val)?p.val:0;
+                const y=h-padY-((val-mn)/diff)*(h-padY*2);
+                const isMilestone=(i===0||i===4||i===14);
+                const circle=document.createElementNS("http://www.w3.org/2000/svg","circle");
+                circle.setAttribute("cx",x);circle.setAttribute("cy",y);
+                circle.setAttribute("r",isMilestone?"5":"3");
+                circle.setAttribute("fill",isMilestone?"#fff":"#111");
+                circle.setAttribute("stroke","#111");circle.setAttribute("stroke-width",isMilestone?"2":"1.5");
+                circle.style.cursor="pointer";
+                circle.addEventListener('mouseover',()=>{
+                    circle.setAttribute("r","7");circle.setAttribute("fill","#111");
+                    document.getElementById('runway-hover-label').innerText=`Month ${p.m.toString().padStart(2,'0')}`;
+                    document.getElementById('runway-hover-val').innerText=(p.val<0?'−':'')+'₹'+Math.round(Math.abs(p.val)).toLocaleString('en-IN');
+                });
+                circle.addEventListener('mouseout',()=>{
+                    circle.setAttribute("r",isMilestone?"5":"3");
+                    circle.setAttribute("fill",isMilestone?"#fff":"#111");
+                    document.getElementById('runway-hover-label').innerText="Hover a data point";
+                    document.getElementById('runway-hover-val').innerText="—";
+                });
+                svg.appendChild(circle);
+                if (isMilestone) {
+                    const lbl=i===0?"M01":(i===4?"M05":"M15");
+                    const t=document.createElementNS("http://www.w3.org/2000/svg","text");
+                    t.setAttribute("x",x);t.setAttribute("y",y-9);
+                    t.setAttribute("text-anchor",i===14?"end":(i===0?"start":"middle"));
+                    t.setAttribute("font-size","8");t.setAttribute("font-weight","700");
+                    t.setAttribute("font-family","Outfit,sans-serif");t.setAttribute("fill","#555");
+                    t.textContent=`${lbl}: ${val<0?'−':''}₹${Math.round(Math.abs(val)).toLocaleString('en-IN')}`;
+                    svg.appendChild(t);
+                }
+            });
+        }
+
+        // ============================================================
+        // WORKSPACE TABS
+        // ============================================================
+        function switchWorkspaceTab(tab) {
+            ['expenses','income','recurring'].forEach(t => {
+                document.getElementById(`ws-${t}`).classList.toggle('active', t===tab);
+                document.getElementById(`ws-tab-${t}`).classList.toggle('active', t===tab);
+            });
+        }
+
+        // Progressive disclosure toggles for expense
+        let expenseDetailsOpen = false;
+        let expenseFormOpen    = false;
+        function toggleExpenseDetails() {
+            expenseDetailsOpen = !expenseDetailsOpen;
+            document.getElementById('expense-table-section').classList.toggle('open', expenseDetailsOpen);
+            document.getElementById('btn-view-expenses').innerText = expenseDetailsOpen ? 'Hide Expenses ↑' : 'View Expenses ↓';
+        }
+        function toggleExpenseForm() {
+            expenseFormOpen = !expenseFormOpen;
+            document.getElementById('expense-form-section').classList.toggle('open', expenseFormOpen);
+            document.getElementById('btn-add-expense').innerText = expenseFormOpen ? 'Cancel ✕' : 'Add Expense +';
+        }
+
+        // Progressive disclosure for income
+        let incomeDetailsOpen = false;
+        let incomeFormOpen    = false;
+        function toggleIncomeDetails() {
+            incomeDetailsOpen = !incomeDetailsOpen;
+            document.getElementById('income-table-section').classList.toggle('open', incomeDetailsOpen);
+            document.getElementById('btn-view-income').innerText = incomeDetailsOpen ? 'Hide Entries ↑' : 'View Entries ↓';
+        }
+        function toggleIncomeForm() {
+            incomeFormOpen = !incomeFormOpen;
+            document.getElementById('income-form-section').classList.toggle('open', incomeFormOpen);
+            document.getElementById('btn-add-income').innerText = incomeFormOpen ? 'Cancel ✕' : 'Add Income +';
+        }
+
+        // ============================================================
+        // EXPENSE MANAGER
+        // ============================================================
+        function renderExpenseTabs() {
+            const c = document.getElementById('expense-month-tabs');
+            c.innerHTML = '';
+            for (let i=1;i<=15;i++) {
+                const btn=document.createElement('button');
+                btn.className=`m-tab ${i-1===currentExpenseMonthIndex?'active':''}`;
+                btn.innerText=`M${i.toString().padStart(2,'0')}`;
+                btn.setAttribute('onclick',`changeExpenseMonth(${i-1})`);
+                c.appendChild(btn);
+            }
+        }
+        function changeExpenseMonth(idx) {
+            currentExpenseMonthIndex=idx; renderExpenseTabs(); renderExpenseDrawerDetails();
+        }
+        function renderExpenseDrawerDetails() {
+            const month=currentExpenseMonthIndex+1;
+            const exps=state.loggedExpenses.filter(e=>parseInt(e.month)===month);
+            const spent=exps.reduce((s,i)=>s+i.amount,0);
+            const limit=state.monthlyLimits[currentExpenseMonthIndex];
+            document.getElementById('exp-total-spent').innerText=`₹${spent.toLocaleString('en-IN')}`;
+            document.getElementById('exp-monthly-limit').value=limit;
+            document.getElementById('exp-avail-budget').innerText=`₹${(limit-spent).toLocaleString('en-IN')}`;
+            const wb=document.getElementById('expense-warning-box');
+            const wm=document.getElementById('expense-warning-msg');
+            if (spent>limit) { wb.style.display='flex'; wm.innerText=`Budget exceeded by ₹${(spent-limit).toLocaleString('en-IN')} — Limit: ₹${limit.toLocaleString('en-IN')}`; }
+            else { wb.style.display='none'; }
+            const rows=document.getElementById('expense-items-list');
+            rows.innerHTML='';
+            if (exps.length===0) {
+                rows.innerHTML=`<div style="padding:16px; text-align:center; font-size:12px; color:var(--ink-light); font-style:italic;">No expenses recorded for this month.</div>`;
+                return;
+            }
+            exps.forEach(item => {
+                const r=document.createElement('div');
+                r.className='data-row';
+                r.innerHTML=`<span style="font-weight:600;">${escapeHTML(item.name)}</span><span>₹${item.amount.toLocaleString('en-IN')}</span><span style="color:var(--ink-light);">Day ${item.date}</span><span style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-mid);">${item.category}</span><button class="del-btn" onclick="deleteExpense('${item.id}')">Remove</button>`;
+                rows.appendChild(r);
+            });
+        }
+        function updateMonthlyLimit() {
+            state.monthlyLimits[currentExpenseMonthIndex]=parseFloat(document.getElementById('exp-monthly-limit').value)||0;
+            saveState(); updateAllData();
+        }
+        function addCustomExpense(e) {
+            e.preventDefault();
+            state.loggedExpenses.push({
+                id:'exp_'+Date.now()+'_'+Math.random().toString(36).substr(2,4),
+                month:currentExpenseMonthIndex+1,
+                name:document.getElementById('add-exp-name').value,
+                amount:parseFloat(document.getElementById('add-exp-amt').value)||0,
+                date:parseInt(document.getElementById('add-exp-day').value)||15,
+                category:document.getElementById('add-exp-cat').value
+            });
+            saveState();
+            document.getElementById('add-exp-name').value='';
+            document.getElementById('add-exp-amt').value='';
+            document.getElementById('add-exp-day').value='';
+            updateAllData();
+        }
+        function deleteExpense(id) { state.loggedExpenses=state.loggedExpenses.filter(e=>e.id!==id); saveState(); updateAllData(); }
+
+        // ============================================================
+        // INCOME MANAGER
+        // ============================================================
+        function renderIncomeTabs() {
+            const c=document.getElementById('income-month-tabs');
+            c.innerHTML='';
+            for (let i=1;i<=15;i++) {
+                const btn=document.createElement('button');
+                btn.className=`m-tab ${i-1===currentIncomeMonthIndex?'active':''}`;
+                btn.innerText=`M${i.toString().padStart(2,'0')}`;
+                btn.setAttribute('onclick',`changeIncomeMonth(${i-1})`);
+                c.appendChild(btn);
+            }
+        }
+        function changeIncomeMonth(idx) { currentIncomeMonthIndex=idx; renderIncomeTabs(); renderIncomeDrawerDetails(); }
+        function renderIncomeDrawerDetails() {
+            const month=currentIncomeMonthIndex+1;
+            const manual=state.loggedIncomes.filter(i=>parseInt(i.month)===month);
+            const mTotal=manual.reduce((s,i)=>s+i.amount,0);
+            document.getElementById('inc-monthly-total').innerText=`₹${(mTotal+getRecurringIncomeForMonth(month)).toLocaleString('en-IN')}`;
+            const rows=document.getElementById('income-items-list');
+            rows.innerHTML='';
+            const list=[];
+            manual.forEach(i=>list.push({name:i.source,amount:i.amount,date:i.date,type:i.type,id:i.id,custom:true}));
+            state.recurringIncomes.forEach(r=>{
+                const s=parseInt(r.startMonth),e=parseInt(r.endMonth);
+                if(month>=s&&month<=e&&(r.frequency==='Monthly'||(r.frequency==='Quarterly'&&(month-s)%3===0)))
+                    list.push({name:`Recurring: ${r.name}`,amount:r.amount,date:'1',type:'Auto',id:r.id,custom:false});
+            });
+            if (list.length===0) {
+                rows.innerHTML=`<div style="padding:16px; text-align:center; font-size:12px; color:var(--ink-light); font-style:italic;">No income entries for this month.</div>`;
+            } else {
+                list.forEach(item => {
+                    const r=document.createElement('div');
+                    r.className='data-row income-data-row';
+                    r.style.gridTemplateColumns='2fr 1fr 1fr 1fr auto';
+                    r.innerHTML=`<span style="font-weight:600;">${escapeHTML(item.name)}</span><span>₹${item.amount.toLocaleString('en-IN')}</span><span style="color:var(--ink-light);">Day ${item.date}</span><span style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-mid);">${item.type}</span>${item.custom?`<button class="del-btn" onclick="deleteIncome('${item.id}')">Remove</button>`:'<span></span>'}`;
+                    rows.appendChild(r);
+                });
+            }
+            renderAutoRulesList();
+        }
+        function addCustomIncome(e) {
+            e.preventDefault();
+            state.loggedIncomes.push({
+                id:'inc_'+Date.now()+'_'+Math.random().toString(36).substr(2,4),
+                month:currentIncomeMonthIndex+1,
+                source:document.getElementById('add-inc-source').value,
+                amount:parseFloat(document.getElementById('add-inc-amt').value)||0,
+                date:parseInt(document.getElementById('add-inc-day').value)||1,
+                type:document.getElementById('add-inc-type').value
+            });
+            saveState();
+            document.getElementById('add-inc-source').value='';
+            document.getElementById('add-inc-amt').value='';
+            document.getElementById('add-inc-day').value='';
+            updateAllData();
+        }
+        function deleteIncome(id) { state.loggedIncomes=state.loggedIncomes.filter(i=>i.id!==id); saveState(); updateAllData(); }
+        function generateAutoIncome(e) {
+            e.preventDefault();
+            const s=parseInt(document.getElementById('auto-inc-start').value);
+            const en=parseInt(document.getElementById('auto-inc-end').value);
+            if(s>en){alert("Start month cannot exceed end month.");return;}
+            state.recurringIncomes.push({
+                id:'rule_'+Date.now()+'_'+Math.random().toString(36).substr(2,4),
+                name:document.getElementById('auto-inc-name').value,
+                amount:parseFloat(document.getElementById('auto-inc-amt').value)||0,
+                startMonth:s,endMonth:en,
+                frequency:document.getElementById('auto-inc-freq').value
+            });
+            saveState();
+            document.getElementById('auto-inc-name').value='';
+            document.getElementById('auto-inc-amt').value='';
+            updateAllData();
+        }
+        function renderAutoRulesList() {
+            const c=document.getElementById('auto-rules-list-container');
+            c.innerHTML='';
+            if(!state.recurringIncomes.length) return;
+            state.recurringIncomes.forEach(r=>{
+                const box=document.createElement('div');
+                box.className='rule-row';
+                box.innerHTML=`<span style="font-size:13px;"><strong>${escapeHTML(r.name)}</strong> &nbsp;·&nbsp; ₹${r.amount.toLocaleString('en-IN')}/mo &nbsp;·&nbsp; M${r.startMonth}–M${r.endMonth} &nbsp;·&nbsp; ${r.frequency}</span><button class="del-btn" onclick="deleteAutoRule('${r.id}')">Remove</button>`;
+                c.appendChild(box);
+            });
+        }
+        function deleteAutoRule(id) { state.recurringIncomes=state.recurringIncomes.filter(r=>r.id!==id); saveState(); updateAllData(); }
+
+        // ============================================================
+        // UPCOMING PAYMENTS (simplified calendar view)
+        // ============================================================
+        function renderUpcomingPayments() {
+            const list = document.getElementById('upcoming-payments-list');
+            list.innerHTML = '';
+            const events = getMonth1CalendarEvents();
+            // Only show fixed/scheduled events (days with events), sorted by day
+            const days = Object.keys(events).map(Number).sort((a,b)=>a-b);
+            if (days.length === 0) {
+                list.innerHTML = `<div style="padding:16px; text-align:center; font-size:12px; color:var(--ink-light); font-style:italic;">No scheduled payments for Month 1.</div>`;
+                return;
+            }
+            days.forEach(day => {
+                const ev = events[day];
+                const items = Array.isArray(ev) ? ev : [ev];
+                items.forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'upcoming-item';
+                    row.style.cursor = 'pointer';
+                    row.onclick = () => {
+                        if (!calendarOpen) toggleCalendarSection();
+                        setTimeout(()=>selectCalendarDay(day), 50);
+                    };
+                    row.innerHTML = `
+                        <span class="upcoming-day">Day ${day.toString().padStart(2,'0')}</span>
+                        <span class="upcoming-name">${escapeHTML(item.title)}</span>
+                        <span class="upcoming-amount">₹${item.amt.toLocaleString('en-IN')}</span>
+                        <span class="upcoming-status ${item.status==='PAID'||item.status==='RECEIVED'?'status-paid':'status-pending'}">${item.status}</span>
+                    `;
+                    list.appendChild(row);
+                });
+            });
+        }
+
+        // ============================================================
+        // CALENDAR
+        // ============================================================
+        let calendarOpen = false;
+        function toggleCalendarSection() {
+            calendarOpen = !calendarOpen;
+            document.getElementById('calendar-body').classList.toggle('open', calendarOpen);
+            document.getElementById('cal-toggle-btn').innerText = calendarOpen ? '← Hide Calendar' : 'Show Full Calendar →';
+        }
+
+        function getMonth1CalendarEvents() {
+            const events = {};
+            const pg1=state.paidPgRent[0];
+            events[1]={title:"PG Rent Payment",amt:state.pgRentAmount,type:"fixed",status:pg1?"PAID":"PENDING",desc:"Month 1 rent obligation.",req:pg1?"Settled":"Required",isToggleable:true,toggleKey:"paidPgRent_0"};
+            const e1=state.paidEmis[0];
+            events[5]={title:"Course EMI 01",amt:state.emiAmount,type:"loan",status:e1?"PAID":"PENDING",desc:"First loan installment.",req:e1?"Settled":"Required",isToggleable:true,toggleKey:"paidEmis_0"};
+            const pp=state.pgDepositPendingPaid;
+            events[10]={title:"PG Deposit Balance",amt:10000,type:"onetime",status:pp?"PAID":"PENDING",desc:"Remaining setup cost.",req:pp?"Settled":"Required",isToggleable:true,toggleKey:"pgDepositPendingPaid"};
+            events[25]={title:"Travel & Transit",amt:3000,type:"onetime",status:"PAID",desc:"Initial travel allowance.",req:"Settled"};
+            state.loggedExpenses.forEach(exp=>{
+                if(parseInt(exp.month)===1){const d=parseInt(exp.date);if(d>=1&&d<=30){if(!events[d])events[d]=[];const a=Array.isArray(events[d])?events[d]:[events[d]];a.push({title:exp.name,amt:exp.amount,type:"expense",status:"PAID",desc:`${exp.category}`,req:"Settled"});events[d]=a;}}
+            });
+            state.loggedIncomes.forEach(inc=>{
+                if(parseInt(inc.month)===1){const d=parseInt(inc.date);if(d>=1&&d<=30){if(!events[d])events[d]=[];const a=Array.isArray(events[d])?events[d]:[events[d]];a.push({title:inc.source,amt:inc.amount,type:"income",status:"RECEIVED",desc:`${inc.type}`,req:"Cash Inflow"});events[d]=a;}}
+            });
+            return events;
+        }
+
+        function renderCalendar() {
+            const grid=document.getElementById('calendar-grid-container');
+            grid.innerHTML='';
+            ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d=>{
+                const h=document.createElement('div');
+                h.className='cal-cell-header';h.innerText=d;grid.appendChild(h);
+            });
+            for(let e=0;e<4;e++){const em=document.createElement('div');em.className='calendar-cell';em.style.cursor='default';grid.appendChild(em);}
+            const events=getMonth1CalendarEvents();
+            for(let d=1;d<=30;d++){
+                const cell=document.createElement('div');
+                cell.className='calendar-cell';
+                cell.setAttribute('onclick',`selectCalendarDay(${d})`);
+                if(d===currentSelectedCalDay) cell.classList.add('selected');
+                const ev=events[d];
+                if(ev){
+                    cell.classList.add('has-event');
+                    const amt=Array.isArray(ev)?ev.reduce((s,i)=>s+i.amt,0):ev.amt;
+                    cell.innerHTML=`<span class="calendar-cell-num">${d}</span><span class="calendar-event-indicator">₹${Math.round(amt/1000)}k</span>`;
+                } else {
+                    cell.innerHTML=`<span class="calendar-cell-num">${d}</span>`;
+                }
+                grid.appendChild(cell);
+            }
+        }
+
+        function selectCalendarDay(day) {
+            currentSelectedCalDay=day;
+            const events=getMonth1CalendarEvents();
+            const ev=events[day];
+            document.getElementById('cal-date-label').innerText=`Month 01 / Day ${day.toString().padStart(2,'0')}`;
+            renderCalendar();
+            const title=document.getElementById('cal-title-label');
+            const body=document.getElementById('cal-body-content');
+            const cat=document.getElementById('cal-category-label');
+            if(!ev){title.innerText='No operations';body.innerHTML=`<div class="cal-instruction">No scheduled events on Day ${day}.</div>`;cat.innerText='System Ready';return;}
+            const list=Array.isArray(ev)?ev:[ev];
+            title.innerText=list.length===1?list[0].title:`${list.length} Operations`;
+            let html='';
+            list.forEach((item,idx)=>{
+                let btn='';
+                if(item.isToggleable) btn=`<div style="margin-top:8px;"><button class="btn-ghost" style="width:100%; font-size:10px;" onclick="toggleCalendarEventState('${item.toggleKey}')">Mark as ${item.status==='PAID'?'Pending':'Paid'}</button></div>`;
+                html+=`<div style="padding-bottom:${idx<list.length-1?'12px':0}; margin-bottom:${idx<list.length-1?'12px':0}; border-bottom:${idx<list.length-1?'1px solid var(--line)':'none'}">
+                    <div class="cal-data-row"><span class="cal-data-label">Name</span><span class="cal-data-val">${escapeHTML(item.title)}</span></div>
+                    <div class="cal-data-row"><span class="cal-data-label">Amount</span><span class="cal-data-val">₹${item.amt.toLocaleString('en-IN')}</span></div>
+                    <div class="cal-data-row"><span class="cal-data-label">Status</span><span class="cal-data-val">${item.status}</span></div>
+                    <div class="cal-data-row"><span class="cal-data-label">Type</span><span class="cal-data-val">${item.type.toUpperCase()}</span></div>
+                    ${btn}
+                </div>`;
+            });
+            body.innerHTML=html;
+            cat.innerText=list.length===1?`Category: ${list[0].type.toUpperCase()}`:'Multiple Transactions';
+        }
+
+        function toggleCalendarEventState(key) {
+            if(key.includes('_')){const p=key.split('_');state[p[0]][parseInt(p[1])]=!state[p[0]][parseInt(p[1])];}
+            else{state[key]=!state[key];}
+            saveState(); updateAllData();
+            if(currentSelectedCalDay!==null) selectCalendarDay(currentSelectedCalDay);
+        }
+
+        // ============================================================
+        // BOOT
+        // ============================================================
+        loadState();
+        checkSession();
+    </script>
+</body>
+</html>
