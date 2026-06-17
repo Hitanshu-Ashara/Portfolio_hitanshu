@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashara Hitanshu | UI/Product Designer</title>
+    <title>Ashara Hitanshu | Designer's Autobiography</title>
     <!-- SEO Best Practices -->
     <meta name="description"
-        content="Portfolio of Ashara Hitanshu, a UI-focused Product Designer creating clean SaaS experiences with strong UX thinking.">
+        content="The chronological design journey and interactive autobiography of Ashara Hitanshu, UI/UX Designer & problem solver.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +21,7 @@
             --font-serif: 'Instrument Serif', serif;
             --font-sans: 'Outfit', sans-serif;
             --border: 2px solid var(--black);
+            --border-thin: 1px solid rgba(0,0,0,0.15);
             --pad-sm: 2rem;
             --pad-md: 4rem;
             --pad-lg: 8rem;
@@ -45,6 +46,7 @@
             line-height: 1.4;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
         /* Utility Classes */
@@ -60,36 +62,33 @@
             border-bottom: var(--border);
         }
 
-        .grid {
-            display: grid;
-        }
-
         .container {
             max-width: 1920px;
             margin: 0 auto;
             border-left: var(--border);
             border-right: var(--border);
             min-height: 100vh;
+            position: relative;
         }
 
         /* Typography */
         h1 {
-            font-size: clamp(4rem, 14vw, 16rem);
+            font-size: clamp(3rem, 10vw, 8rem);
             line-height: 0.85;
             letter-spacing: -0.02em;
             font-weight: 400;
         }
 
         h2 {
-            font-size: clamp(3rem, 10vw, 10rem);
-            line-height: 0.9;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 0.95;
             letter-spacing: -0.02em;
             font-weight: 400;
         }
 
         h3 {
-            font-size: clamp(2rem, 4vw, 4.5rem);
-            line-height: 1;
+            font-size: clamp(1.75rem, 3.5vw, 3rem);
+            line-height: 1.1;
             font-weight: 400;
             letter-spacing: -0.02em;
         }
@@ -101,6 +100,10 @@
             align-items: center;
             padding: var(--pad-sm) var(--pad-md);
             border-bottom: var(--border);
+            background: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -145,53 +148,63 @@
         /* Hero Section */
         .hero {
             padding: var(--pad-lg) var(--pad-md);
-            min-height: 85vh;
+            min-height: 90vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             position: relative;
         }
 
-        .role-tag {
-            font-family: var(--font-sans);
-            font-weight: 500;
-            font-size: 1rem;
-            letter-spacing: 0.1em;
-            padding: 0.5rem 1.5rem;
-            border: 1px solid var(--black);
-            display: inline-block;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 6rem;
+            width: 100%;
+            align-items: center;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
             margin-bottom: 2rem;
+            text-transform: uppercase;
         }
 
-        .hero h1 {
-            text-transform: none;
-            margin-bottom: 2.5rem;
-            margin-left: -0.05em;
-            /* Optical alignment stringency */
-        }
-
-        .hero-bottom {
-            display: block;
-            margin-top: 1rem;
+        .hero-tagline {
+            font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+            line-height: 1.15;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            max-width: 750px;
         }
 
         .hero-subtitle {
-            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            font-size: 1.25rem;
             font-weight: 300;
             max-width: 600px;
             margin-bottom: 3rem;
-            letter-spacing: 0;
+            color: #444;
             line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem 3.5rem;
+            padding: 1.25rem 3rem;
             font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             text-decoration: none;
             color: var(--white);
             background: var(--black);
@@ -206,211 +219,766 @@
             color: var(--black);
         }
 
-        /* Section Header Shared */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: var(--pad-md);
-            border-bottom: var(--border);
-        }
-
-        .section-number {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        /* Projects Section */
-        .projects-list {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-row {
-            display: flex;
-            flex-direction: column;
-            padding: var(--pad-md);
-            border-bottom: 1px solid currentColor;
-            text-decoration: none;
+        .btn-secondary {
+            background: transparent;
             color: var(--black);
-            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        .project-row:last-child {
-            border-bottom: none;
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 2rem;
-            gap: 2rem;
-        }
-
-        .project-row h3 {
-            font-size: clamp(3rem, 6vw, 6.5rem);
-            margin: 0;
-            line-height: 0.9;
-        }
-
-        .project-type {
-            font-size: 0.875rem;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            padding: 0.5rem 1.25rem;
-            border: 1px solid currentColor;
-            white-space: nowrap;
-        }
-
-        .project-details {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-top: 1.5rem;
-            gap: 2rem;
-        }
-
-        .project-row p {
-            max-width: 600px;
-            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-            font-weight: 300;
-            color: #222;
-            line-height: 1.5;
-            transition: color 0.4s ease;
-            margin: 0;
-        }
-
-        .view-link {
-            font-size: 1rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            position: relative;
-            padding-bottom: 4px;
-            letter-spacing: 0.05em;
-        }
-
-        .view-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: currentColor;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s ease;
-        }
-
-        /* Hover Effects */
-        .project-row:hover {
-            background-color: var(--black);
-            color: var(--white);
-        }
-
-        .project-row:hover p {
-            color: #d0d0d0;
-        }
-
-        .project-row:hover .view-link::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        /* About Section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .about-text {
-            padding: var(--pad-md);
-            border-right: var(--border);
-        }
-
-        .about-text p {
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
-            margin-bottom: 2rem;
-        }
-
-        .skills {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .skill-item {
-            padding: var(--pad-md);
-            border-bottom: var(--border);
-            font-size: clamp(1.5rem, 2.5vw, 2.5rem);
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .skill-item:last-child {
-            border-bottom: none;
-        }
-
-        .skill-arrow {
-            font-size: 1.75rem;
-            font-weight: 300;
-            line-height: 1;
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .skill-item.open .skill-arrow {
-            transform: rotate(45deg);
-        }
-
-        .skill-item:hover,
-        .skill-item.open {
+        .btn-secondary:hover {
             background: var(--black);
             color: var(--white);
         }
 
-        .skill-panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Status Card */
+        .status-card {
+            border: 2px solid var(--black);
+            background: #fafafa;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 8px 8px 0px var(--black);
         }
 
-        .skill-panel.open {
-            max-height: 800px;
-            border-bottom: var(--border);
+        .status-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
         }
 
-        .skill-panel-inner {
-            padding: var(--pad-md);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            border-top: var(--border);
+        .status-dot-active {
+            width: 8px;
+            height: 8px;
+            background: var(--black);
+            border-radius: 50%;
+            animation: status-pulse 2s infinite;
         }
 
-        .skill-panel p {
-            font-size: 1.1rem;
+        @keyframes status-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.3; }
+        }
+
+        .status-card-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .status-location {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-icon {
+            font-size: 1.5rem;
+        }
+
+        .status-location h3 {
+            font-size: 1.5rem;
+            font-family: var(--font-serif);
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .status-location p {
+            font-size: 0.85rem;
             font-weight: 300;
-            line-height: 1.75;
-            margin-bottom: 1.25rem;
+            color: #666;
+        }
+
+        .status-divider {
+            height: 1px;
+            background: rgba(0,0,0,0.1);
+            margin: 1.5rem 0;
+        }
+
+        .status-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: #666;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-focus h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .status-org {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #444;
+            margin-top: 0.25rem;
+        }
+
+        .status-timeline p {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Floating Sidebar Navigation */
+        .timeline-nav {
+            position: fixed;
+            right: 4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            z-index: 1000;
+        }
+
+        .timeline-nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--black);
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .timeline-nav-dot {
+            width: 8px;
+            height: 8px;
+            border: 2px solid var(--black);
+            background: var(--white);
+            border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .timeline-nav-label {
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            background: var(--white);
+            padding: 2px 6px;
+            border: 1px solid transparent;
+        }
+
+        .timeline-nav-item:hover .timeline-nav-label,
+        .timeline-nav-item.active .timeline-nav-label {
+            opacity: 1;
+            transform: translateX(0);
+            border-color: var(--black);
+        }
+
+        .timeline-nav-item.active .timeline-nav-dot {
+            background: var(--black);
+            transform: scale(1.4);
+        }
+
+        /* Timeline Engine */
+        .timeline-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .timeline-line-wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 240px;
+            width: 2px;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+
+        .timeline-progress-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: var(--black);
+            transition: height 0.1s ease-out;
+        }
+
+        /* Timeline Chapters */
+        .chapter {
+            position: relative;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 0;
+            border-bottom: var(--border);
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .chapter-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            padding: var(--pad-md) 3rem var(--pad-md) 2rem;
+            position: relative;
+            border-right: var(--border);
+            background: #fafafa;
+        }
+
+        .chapter-year {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: var(--font-sans);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .chapter-number {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        /* Chapter node on the line */
+        .chapter-node {
+            position: absolute;
+            right: -9px;
+            top: calc(var(--pad-md) + 0.5rem);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid var(--black);
+            background: var(--white);
+            z-index: 5;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .chapter.active .chapter-node {
+            background: var(--black);
+            transform: scale(1.25);
+        }
+
+        .chapter-right {
+            padding: var(--pad-md) 6rem var(--pad-md) 4rem;
+            display: grid;
+            grid-template-columns: 1.2fr 1.1fr;
+            gap: 4rem;
+            background: var(--white);
+        }
+
+        .chapter-story {
+            max-width: 650px;
+        }
+
+        .chapter-title {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        .chapter-narrative p {
+            font-size: 1.15rem;
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
             color: #222;
         }
 
-        .skill-panel p:last-child { margin-bottom: 0; }
+        .chapter-narrative p:last-child {
+            margin-bottom: 0;
+        }
 
-        .skill-panel-label {
+        .chapter-humor {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.35rem;
+            color: #444;
+            border-left: 2px solid var(--black);
+            padding-left: 1.25rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .chapter-media {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 2rem;
+        }
+
+        /* Cards and interactive indicators */
+        .project-card {
+            border: 2px solid var(--black);
+            background: var(--white);
+            padding: 2.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--black);
+            position: relative;
+            box-shadow: 4px 4px 0px var(--black);
+        }
+
+        .project-card:hover {
+            background: var(--black);
+            color: var(--white);
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px var(--black);
+        }
+
+        .project-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .project-card-title {
+            font-family: var(--font-serif);
+            font-size: 2.25rem;
+            line-height: 1.05;
+            font-weight: 400;
+        }
+
+        .project-card-type {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--black);
+            white-space: nowrap;
+            transition: border-color 0.3s ease;
+        }
+
+        .project-card:hover .project-card-type {
+            border-color: var(--white);
+        }
+
+        .project-card-desc {
+            font-size: 1rem;
+            font-weight: 300;
+            opacity: 0.85;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+        }
+
+        .project-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-top: 1px solid currentColor;
+            padding-top: 1rem;
+            margin-top: auto;
+        }
+
+        .project-card-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-card-arrow {
+            transform: translateX(6px);
+        }
+
+        /* Achievements Badges */
+        .achievement-card {
+            border: 2px solid var(--black);
+            background: #fafafa;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            box-shadow: 4px 4px 0px var(--black);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .achievement-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--black);
+            background: #f0f0f0;
+        }
+
+        .achievement-icon {
+            font-size: 2.25rem;
+            flex-shrink: 0;
+        }
+
+        .achievement-details h4 {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.05em;
+        }
+
+        .achievement-details p {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #555;
+            line-height: 1.3;
+        }
+
+        /* Graphics & Art Placeholders */
+        .graphic-placeholder {
+            border: 2px solid var(--black);
+            aspect-ratio: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fcfcfc;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .graphic-placeholder::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, rgba(0,0,0,0.015) 0, rgba(0,0,0,0.015) 2px, transparent 2px, transparent 12px);
+        }
+
+        .graphic-placeholder-inner {
+            z-index: 2;
+            text-align: center;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .graphic-placeholder-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #888;
+        }
+
+        .graphic-placeholder-subtitle {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #aaa;
+        }
+
+        /* Chapter 9 Blinking cursor loading styling */
+        .loading-blink {
+            animation: blinker 1.2s infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+
+        .skeleton-block {
+            border: 2px dashed #999;
+            padding: 2rem;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            opacity: 0.7;
+        }
+
+        .skeleton-line {
+            height: 12px;
+            background: #eee;
+            width: 100%;
+        }
+
+        .skeleton-line.short {
+            width: 60%;
+        }
+
+        /* Interactive iOS Bottom Sheet */
+        .bottom-sheet-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bottom-sheet-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .bottom-sheet {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 100%);
+            width: 100%;
+            max-width: 1000px;
+            height: 88vh;
+            background: var(--white);
+            border: 3px solid var(--black);
+            border-bottom: none;
+            border-radius: 24px 24px 0 0;
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.2);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bottom-sheet.active {
+            transform: translate(-50%, 0);
+        }
+
+        .bottom-sheet.dragging {
+            transition: none;
+        }
+
+        .bottom-sheet-header {
+            height: 60px;
+            border-bottom: 2px solid var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2.5rem;
+            cursor: grab;
+            user-select: none;
+            background: var(--white);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .bottom-sheet-header:active {
+            cursor: grabbing;
+        }
+
+        .bottom-sheet-drag-handle {
+            width: 44px;
+            height: 5px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 12px;
+        }
+
+        .bottom-sheet-header-title {
             font-size: 0.8rem;
             font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .bottom-sheet-close {
+            background: transparent;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            padding: 0.5rem;
+            margin-right: -0.5rem;
+            color: var(--black);
+            margin-top: 8px;
+        }
+
+        .bottom-sheet-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 4rem 5rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Content details within Bottom Sheet */
+        .cs-sheet-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-family: var(--font-serif);
+            line-height: 0.95;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        .cs-sheet-subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 2.5rem;
+            color: #444;
+        }
+
+        .cs-sheet-type {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border: 1px solid var(--black);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+        }
+
+        .cs-sheet-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .cs-sheet-section {
+            border-top: 1px solid rgba(0,0,0,0.12);
+            padding-top: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .cs-sheet-section-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #666;
             margin-bottom: 1.5rem;
             display: block;
+        }
+
+        .cs-sheet-body {
+            font-size: 1.15rem;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .cs-sheet-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .cs-sheet-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .cs-sheet-body ul {
+            list-style-type: square;
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cs-sheet-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-details-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .cs-details-grid h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .cs-sheet-meta-card {
+            border: 2px solid var(--black);
+            padding: 2.5rem;
+            background: #fafafa;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            box-shadow: 6px 6px 0px var(--black);
+        }
+
+        .cs-sheet-meta-item {
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            padding-bottom: 1.25rem;
+        }
+
+        .cs-sheet-meta-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .cs-sheet-meta-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .cs-sheet-meta-val {
+            font-size: 1.05rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .cs-sheet-mockup {
+            border: 2px solid var(--black);
+            margin-bottom: 3.5rem;
+            background: #fdfdfd;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .cs-sheet-insight {
+            background: var(--black);
+            color: var(--white);
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .cs-sheet-insight-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .cs-sheet-insight-text {
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        body.sheet-open {
+            overflow: hidden;
         }
 
         /* Contact Section */
@@ -419,6 +987,8 @@
             text-align: center;
             background-color: var(--black);
             color: var(--white);
+            z-index: 10;
+            position: relative;
         }
 
         .contact h2 {
@@ -482,64 +1052,122 @@
             color: var(--black);
             font-weight: 700;
             font-size: 1rem;
+            z-index: 10;
+            position: relative;
         }
 
         /* Responsive Breakpoints */
+        @media (max-width: 1200px) {
+            .timeline-line-wrapper {
+                left: 60px;
+            }
+
+            .chapter {
+                grid-template-columns: 60px 1fr;
+            }
+
+            .chapter-left {
+                align-items: flex-start;
+                text-align: left;
+                padding: var(--pad-md) 1rem var(--pad-md) 2rem;
+            }
+
+            .chapter-year {
+                font-size: 1.8rem;
+            }
+
+            .chapter-node {
+                left: -9px;
+                right: auto;
+            }
+
+            .chapter-right {
+                padding-right: var(--pad-md);
+            }
+        }
+
         @media (max-width: 1024px) {
             :root {
-                --pad-md: 2rem;
+                --pad-md: 2.5rem;
                 --pad-lg: 4rem;
             }
 
-            .hero-bottom {
+            .hero-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 4rem;
             }
 
-            .project-header,
-            .project-details {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1.5rem;
+            .timeline-nav {
+                display: none; /* Hide sidebar nav on smaller devices */
             }
 
-            .project-row p {
-                max-width: 100%;
-            }
-
-            .about-grid {
+            .chapter-right {
                 grid-template-columns: 1fr;
+                gap: 3rem;
             }
 
-            .about-text {
-                border-right: none;
-                border-bottom: var(--border);
+            .cs-sheet-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
             }
 
-            .social-links {
-                flex-wrap: wrap;
-                gap: 2rem;
+            .cs-sheet-meta-card {
+                box-shadow: none;
             }
         }
 
         @media (max-width: 768px) {
+            nav {
+                padding: var(--pad-sm) 2rem;
+            }
+
             .nav-links {
                 display: none;
+            }
+
+            .timeline-line-wrapper {
+                left: 30px;
+            }
+
+            .chapter {
+                grid-template-columns: 30px 1fr;
+            }
+
+            .chapter-left {
+                padding: var(--pad-md) 0.5rem var(--pad-md) 1rem;
+            }
+
+            .chapter-year {
+                font-size: 1.4rem;
+            }
+
+            .chapter-node {
+                left: -9px;
+            }
+
+            .chapter-right {
+                padding-left: 2rem;
+                padding-right: 1.5rem;
+            }
+
+            .bottom-sheet-content {
+                padding: 3rem 2rem;
+            }
+
+            .bottom-sheet-header {
+                padding: 0 1.5rem;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+                gap: 2.5rem;
+                margin-top: 6rem;
             }
 
             footer {
                 flex-direction: column;
                 gap: 1rem;
                 text-align: center;
-            }
-
-            .section-header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .skill-item {
-                font-size: 1.5rem;
             }
         }
     </style>
@@ -553,147 +1181,440 @@
         <nav>
             <a href="#" class="logo uppercase">Ashara</a>
             <div class="nav-links uppercase">
-                <a href="#work">Work</a>
-                <a href="#about">About</a>
+                <a href="#hero">Timeline</a>
                 <a href="finance.html">Finance 🔒</a>
                 <a href="#contact">Contact</a>
             </div>
         </nav>
 
         <!-- Hero Section -->
-        <section class="hero divider">
-            <div class="hero-content">
-                <div class="role-tag uppercase">UX Designer</div>
-                <h1 class="serif">Ashara<br>Hitanshu</h1>
-                <div class="hero-bottom">
-                    <p class="hero-subtitle">Creating clean, scalable SaaS experiences with strong UX thinking.</p>
-                    <a href="#work" class="btn uppercase">View Work</a>
+        <section class="hero divider" id="hero">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-eyebrow uppercase">2023 &rarr; Present</div>
+                    <h1 class="serif hero-title">HELLO.<br>I'M HITANSHU.</h1>
+                    <p class="hero-tagline serif">A problem solver who discovered design while building apps.</p>
+                    <p class="hero-subtitle">From self-taught developer to AI-powered UX designer.</p>
+                    <div class="hero-actions">
+                        <a href="#chapter-01" class="btn uppercase">Start The Journey &rarr;</a>
+                        <a href="#chapter-08" class="btn btn-secondary uppercase">Current Status &rarr;</a>
+                    </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Projects Section -->
-        <section id="work" class="divider">
-            <div class="section-header">
-                <h2 class="serif uppercase">Selected<br>Work</h2>
-                <span class="section-number">(01)</span>
-            </div>
-
-            <div class="projects-list">
-
-                <!-- Project 1 -->
-                <a href="soulfultone.html" class="project-row">
-                    <div class="project-header">
-                        <h3 class="serif">SoulfulTone</h3>
-                        <span class="project-type uppercase">Landing Page &amp; Web</span>
+                <!-- Status Card -->
+                <div class="status-card">
+                    <div class="status-card-header">
+                        <span class="status-dot-active"></span>
+                        <span class="status-card-label uppercase">Live Tracker</span>
                     </div>
-                    <div class="project-details">
-                        <p>A calming and emotionally driven website introducing an affirmation app, focusing on
-                            minimalism and peaceful user experience.</p>
-                        <span class="view-link uppercase">View Case Study &rarr;</span>
-                    </div>
-                </a>
-
-                <!-- Project 2 -->
-                <a href="padmshakti.html" class="project-row">
-                    <div class="project-header">
-                        <h3 class="serif">PADMSHAKTI</h3>
-                        <span class="project-type uppercase">E-commerce Website</span>
-                    </div>
-                    <div class="project-details">
-                        <p>A modern e-commerce platform for a premium gifting brand, focusing on personalized
-                            experiences and elegant visual storytelling.</p>
-                        <span class="view-link uppercase">View Case Study &rarr;</span>
-                    </div>
-                </a>
-
-                <!-- Project 3 -->
-                <a href="substracker.html" class="project-row">
-                    <div class="project-header">
-                        <h3 class="serif">SubStracker</h3>
-                        <span class="project-type uppercase">Mobile App Design</span>
-                    </div>
-                    <div class="project-details">
-                        <p>A clean and intuitive mobile app designed to help users track, manage, and optimize their
-                            subscription spending efficiently.</p>
-                        <span class="view-link uppercase">View Case Study &rarr;</span>
-                    </div>
-                </a>
-
-                <!-- Project 4 -->
-                <a href="sylvornlabs.html" class="project-row" style="border-bottom: none;">
-                    <div class="project-header">
-                        <h3 class="serif">Sylvorn Labs</h3>
-                        <span class="project-type uppercase">SaaS Website</span>
-                    </div>
-                    <div class="project-details">
-                        <p>A modern, minimalist website for a SaaS company focused on strong brand presence, service
-                            clarity, and trust-building digital experience.</p>
-                        <span class="view-link uppercase">View Case Study &rarr;</span>
-                    </div>
-                </a>
-
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="divider">
-            <div class="section-header">
-                <h2 class="serif uppercase">About<br>Designer</h2>
-                <span class="section-number">(02)</span>
-            </div>
-
-            <div class="about-grid">
-                <div class="about-text">
-                    <span style="display: inline-block; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; padding: 0.4rem 1rem; border: 1px solid var(--black);">Clarity through structure</span>
-                    <p class="serif"
-                        style="font-size: clamp(1.8rem, 3.5vw, 3.5rem); margin-bottom: 3rem; line-height: 1.1;">
-                        Designing with uncompromising constraint to command attention.</p>
-                    <p>I am a UI/UX designer specializing in structured interfaces for mobile apps and web platforms. Inspired by editorial design principles, I focus on clarity, hierarchy, and reducing unnecessary complexity.</p>
-                    <p>My approach emphasizes strong grid systems, high contrast layouts, and intuitive user flows — ensuring every interface is purposeful and easy to navigate.</p>
-                    <p>With experience in both internship and freelance work, I design solutions that balance usability with clean, scalable structure.</p>
-                </div>
-                <div class="skills">
-                    <div class="skill-item uppercase" id="skill-uidesign" onclick="toggleSkill('uidesign')">
-                        <span>UI Design &amp; Logic</span>
-                        <span class="skill-arrow">+</span>
-                    </div>
-                    <div class="skill-panel" id="panel-uidesign">
-                        <div class="skill-panel-inner">
+                    <div class="status-card-body">
+                        <div class="status-location">
+                            <span class="status-icon">📍</span>
                             <div>
-                                <span class="skill-panel-label">UI Design &amp; Logic</span>
-                                <p>I design interfaces by controlling what the user sees first.</p>
-                                <p>My approach is rooted in visual hierarchy — ensuring that the most important action or information is immediately clear. I decide what comes first by focusing on the primary action the user needs to take, and everything else supports that decision.</p>
+                                <h3 style="font-family: var(--font-sans); font-weight: 700; font-size: 1.35rem;">Pune, India</h3>
+                                <p style="font-size: 0.85rem; color: #666;">Relocated for study &amp; industry training</p>
                             </div>
-                            <div>
-                                <p>Hierarchy is created through a combination of typography, spacing, and structured layout systems. I use size, weight, and contrast to guide attention, while spacing and alignment create clarity and separation between elements.</p>
-                                <p>Every screen is built with intention. No element is placed without purpose, and no visual noise is introduced without reason.</p>
-                                <p>The result is interfaces that feel clear, focused, and easy to navigate.</p>
+                        </div>
+                        <div class="status-divider"></div>
+                        <div class="status-focus">
+                            <span class="status-label uppercase">Current Focus</span>
+                            <h4>Learning AI-Powered UI/UX Design</h4>
+                            <p class="status-org">Design Boat</p>
+                        </div>
+                        <div class="status-divider"></div>
+                        <div class="status-timeline">
+                            <span class="status-label uppercase">Timeline</span>
+                            <p>June 2026 &rarr; October 2026</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Floating Sidebar Timeline Nav -->
+        <div class="timeline-nav">
+            <a href="#chapter-01" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 01 (2023)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-02" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 02 (2024)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-03" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 03 (2025)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-04" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 04 (2025)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-05" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 05 (2025)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-06" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 06 (2025)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-07" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 07 (2026)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-08" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 08 (2026)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-09" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 09 (Loading)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+        </div>
+
+        <!-- Continuous Chronological Timeline Container -->
+        <div class="timeline-container" id="timeline-container">
+            <div class="timeline-line-wrapper">
+                <div class="timeline-progress-line" id="timeline-progress-line"></div>
+            </div>
+
+            <!-- CHAPTER 01 -->
+            <section class="chapter" id="chapter-01">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-year">2023</div>
+                    <div class="chapter-number">Chapter 01</div>
+                </div>
+                <div class="chapter-right">
+                    <div class="chapter-story">
+                        <h2 class="chapter-title serif">The Self-Taught Developer</h2>
+                        <div class="chapter-narrative">
+                            <p>Started my Bachelor of Computer Applications (BCA) at Atmiya University. While the lecture halls explained theoretical principles, I realized I wanted to build, deploy, and learn faster than the structured curriculum could move.</p>
+                            <p>I dove into Full Stack Development independently. I turned late nights into coding labs, learning frontend layout logics, backend servers, databases, and continuous hosting environments.</p>
+                        </div>
+                        <div class="chapter-humor">
+                            "While everyone focused on code, I became obsessed with why the button was there."
+                        </div>
+                    </div>
+                    <div class="chapter-media">
+                        <!-- Custom SVG Mockup for Code Space -->
+                        <div class="graphic-placeholder">
+                            <div class="graphic-placeholder-inner">
+                                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                    <line x1="14" y1="4" x2="10" y2="20"></line>
+                                </svg>
+                                <span class="graphic-placeholder-title">Localhost:3000</span>
+                                <span class="graphic-placeholder-subtitle">Nights Spent Coding</span>
                             </div>
                         </div>
                     </div>
-                    <div class="skill-item uppercase" id="skill-uxarch" onclick="toggleSkill('uxarch')">
-                        <span>UX Architecture</span>
-                        <span class="skill-arrow">+</span>
-                    </div>
-                    <div class="skill-panel" id="panel-uxarch"></div>
-                    <div class="skill-item uppercase" id="skill-figma" onclick="toggleSkill('figma')">
-                        <span>Figma Mastery</span>
-                        <span class="skill-arrow">+</span>
-                    </div>
-                    <div class="skill-panel" id="panel-figma"></div>
-                    <div class="skill-item uppercase" id="skill-ds" onclick="toggleSkill('ds')">
-                        <span>Design Systems</span>
-                        <span class="skill-arrow">+</span>
-                    </div>
-                    <div class="skill-panel" id="panel-ds"></div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <!-- CHAPTER 02 -->
+            <section class="chapter" id="chapter-02">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-year">2024</div>
+                    <div class="chapter-number">Chapter 02</div>
+                </div>
+                <div class="chapter-right">
+                    <div class="chapter-story">
+                        <h2 class="chapter-title serif">Flutter Changed Everything</h2>
+                        <div class="chapter-narrative">
+                            <p>Mobile applications were growing rapidly, and I decided to pick up Flutter to learn cross-platform development. I designed and coded several functional apps, testing local databases, state management, and device integration.</p>
+                            <p>But the real shift happened under the hood. As I designed the views for these applications, I found myself constantly questioning button alignments, screen density, click flows, and readability metrics.</p>
+                            <p>I stumbled upon UI/UX Design as a discipline. It was the spark that redirected my career trajectory from pure engineering to designing human-centered products.</p>
+                        </div>
+                    </div>
+                    <div class="chapter-media">
+                        <!-- Custom SVG Mockup for Flutter Device -->
+                        <div class="graphic-placeholder">
+                            <div class="graphic-placeholder-inner">
+                                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5">
+                                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                    <line x1="12" y1="18" x2="12" y2="18"></line>
+                                </svg>
+                                <span class="graphic-placeholder-title">Interface Prototypes</span>
+                                <span class="graphic-placeholder-subtitle">Flutter &amp; Figma Exploration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHAPTER 03 -->
+            <section class="chapter" id="chapter-03">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-year">2025</div>
+                    <div class="chapter-number">Chapter 03</div>
+                </div>
+                <div class="chapter-right">
+                    <div class="chapter-story">
+                        <h2 class="chapter-title serif">First Professional Experience</h2>
+                        <div class="chapter-narrative">
+                            <p>Joined Hashone Tech LLP as a UI/UX Design Intern. This was my playground to apply theoretical design rules in dynamic commercial environments.</p>
+                            <p>Under professional mentorship, I learned layout architecture, typography grids, component consistency, and collaborated on cross-functional developer hands-offs. I designed my first complete end-to-end product.</p>
+                        </div>
+                    </div>
+                    <div class="chapter-media">
+                        <!-- Interactive Project Card -->
+                        <div class="project-card" onclick="openSheet('substracker')">
+                            <div class="project-card-header">
+                                <h3 class="project-card-title">Subscription Management App</h3>
+                                <span class="project-card-type">Case Study</span>
+                            </div>
+                            <p class="project-card-desc">Simplifying payment tracking, renewals, and financial metrics through clean dashboard structures.</p>
+                            <div class="project-card-footer">
+                                <span>Explore Story</span>
+                                <span class="project-card-arrow">&rarr;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHAPTER 04 -->
+            <section class="chapter" id="chapter-04">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-year">Apr 2025</div>
+                    <div class="chapter-number">Chapter 04</div>
+                </div>
+                <div class="chapter-right">
+                    <div class="chapter-story">
+                        <h2 class="chapter-title serif">Design Sprint Winner</h2>
+                        <div class="chapter-narrative">
+                            <p>Entered the Design Sprint 2025 hackathon. The challenge was to deliver fast research, mapping, logic, and interface designs in two intensive rounds:</p>
+                            <p><strong>Round 1: HabitO</strong> – Designed a comprehensive habit tracking app for students that connects daily routines, study tracking, and self-care indicators.</p>
+                            <p><strong>Round 2: College Canteen App</strong> – Designed a student pre-ordering platform focused on tracking crowds, slotting collection windows, and reducing wait times.</p>
+                        </div>
+                        <div class="chapter-humor">
+                            "Designed productivity apps while occasionally procrastinating."
+                        </div>
+                    </div>
+                    <div class="chapter-media">
+                        <!-- Award Badge trigger card -->
+                        <div class="achievement-card" onclick="openSheet('habito_canteen')">
+                            <span class="achievement-icon">🏆</span>
+                            <div class="achievement-details">
+                                <h4>1st Rank — Design Sprint 2025</h4>
+                                <p>Rapid research &amp; interactive prototyping win.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHAPTER 05 -->
+            <section class="chapter" id="chapter-05">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-year">Dec 2025</div>
+                    <div class="chapter-number">Chapter 05</div>
+                </div>
+                <div class="chapter-right">
+                    <div class="chapter-story">
+                        <h2 class="chapter-title serif">Freelancing Journey</h2>
+                        <div class="chapter-narrative">
+                            <p>Started taking on client contracts through Sylvorn Labs. As an independent consultant, I learned client scoping, pricing, responsive system creation, and designed premium corporate assets under constraint.</p>
+                            <p>I took on multiple projects, handling visual storytelling, visa consultancy dashboards, e-commerce customizations, and calming wellness flows.</p>
+                        </div>
+                    </div>
+                    <div class="chapter-media" style="gap: 1.5rem;">
+                        <!-- Project Cards -->
+                        <div class="project-card" onclick="openSheet('sylvornlabs')">
+                            <div class="project-card-header">
+                                <h3 class="project-card-title">Sylvorn Labs</h3>
+                                <span class="project-card-type">SaaS Web</span>
+                            </div>
+                            <p class="project-card-desc">Introducing interactive comic-style branding elements to standard company about pages.</p>
+                            <div class="project-card-footer">
+                                <span>Explore Story</span>
+                                <span class="project-card-arrow">&rarr;</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card" onclick="openSheet('careerclout')">
+                            <div class="project-card-header">
+                                <h3 class="project-card-title">Career Clout</h3>
+                                <span class="project-card-type">SaaS Portal</span>
+                            </div>
+                            <p class="project-card-desc">Premium recruitment agency landing pages and spreadsheet inquiry automation pipelines.</p>
+                            <div class="project-card-footer">
+                                <span>Explore Story</span>
+                                <span class="project-card-arrow">&rarr;</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card" onclick="openSheet('padmshakti')">
+                            <div class="project-card-header">
+                                <h3 class="project-card-title">Padmshakti</h3>
+                                <span class="project-card-type">E-commerce</span>
+                            </div>
+                            <p class="project-card-desc">Luxury gifting e-commerce site with visual personalization workflows and easy search.</p>
+                            <div class="project-card-footer">
+                                <span>Explore Story</span>
+                                <span class="project-card-arrow">&rarr;</span>
+                            </div>
+                        </div>
+
+                        <div class="project-card" onclick="openSheet('soulfultone')">
+                            <div class="project-card-header">
+                                <h3 class="project-card-title">Soulful Tone</h3>
+                                <span class="project-card-type">Web App</span>
+                            </div>
+                            <p class="project-card-desc">Quiet, dark-themed subscription onboarding and blog layout for wellness platforms.</p>
+                            <div class="project-card-footer">
+                                <span>Explore Story</span>
+                                <span class="project-card-arrow">&rarr;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHAPTER 06 -->
+            <section class="chapter" id="chapter-06">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-year">2025</div>
+                    <div class="chapter-number">Chapter 06</div>
+                </div>
+                <div class="chapter-right">
+                    <div class="chapter-story">
+                        <h2 class="chapter-title serif">Competitions &amp; Recognition</h2>
+                        <div class="chapter-narrative">
+                            <p>Tested my visual systems and layouts against global designer panels on community hubs.</p>
+                            <p>Designed a gym platform's dynamic onboarding and landing screens, winning the ADSC weekly prompt. Secured first rank at the Multicon Articon challenge.</p>
+                        </div>
+                        <div class="chapter-humor">
+                            "Discovered that good UI cannot fix bad UX."
+                        </div>
+                    </div>
+                    <div class="chapter-media">
+                        <!-- Badges -->
+                        <div class="achievement-card" onclick="openSheet('adsc_articon')" style="margin-bottom: 1rem;">
+                            <span class="achievement-icon">🏆</span>
+                            <div class="achievement-details">
+                                <h4>ADSC Challenge Winner</h4>
+                                <p>Onboarding screen visual design win.</p>
+                            </div>
+                        </div>
+                        <div class="achievement-card" onclick="openSheet('adsc_articon')">
+                            <span class="achievement-icon">🏆</span>
+                            <div class="achievement-details">
+                                <h4>1st Rank — Multicon Articon</h4>
+                                <p>National level design challenge winner.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHAPTER 07 -->
+            <section class="chapter" id="chapter-07">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-year">May 2026</div>
+                    <div class="chapter-number">Chapter 07</div>
+                </div>
+                <div class="chapter-right">
+                    <div class="chapter-story">
+                        <h2 class="chapter-title serif">InspoAI Redesignathon</h2>
+                        <div class="chapter-narrative">
+                            <p>Entered the regional InspoAI platform redesign challenge. The prompt was to overhaul Atmiya University's legacy Student Information System (SIS).</p>
+                            <p>I focused on removing attendance tables, optimizing layout menus, grading clarity, responsive compatibility, and achieving full AA contrast accessibility metrics.</p>
+                        </div>
+                    </div>
+                    <div class="chapter-media">
+                        <div class="achievement-card" onclick="openSheet('inspoai')">
+                            <span class="achievement-icon">🏆</span>
+                            <div class="achievement-details">
+                                <h4>1st Rank — SIS Redesign 2026</h4>
+                                <p>Overhauling legacy educational platforms.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHAPTER 08 -->
+            <section class="chapter" id="chapter-08">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-year">June 2026</div>
+                    <div class="chapter-number">Chapter 08</div>
+                </div>
+                <div class="chapter-right">
+                    <div class="chapter-story">
+                        <h2 class="chapter-title serif">The Pune Chapter</h2>
+                        <div class="chapter-narrative">
+                            <p>Relocated to Pune to begin intensive, advanced AI-Powered UI/UX Design training at Design Boat.</p>
+                            <p>My current objective is mastering advanced metrics, accelerating layout exploration through AI agents, structuring scalable libraries, and detailing complete product roadmap logic.</p>
+                        </div>
+                    </div>
+                    <div class="chapter-media">
+                        <!-- Custom Checklist Box -->
+                        <div class="status-card" style="box-shadow: none; background: #fafafa; border: 2px solid var(--black); padding: 1.75rem;">
+                            <span class="status-label uppercase" style="margin-bottom: 1.25rem;">Active Focus Areas</span>
+                            <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.95rem; font-weight:600;">
+                                <div style="display:flex; gap:0.5rem; align-items:center;">
+                                    <span>⚡</span>
+                                    <span>AI-assisted design workflows</span>
+                                </div>
+                                <div style="display:flex; gap:0.5rem; align-items:center;">
+                                    <span>📊</span>
+                                    <span>Advanced UX Research methods</span>
+                                </div>
+                                <div style="display:flex; gap:0.5rem; align-items:center;">
+                                    <span>📐</span>
+                                    <span>Figma design tokens &amp; systems</span>
+                                </div>
+                                <div style="display:flex; gap:0.5rem; align-items:center;">
+                                    <span>💼</span>
+                                    <span>Product Strategy &amp; Scoping</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHAPTER 09 -->
+            <section class="chapter" id="chapter-09">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-year">Future</div>
+                    <div class="chapter-number">Chapter 09</div>
+                </div>
+                <div class="chapter-right">
+                    <div class="chapter-story">
+                        <h2 class="chapter-title serif">Loading...<span class="loading-blink">_</span></h2>
+                        <div class="chapter-narrative">
+                            <p>This chapter hasn't been written yet. My ultimate goal is designing clean, fast, and structured products that solve complex user problems.</p>
+                        </div>
+                    </div>
+                    <div class="chapter-media">
+                        <!-- Skeleton loading visual placeholder -->
+                        <div class="skeleton-block">
+                            <span class="status-label uppercase">Up next</span>
+                            <div style="font-family: var(--font-serif); font-size: 1.75rem; line-height: 1.2; font-style: italic;">
+                                "Maybe the next project.<br>Maybe a startup.<br>Maybe your company."
+                            </div>
+                            <div class="skeleton-line"></div>
+                            <div class="skeleton-line short"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
         <!-- Contact Section -->
         <section id="contact" class="contact">
-            <h2 class="serif uppercase">Let's work<br>together</h2>
+            <h2 class="serif uppercase">Let's write<br>the next chapter</h2>
             <a href="mailto:hello@example.com" class="btn uppercase">Initiate Contact</a>
 
             <div class="social-links uppercase">
@@ -714,23 +1635,606 @@
 
     </div>
 
-</body>
+    <!-- IOS Style Bottom Sheet Container -->
+    <div class="bottom-sheet-backdrop" id="bottom-sheet-backdrop" onclick="closeSheet()"></div>
+    <div class="bottom-sheet" id="bottom-sheet">
+        <div class="bottom-sheet-header" id="sheet-header">
+            <div class="bottom-sheet-drag-handle" id="sheet-drag-handle"></div>
+            <span class="bottom-sheet-header-title" id="sheet-header-title">Documentary View</span>
+            <button class="bottom-sheet-close" onclick="closeSheet()">Close &times;</button>
+        </div>
+        <div class="bottom-sheet-content" id="sheet-content">
+            <span class="cs-sheet-type" id="cs-sheet-type">UI/UX CASE STUDY</span>
+            <h2 class="cs-sheet-title" id="sheet-title">PROJECT TITLE</h2>
+            <p class="cs-sheet-subtitle" id="sheet-subtitle">Project tagline goes here</p>
+            
+            <div id="sheet-dynamic-content">
+                <!-- Injected dynamically via JavaScript -->
+            </div>
+        </div>
+    </div>
 
-<script>
-    function toggleSkill(id) {
-        const item = document.getElementById('skill-' + id);
-        const panel = document.getElementById('panel-' + id);
-        if (!panel || !panel.innerHTML.trim()) return; // skip empty panels
-        const isOpen = item.classList.contains('open');
-        // Close all open panels first
-        document.querySelectorAll('.skill-item.open').forEach(el => el.classList.remove('open'));
-        document.querySelectorAll('.skill-panel.open').forEach(el => el.classList.remove('open'));
-        // If it wasn't open, open it
-        if (!isOpen) {
-            item.classList.add('open');
-            panel.classList.add('open');
+    <!-- JavaScript Data and Controller -->
+    <script>
+        // Project Details Database
+        const caseStudies = {
+            substracker: {
+                title: "SubStracker",
+                subtitle: "Subscription Management Application",
+                type: "Mobile App Design • Case Study",
+                problem: "With the rise of subscription-based services, users often lose track of their expenses, forget renewal dates, and continue paying for unused services. Existing solutions are either too complex or fail to present information clearly.",
+                solution: "Designed a minimal and user-friendly subscription management app that provides a clear overview of spending, smart renewal tracking, and effortless subscription management through intuitive UI and structured hierarchy.",
+                process: `
+                    <span class="cs-sheet-section-title">Sprint Strategy &amp; Core Logic</span>
+                    <p>During the design research phase, I discovered that over 70% of subscription drop-offs and negative ratings on other platforms occur because payments are hidden behind complex account menus.</p>
+                    <div class="cs-details-grid">
+                        <div>
+                            <h4>Key Features</h4>
+                            <ul>
+                                <li>Smart Dashboard showing monthly &amp; yearly spending</li>
+                                <li>Subscription tracking with renewal reminders</li>
+                                <li>Add &amp; manage custom subscriptions</li>
+                                <li>Multiple sorting options (recent, renewal, duration, price)</li>
+                                <li>Category &amp; Payment method management system</li>
+                                <li>Clean and persuasive premium (Pro) upgrade flow</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Design Style</h4>
+                            <ul>
+                                <li><strong>Tone:</strong> Clean, modern, minimal, structured</li>
+                                <li><strong>Colors:</strong> Soft neutrals with subtle accent highlights</li>
+                                <li><strong>Typography:</strong> Clear, readable, modern sans-serif</li>
+                                <li><strong>Experience Focus:</strong> Clarity, low cognitive load, fast usability</li>
+                            </ul>
+                        </div>
+                    </div>
+                `,
+                role: "Lead UX/UI Designer. Structured user journeys, created visual wireframes, formulated typography scale, and prototyped premium payment gate flows.",
+                outcome: "A complete subscription management experience that simplifies financial tracking, improves user awareness, and provides a structured yet minimal interface for managing recurring expenses efficiently.",
+                learnings: "This project demonstrates functional UX problem-solving combined with system design thinking — not just visual UI. It showcases the ability to design complex data-driven interfaces, structure information clearly, and handle real-world financial use cases.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="135" y="20" width="130" height="260" rx="16" stroke="black" stroke-width="2" fill="white"/>
+                        <rect x="180" y="28" width="40" height="5" rx="2.5" fill="black"/>
+                        <text x="145" y="55" font-family="Outfit" font-size="8" font-weight="bold" fill="black">SubStracker</text>
+                        <!-- spend card -->
+                        <rect x="145" y="70" width="110" height="50" rx="6" fill="black"/>
+                        <text x="153" y="86" font-family="Outfit" font-size="7" fill="white" opacity="0.7">Monthly Budget</text>
+                        <text x="153" y="106" font-family="Instrument Serif" font-size="18" fill="white">$84.50</text>
+                        <circle cx="235" cy="95" r="8" fill="white" opacity="0.15"/>
+                        <!-- list -->
+                        <text x="145" y="140" font-family="Outfit" font-size="7" font-weight="bold" fill="black">Renewing Tomorrow</text>
+                        <rect x="145" y="150" width="110" height="20" rx="4" stroke="black" stroke-width="1.5" fill="white"/>
+                        <circle cx="155" cy="160" r="4" fill="black"/>
+                        <text x="165" y="163" font-family="Outfit" font-size="6" font-weight="bold" fill="black">Netflix Premium</text>
+                        <text x="245" y="163" font-family="Outfit" font-size="6" font-weight="bold" fill="black" text-anchor="end">$15.49</text>
+
+                        <rect x="145" y="175" width="110" height="20" rx="4" stroke="black" stroke-width="1.5" fill="white"/>
+                        <circle cx="155" cy="185" r="4" stroke="black" fill="white"/>
+                        <text x="165" y="188" font-family="Outfit" font-size="6" font-weight="bold" fill="black">Spotify Duo</text>
+                        <text x="245" y="188" font-family="Outfit" font-size="6" font-weight="bold" fill="black" text-anchor="end">$9.99</text>
+                        
+                        <rect x="145" y="210" width="110" height="25" rx="4" fill="#f0f0f0"/>
+                        <text x="200" y="226" font-family="Outfit" font-size="7" font-weight="bold" fill="black" text-anchor="middle">+ Add Subscription</text>
+                    </svg>
+                `
+            },
+            sylvornlabs: {
+                title: "Sylvorn Labs",
+                subtitle: "SaaS Brand Presence & Interactive Storytelling",
+                type: "SaaS Brand Website • Client Project",
+                problem: "New and emerging tech companies often struggle to present their vision, services, and credibility effectively. Many SaaS websites are either too cluttered or fail to communicate their value clearly, leading to poor user engagement and weak brand perception.",
+                solution: "Designed a clean and scalable website experience that communicates Sylvorn Labs' vision, services, and expertise through structured layouts, minimal design, and strong visual hierarchy — ensuring clarity, trust, and engagement.",
+                process: `
+                    <span class="cs-sheet-section-title">Brand Narrative &amp; Layout grids</span>
+                    <p>I introduced a custom comic-strip branding layout within the client's 'About' page. Instead of using default descriptions, the website tells the founder's growth history as an interactive digital story panel with custom borders.</p>
+                    <div class="cs-details-grid">
+                        <div>
+                            <h4>Key Features</h4>
+                            <ul>
+                                <li>Strong Hero Section with brand messaging and CTA</li>
+                                <li>Multi-page website design structure (Work, Careers, About, solutions)</li>
+                                <li>Service and technology showcase sections</li>
+                                <li>Case study pages with detailed breakdowns</li>
+                                <li>Responsive newsletter captures and launch calendars</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Design System</h4>
+                            <ul>
+                                <li><strong>Tone:</strong> Minimal, futuristic, and professional</li>
+                                <li><strong>Colors:</strong> High contrast monochrome with dark accent blocks</li>
+                                <li><strong>UI Elements:</strong> Structured grids, thick lines, subtle transitions</li>
+                            </ul>
+                        </div>
+                    </div>
+                `,
+                role: "Web Layout Designer. Built visual structures, designed comic storytelling layouts, formulated components, and delivered Figma assets.",
+                outcome: "A complete SaaS website experience that effectively communicates the company's vision, builds credibility, and provides a scalable foundation for future growth and product expansion.",
+                learnings: "This project highlights brand-driven UX thinking combined with scalable system design. It showcases the ability to design multi-page, content-heavy websites, translate brand vision into a cohesive digital experience, and balance aesthetics with business goals.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="white"/>
+                        <line x1="50" y1="65" x2="350" y2="65" stroke="black" stroke-width="1.5"/>
+                        <circle cx="65" cy="53" r="3" fill="black"/>
+                        <circle cx="75" cy="53" r="3" fill="black"/>
+                        <text x="95" y="56" font-family="Instrument Serif" font-size="10" font-weight="bold" fill="black">Sylvorn Labs</text>
+                        <!-- Grid layout -->
+                        <text x="75" y="100" font-family="Instrument Serif" font-size="16" fill="black">SAAS DESIGN OPERATING SYSTEM</text>
+                        <text x="75" y="115" font-family="Outfit" font-size="8" fill="black" opacity="0.6">Minimalist layout systems built for technical applications.</text>
+                        
+                        <rect x="75" y="135" width="70" height="90" stroke="black" stroke-width="1.5" fill="#fcfcfc"/>
+                        <text x="110" y="180" font-family="Outfit" font-size="8" fill="black" text-anchor="middle" opacity="0.3">Panel 01</text>
+                        <rect x="155" y="135" width="70" height="90" stroke="black" stroke-width="1.5" fill="#fcfcfc"/>
+                        <text x="190" y="180" font-family="Outfit" font-size="8" fill="black" text-anchor="middle" opacity="0.3">Panel 02</text>
+                        <rect x="235" y="135" width="90" height="90" stroke="black" stroke-width="1.5" fill="#fafafa"/>
+                        <text x="280" y="180" font-family="Outfit" font-size="8" fill="black" text-anchor="middle" opacity="0.3">Story Board</text>
+                    </svg>
+                `
+            },
+            careerclout: {
+                title: "Career Clout",
+                subtitle: "International Recruitment & Visa Platform",
+                type: "Consultancy Landing Page • Client Project",
+                problem: "International visa and recruitment agencies typically have low design budgets, forcing them to use generic website templates that look unprofessional and fail to establish trust with visa applicants. Additionally, managing applicant inquiries manually is slow and error-prone.",
+                solution: "Designed and developed a premium, highly professional international recruitment landing page under tight budget constraints. Integrated user-friendly visa inquiry forms and automated lead routing straight to client spreadsheets to streamline operations.",
+                process: `
+                    <span class="cs-sheet-section-title">Workflow Automation &amp; Form Logic</span>
+                    <p>Rather than using expensive SaaS database integrations, I solved the client's low-budget constraints by writing a custom form handler that validates applicant details and posts them directly to Google Sheets using Apps Script. This saved the client hundreds of dollars in operational costs while maintaining high security and zero platform dependencies.</p>
+                    <div class="cs-details-grid">
+                        <div>
+                            <h4>Key Features</h4>
+                            <ul>
+                                <li>High-conversion visa assessment questionnaire</li>
+                                <li>Automated lead management &amp; spreadsheet routing</li>
+                                <li>Responsive international visa roadmap visualization</li>
+                                <li>Interactive country guides (UK, Canada, Europe)</li>
+                                <li>High-trust design layout with secure data encryption information</li>
+                            </ul>
+                        </div>
+                    </div>
+                `,
+                role: "Product Designer &amp; Tech Lead. Formulated lead collection steps, developed front-end interfaces, and linked sheets integrations.",
+                outcome: "A premium corporate presence that collects, validates, and manages international visa leads instantly, helping the client scale without high recurring software fees.",
+                learnings: "This project taught me how to solve real business constraints creatively. Good design is not just about aesthetics; it is about building cost-effective, high-performing workflows that align with the client's budget and technical capabilities.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="white"/>
+                        <line x1="50" y1="65" x2="350" y2="65" stroke="black" stroke-width="1.5"/>
+                        <text x="65" y="55" font-family="Outfit" font-weight="bold" font-size="9" fill="black">CareerClout</text>
+                        
+                        <rect x="75" y="90" width="110" height="150" stroke="black" stroke-width="1.5" fill="white"/>
+                        <text x="85" y="105" font-family="Outfit" font-size="8" font-weight="bold" fill="black">Assessment</text>
+                        <rect x="85" y="115" width="90" height="12" stroke="black" stroke-width="1" fill="#f9f9f9"/>
+                        <rect x="85" y="132" width="90" height="12" stroke="black" stroke-width="1" fill="#f9f9f9"/>
+                        <rect x="85" y="149" width="90" height="12" stroke="black" stroke-width="1" fill="#f9f9f9"/>
+                        <rect x="85" y="180" width="90" height="15" fill="black"/>
+                        
+                        <rect x="205" y="90" width="120" height="150" stroke="black" stroke-dasharray="3" fill="#fcfcfc"/>
+                        <text x="265" y="110" font-family="Outfit" font-size="7" font-weight="bold" fill="black" text-anchor="middle">Sheet Database</text>
+                        <line x1="215" y1="125" x2="315" y2="125" stroke="black" stroke-width="1"/>
+                        <line x1="215" y1="145" x2="315" y2="145" stroke="black" stroke-width="1"/>
+                        <line x1="250" y1="125" x2="250" y2="225" stroke="black" stroke-width="1"/>
+                    </svg>
+                `
+            },
+            padmshakti: {
+                title: "Padmshakti",
+                subtitle: "Luxury Gifting E-commerce Experience",
+                type: "E-commerce System • Client Project",
+                problem: "Most gifting platforms are cluttered, generic, and lack emotional connection. Users struggle to find meaningful, customized gifts while businesses need scalable solutions for bulk and corporate gifting.",
+                solution: "Designed a clean, premium e-commerce experience that simplifies gifting through intuitive navigation, curated categories, and personalization-focused flows. The platform blends emotional storytelling with functional shopping.",
+                process: `
+                    <span class="cs-sheet-section-title">Gift Builder Flow &amp; Customization</span>
+                    <p>The core challenge was allowing corporate and individual buyers to personalize high-end gift sets without overloading the checkout flow. I built an interactive 'gift box builder' that guides users from selecting a theme, box color, selecting premium gifts, to writing a customized calligraphed note card.</p>
+                    <div class="cs-details-grid">
+                        <div>
+                            <h4>Key Features</h4>
+                            <ul>
+                                <li>Smart Product Categorization (Corporate, Event, Personalized)</li>
+                                <li>Advanced Filters &amp; Sorting for quick discovery</li>
+                                <li>Interactive Personalized Gifting Experience</li>
+                                <li>Seamless Cart &amp; Checkout Flow</li>
+                                <li>User Profile &amp; Order Management System</li>
+                                <li>Trust-focused sections (quality, delivery)</li>
+                            </ul>
+                        </div>
+                    </div>
+                `,
+                role: "Lead UI/UX Designer. Designed gift customization layouts, visual styling rules, checkout loops, and bulk dashboard interfaces.",
+                outcome: "A structured and visually refined e-commerce experience that improves product discovery, enhances user trust, and supports both individual and bulk gifting needs in a seamless way.",
+                learnings: "This project demonstrates end-to-end e-commerce UX thinking — not just UI. It includes complex flows like filtering, checkout, and personalization, which shows strong real-world product design capability beyond basic screens.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="white"/>
+                        <line x1="50" y1="65" x2="350" y2="65" stroke="black" stroke-width="1.5"/>
+                        <text x="105" y="56" font-family="Instrument Serif" font-size="10" font-weight="bold" fill="black">PADMSHAKTI</text>
+                        <!-- item grid -->
+                        <rect x="70" y="80" width="100" height="150" stroke="black" stroke-dasharray="2" fill="white"/>
+                        <circle cx="120" cy="140" r="15" stroke="black" stroke-width="1"/>
+                        <text x="120" y="170" font-family="Outfit" font-size="6" fill="black" text-anchor="middle">Premium Box</text>
+                        
+                        <text x="190" y="105" font-family="Instrument Serif" font-size="15" fill="black">Luxury Gift Hamper</text>
+                        <text x="190" y="120" font-family="Outfit" font-size="7" fill="black" opacity="0.6">Personalize calligraphed items.</text>
+                        <text x="190" y="140" font-family="Outfit" font-size="12" font-weight="bold" fill="black">$120.00</text>
+                        
+                        <rect x="190" y="160" width="140" height="30" stroke="black" fill="white"/>
+                        <text x="195" y="178" font-family="Outfit" font-size="7" fill="black">Enter Calligraphy Note...</text>
+                        
+                        <rect x="190" y="200" width="140" height="20" fill="black"/>
+                        <text x="260" y="212" font-family="Outfit" font-size="8" fill="white" text-anchor="middle">ADD TO CART</text>
+                    </svg>
+                `
+            },
+            soulfultone: {
+                title: "SoulfulTone",
+                subtitle: "Calming Wellness Affirmation Platform",
+                type: "Wellness Web Platform • Client Project",
+                problem: "Wellness and affirmation websites are often clinical or overly commercial. Users struggle to feel calm, focused, and emotionally connected when browsing affirmation platforms, which should inspire mindfulness and tranquility.",
+                solution: "Created a premium subscription-based affirmation platform featuring an immersive, quiet dark-mode visual interface, minimal layout structures, and soft glowing elements that help users explore content in a state of calmness.",
+                process: `
+                    <span class="cs-sheet-section-title">Emotional Layouts &amp; Contrast Systems</span>
+                    <p>I structured this experience heavily around emotional design principles. I spent time exploring typography and contrast ratios to ensure readability at night, when many users practice affirmations.</p>
+                    <div class="cs-details-grid">
+                        <div>
+                            <h4>Key Features</h4>
+                            <ul>
+                                <li>Emotion-driven Hero Section with immersive visuals</li>
+                                <li>Minimal Navigation System for better focus</li>
+                                <li>Clean Login Experience &amp; Subscriber onboarding</li>
+                                <li>Subscription Plan Selection Flow</li>
+                                <li>Informational Blog &amp; About Pages</li>
+                            </ul>
+                        </div>
+                    </div>
+                `,
+                role: "UI/UX Designer. Built visual styles, defined dark-mode layout parameters, engineered subscription cards, and formulated navigation paths.",
+                outcome: "A beautiful, relaxing interface that communicates calmness and clarity while guiding users naturally through content discovery and subscription flows.",
+                learnings: "This project demonstrates the ability to create environments that evoke a specific feeling and comfort. Visual hierarchy is used to guide attention, while spacing and alignment create clarity and separation.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="#111111"/>
+                        <line x1="50" y1="65" x2="350" y2="65" stroke="white" stroke-width="1"/>
+                        <text x="95" y="56" font-family="Instrument Serif" font-size="10" font-weight="bold" fill="white">SoulfulTone</text>
+                        <!-- glow representation -->
+                        <circle cx="200" cy="140" r="30" fill="white" opacity="0.1"/>
+                        <circle cx="200" cy="140" r="15" fill="white" opacity="0.15"/>
+                        <!-- text -->
+                        <text x="200" y="135" font-family="Instrument Serif" font-style="italic" font-size="12" fill="white" text-anchor="middle">"I am grounded, calm,</text>
+                        <text x="200" y="150" font-family="Instrument Serif" font-style="italic" font-size="12" fill="white" text-anchor="middle">and centered."</text>
+                        <!-- play button -->
+                        <circle cx="200" cy="190" r="10" stroke="white" stroke-width="1.5"/>
+                        <polygon points="198,186 204,190 198,194" fill="white"/>
+                    </svg>
+                `
+            },
+            habito_canteen: {
+                title: "Design Sprint 2025",
+                subtitle: "Rapid UX Prototyping Winner (1st Rank)",
+                type: "48-Hour Rapid Challenge • Competition Milestone",
+                problem: "In high-stress student environments, habit tracking often falls short due to friction, and college canteen rush hours cause massive wait times, resulting in skipped meals and frustrated students.",
+                solution: "Designed two rapid UX prototypes: 'HabitO', which integrates visual productivity, self-care, and academic habit tracking, and the 'College Canteen App', which streamlines order queues via real-time tracking and pre-order slots.",
+                process: `
+                    <span class="cs-sheet-section-title">Rapid Execution &amp; Design Frameworks</span>
+                    <p>During the sprint, our team mapped student morning routines to find the exact friction points. We structured HabitO around 'click-less check-ins' and the Canteen App around 'pre-packaged ticket codes'.</p>
+                    <div class="cs-details-grid">
+                        <div>
+                            <h4>Round 1: HabitO</h4>
+                            <p>Designed a student habit tracking experience combining productivity, study habits, and self-care. Used modular cards to separate wellness metrics from grade trackers.</p>
+                        </div>
+                        <div>
+                            <h4>Round 2: College Canteen</h4>
+                            <p>Designed a canteen order flow focused on reducing physical waiting times. Introduced traffic checkers showing rush volumes before ordering.</p>
+                        </div>
+                    </div>
+                `,
+                role: "UX Researcher &amp; Rapid Prototyper. Researched student habits, sketched screen cards, built Figma interaction logic, and pitched layouts to the panel.",
+                outcome: "Awarded 1st Rank — Design Sprint 2025 out of multiple design teams for combining high-fidelity aesthetics with solid, research-backed user solutions.",
+                learnings: "Designing under severe time pressure taught me to prioritize core user values over visual perfection. I learned that identifying the single most critical friction point (like canteen wait times) yields the highest impact.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <!-- HabitO -->
+                        <rect x="75" y="40" width="100" height="200" rx="10" stroke="black" stroke-width="2" fill="white"/>
+                        <text x="85" y="60" font-family="Outfit" font-size="8" font-weight="bold" fill="black">HabitO</text>
+                        <rect x="85" y="75" width="80" height="15" rx="3" stroke="black" fill="white"/>
+                        <circle cx="92" cy="825" r="3" fill="black"/>
+                        <text x="100" y="85" font-family="Outfit" font-size="5" fill="black">Hydrate (3L)</text>
+                        <!-- progress circle -->
+                        <circle cx="125" cy="150" r="20" stroke="black" stroke-width="2" stroke-dasharray="80,40" fill="none"/>
+                        
+                        <!-- Canteen -->
+                        <rect x="225" y="40" width="100" height="200" rx="10" stroke="black" stroke-width="2" fill="white"/>
+                        <text x="235" y="60" font-family="Outfit" font-size="8" font-weight="bold" fill="black">Campus Eats</text>
+                        <rect x="235" y="75" width="80" height="20" fill="black"/>
+                        <text x="240" y="87" font-family="Outfit" font-size="5" fill="white">🟢 LOW CROWD (3m wait)</text>
+                    </svg>
+                `
+            },
+            inspoai: {
+                title: "InspoAI Redesignathon 2026",
+                subtitle: "SIS Platform Usability Redesign (1st Rank)",
+                type: "UX Overhaul Challenge • Competition Milestone",
+                problem: "University Student Information System (SIS) platforms are notoriously outdated, heavily cluttered, difficult to navigate, and lacking basic mobile accessibility features. Students waste critical time trying to find schedules, grades, and fee records.",
+                solution: "Redesigned Atmiya University's SIS platform from scratch. Introduced a widgetized dashboard, collapsed multi-level menus into a flat gesture-based navigation, resolved key layout problems, and implemented AA-grade color contrast accessibility.",
+                process: `
+                    <span class="cs-sheet-section-title">Usability Mapping &amp; Component Overhaul</span>
+                    <p>The old student portal was built on nested HTML tables which completely broke on mobile screens. My redesign replaced those structures with responsive flex layouts and simplified navigation paths down to two taps.</p>
+                    <div class="cs-details-grid">
+                        <div>
+                            <h4>Key Redesign Actions</h4>
+                            <ul>
+                                <li>Attendance cards showing visual safety boundaries</li>
+                                <li>Centralized schedule dashboard with live updates</li>
+                                <li>Mobile-first tabbed menu navigation systems</li>
+                                <li>Accessible font sizes and dark/light ratios satisfying WCAG metrics</li>
+                            </ul>
+                        </div>
+                    </div>
+                `,
+                role: "UX Designer. Re-mapped system navigation flows, designed grid boards, formulated responsive components, and conducted student interviews.",
+                outcome: "Won 1st Rank at InspoAI Redesignathon 2026. Praised by university officials and technical judges for creating a clean, modern, and highly implementable redesign.",
+                learnings: "This project reinforced the importance of accessibility and simplicity. I learned that designing for complex legacy databases means filtering visual clutter so students only see what is relevant to their immediate context.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="white"/>
+                        <line x1="50" y1="65" x2="350" y2="65" stroke="black" stroke-width="1.5"/>
+                        <line x1="120" y1="65" x2="120" y2="260" stroke="black" stroke-width="1"/>
+                        <text x="65" y="85" font-family="Outfit" font-size="8" font-weight="bold" fill="black">SIS Portal</text>
+                        <!-- Attendance card -->
+                        <rect x="135" y="80" width="85" height="60" rx="4" stroke="black" stroke-width="1.5"/>
+                        <text x="145" y="95" font-family="Outfit" font-size="6" font-weight="bold" fill="black">Attendance</text>
+                        <text x="145" y="125" font-family="Instrument Serif" font-size="20" fill="black">87.4%</text>
+                        <!-- grades -->
+                        <rect x="235" y="80" width="100" height="60" rx="4" stroke="black" stroke-width="1.5"/>
+                        <text x="245" y="95" font-family="Outfit" font-size="6" font-weight="bold" fill="black">Current SGPA</text>
+                        <text x="245" y="125" font-family="Instrument Serif" font-size="20" fill="black">9.12</text>
+                    </svg>
+                `
+            },
+            adsc_articon: {
+                title: "Visual Challenges & Art Wins",
+                subtitle: "Gym App Onboarding & National Concept Art",
+                type: "National & Platform Level Awards",
+                problem: "In competitive UI challenges, stands out by catching the user's attention in the first 3 seconds while communicating a powerful, functional brand logic. Standard layouts fail to leave an impact.",
+                solution: "Crafted a custom splash screen and onboarding loop for a premium Gym Application focused on dark-mode energy and extreme contrast, securing 1st Rank in the ADSC Weekly Challenge. Designed futuristic interfaces for Multicon Articon 2025, securing 1st Rank.",
+                process: `
+                    <span class="cs-sheet-section-title">Onboarding Mechanics &amp; Styling</span>
+                    <p>For the ADSC challenge, I built a 'Pulse' sports theme with stark typography layouts that make training entries quick and energetic. For Multicon Articon, I designed futuristic concept panels simulating operations screens.</p>
+                    <div class="cs-details-grid">
+                        <div>
+                            <h4>ADSC Win: Pulse Onboarding</h4>
+                            <ul>
+                                <li>High-impact kinetic text splash layout</li>
+                                <li>Fast goal selection screens (Bulk, Cut, Train)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Multicon Articon 2025</h4>
+                            <ul>
+                                <li>National level dashboard challenge (1st Rank)</li>
+                                <li>Evaluated visual grids for telemetry screens</li>
+                            </ul>
+                        </div>
+                    </div>
+                `,
+                role: "Visual Concept Designer. Formulated color parameters, drafted layout wireframes, and designed premium athletic branding assets.",
+                outcome: "Multiple first-place finishes demonstrating the ability to craft compelling visual identity systems, motion hooks, and state-of-the-art visual user experiences.",
+                learnings: "Good UI cannot fix bad UX, but premium visuals are critical to first impressions. These competitions taught me how to combine high-end aesthetic layout systems with fast loading times to keep the user engaged.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="80" y="30" width="100" height="220" rx="12" stroke="black" stroke-width="2" fill="#111"/>
+                        <text x="130" y="80" font-family="Outfit" font-weight="900" font-size="18" fill="white" text-anchor="middle">PULSE</text>
+                        <circle cx="130" cy="140" r="25" stroke="white" stroke-width="1.5" stroke-dasharray="4" fill="none"/>
+                        <polygon points="127,133 137,140 127,147" fill="white"/>
+                        
+                        <rect x="220" y="50" width="100" height="180" stroke="black" stroke-dasharray="2" fill="white"/>
+                        <path d="M245 80 H295 V110 C295 125 285 135 270 135 C255 135 245 125 245 110 Z" stroke="black" stroke-width="1.5"/>
+                        <text x="270" y="170" font-family="Outfit" font-weight="bold" font-size="9" fill="black" text-anchor="middle">🏆 1st Rank</text>
+                    </svg>
+                `
+            }
+        };
+
+        // Scroll Progress Line and Navigation Highlighting
+        const timelineContainer = document.getElementById('timeline-container');
+        const progressLine = document.getElementById('timeline-progress-line');
+
+        function updateTimelineProgress() {
+            if (!timelineContainer || !progressLine) return;
+            
+            const rect = timelineContainer.getBoundingClientRect();
+            const timelineHeight = rect.height;
+            const screenCenter = window.innerHeight / 2;
+            const containerTopFromCenter = rect.top - screenCenter;
+            
+            let progress = 0;
+            if (containerTopFromCenter < 0) {
+                progress = Math.min(100, Math.max(0, (-containerTopFromCenter / timelineHeight) * 100));
+            }
+            
+            progressLine.style.height = `${progress}%`;
         }
-    }
-</script>
+
+        // Observer for Timeline Navigation dots and chapter status
+        const observerOptions = {
+            root: null,
+            rootMargin: '-30% 0px -50% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    // Nav highlight
+                    document.querySelectorAll('.timeline-nav-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    const navItem = document.querySelector(`.timeline-nav-item[href="#${id}"]`);
+                    if (navItem) {
+                        navItem.classList.add('active');
+                    }
+                    
+                    // Chapter node highlight
+                    document.querySelectorAll('.chapter').forEach(ch => {
+                        ch.classList.remove('active');
+                    });
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.chapter').forEach(chapter => {
+            observer.observe(chapter);
+        });
+
+        window.addEventListener('scroll', updateTimelineProgress);
+        window.addEventListener('resize', updateTimelineProgress);
+        updateTimelineProgress(); // Initial run
+
+        // iOS Bottom Sheet Logic
+        let isDragging = false;
+        let startY = 0;
+        let currentY = 0;
+        let sheetY = 0;
+        
+        const sheet = document.getElementById('bottom-sheet');
+        const backdrop = document.getElementById('bottom-sheet-backdrop');
+        const dragHandle = document.getElementById('sheet-drag-handle');
+        const sheetHeader = document.getElementById('sheet-header');
+
+        function openSheet(studyKey) {
+            const data = caseStudies[studyKey];
+            if (!data) return;
+            
+            // Inject details
+            document.getElementById('sheet-title').innerText = data.title;
+            document.getElementById('sheet-subtitle').innerText = data.subtitle;
+            document.getElementById('cs-sheet-type').innerText = data.type;
+            
+            let htmlContent = '';
+            
+            if (data.svgMockup) {
+                htmlContent += `<div class="cs-sheet-mockup">${data.svgMockup}</div>`;
+            }
+            
+            htmlContent += `
+                <div class="cs-sheet-grid">
+                    <div class="cs-sheet-body">
+                        <div class="cs-sheet-section">
+                            <span class="cs-sheet-section-title">Overview &amp; Problem</span>
+                            <p><strong>Problem Statement:</strong> ${data.problem}</p>
+                            <p><strong>Solution:</strong> ${data.solution}</p>
+                        </div>
+                        ${data.process ? `<div class="cs-sheet-section">${data.process}</div>` : ''}
+                    </div>
+                    
+                    <div>
+                        <div class="cs-sheet-meta-card">
+                            <div class="cs-sheet-meta-item">
+                                <div class="cs-sheet-meta-label">My Role</div>
+                                <div class="cs-sheet-meta-val">${data.role}</div>
+                            </div>
+                            <div class="cs-sheet-meta-item">
+                                <div class="cs-sheet-meta-label">Discipline</div>
+                                <div class="cs-sheet-meta-val">${data.type}</div>
+                            </div>
+                            <div class="cs-sheet-meta-item">
+                                <div class="cs-sheet-meta-label">Tools</div>
+                                <div class="cs-sheet-meta-val">Figma</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cs-sheet-section">
+                    <span class="cs-sheet-section-title">Outcome &amp; Deliverables</span>
+                    <p style="font-size: 1.3rem; font-weight: 300; line-height: 1.5;">${data.outcome}</p>
+                </div>
+            `;
+            
+            if (data.learnings) {
+                htmlContent += `
+                    <div class="cs-sheet-insight">
+                        <h4 class="cs-sheet-insight-title">Design Takeaway</h4>
+                        <p class="cs-sheet-insight-text">${data.learnings}</p>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('sheet-dynamic-content').innerHTML = htmlContent;
+            
+            // Trigger animation
+            sheet.style.transform = 'translate(-50%, 0)';
+            sheet.classList.add('active');
+            backdrop.classList.add('active');
+            document.body.classList.add('sheet-open');
+            sheetY = 0;
+        }
+
+        function closeSheet() {
+            sheet.style.transform = '';
+            sheet.classList.remove('active');
+            backdrop.classList.remove('active');
+            document.body.classList.remove('sheet-open');
+        }
+
+        // Drag mechanics
+        function dragStart(e) {
+            isDragging = true;
+            startY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+            sheet.classList.add('dragging');
+        }
+
+        function dragMove(e) {
+            if (!isDragging) return;
+            const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+            const deltaY = clientY - startY;
+            
+            if (deltaY > 0) {
+                sheetY = deltaY;
+                sheet.style.transform = `translate(-50%, ${sheetY}px)`;
+            } else {
+                // visual dampening when pulling upwards
+                sheetY = deltaY * 0.15;
+                sheet.style.transform = `translate(-50%, ${sheetY}px)`;
+            }
+        }
+
+        function dragEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            sheet.classList.remove('dragging');
+            
+            if (sheetY > 150) {
+                closeSheet();
+            } else {
+                sheet.style.transform = 'translate(-50%, 0)';
+            }
+            sheetY = 0;
+        }
+
+        // Event hooks
+        [sheetHeader, dragHandle].forEach(element => {
+            element.addEventListener('mousedown', dragStart);
+            element.addEventListener('touchstart', dragStart, { passive: true });
+        });
+
+        window.addEventListener('mousemove', dragMove);
+        window.addEventListener('touchmove', dragMove, { passive: false });
+
+        window.addEventListener('mouseup', dragEnd);
+        window.addEventListener('touchend', dragEnd);
+
+        // Escape Key Hook
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSheet();
+            }
+        });
+    </script>
+</body>
 
 </html>
