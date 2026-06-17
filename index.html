@@ -4,16 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashara Hitanshu | Designer's Autobiography</title>
+    <title>Hitanshu | Interactive Autobiography</title>
     <!-- SEO Best Practices -->
     <meta name="description"
-        content="The chronological design journey and interactive autobiography of Ashara Hitanshu, UI/UX Designer & problem solver.">
+        content="The chronological design journey and interactive autobiography of Hitanshu, UI/UX Designer & problem solver.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <!-- Hugeicons CDN -->
+    <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
     <style>
         :root {
             --black: #000000;
@@ -21,7 +23,7 @@
             --font-serif: 'Instrument Serif', serif;
             --font-sans: 'Outfit', sans-serif;
             --border: 2px solid var(--black);
-            --border-thin: 1px solid rgba(0,0,0,0.15);
+            --border-thin: 1px solid rgba(0, 0, 0, 0.15);
             --pad-sm: 2rem;
             --pad-md: 4rem;
             --pad-lg: 8rem;
@@ -118,6 +120,7 @@
         .nav-links {
             display: flex;
             gap: 3rem;
+            align-items: center;
         }
 
         .nav-links a {
@@ -127,6 +130,8 @@
             color: var(--black);
             position: relative;
             overflow: hidden;
+            display: inline-flex;
+            align-items: center;
         }
 
         .nav-links a::after {
@@ -212,6 +217,7 @@
             transition: all 0.3s ease;
             cursor: pointer;
             outline: none;
+            gap: 0.5rem;
         }
 
         .btn:hover {
@@ -276,12 +282,16 @@
 
         .status-icon {
             font-size: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.2rem;
         }
 
         .status-location h3 {
             font-size: 1.5rem;
-            font-family: var(--font-serif);
-            font-weight: 400;
+            font-family: var(--font-sans);
+            font-weight: 700;
             line-height: 1.2;
         }
 
@@ -293,7 +303,7 @@
 
         .status-divider {
             height: 1px;
-            background: rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 0.1);
             margin: 1.5rem 0;
         }
 
@@ -302,8 +312,10 @@
             font-weight: 700;
             letter-spacing: 0.05em;
             color: #666;
-            display: block;
+            display: inline-flex;
+            align-items: center;
             margin-bottom: 0.5rem;
+            gap: 0.4rem;
         }
 
         .status-focus h4 {
@@ -393,7 +405,7 @@
             position: absolute;
             top: 0;
             bottom: 0;
-            left: 240px;
+            left: 200px;
             width: 2px;
             background: #e0e0e0;
             z-index: 1;
@@ -413,11 +425,16 @@
         .chapter {
             position: relative;
             display: grid;
-            grid-template-columns: 240px 1fr;
+            grid-template-columns: 200px 1fr;
             gap: 0;
             border-bottom: var(--border);
             z-index: 2;
-            overflow: hidden;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .chapter:hover {
+            background-color: #fafafa;
         }
 
         .chapter-left {
@@ -428,11 +445,10 @@
             padding: var(--pad-md) 3rem var(--pad-md) 2rem;
             position: relative;
             border-right: var(--border);
-            background: #fafafa;
         }
 
-        .chapter-year {
-            font-size: 2.5rem;
+        .chapter-date {
+            font-size: 1.5rem;
             font-weight: 700;
             font-family: var(--font-sans);
             line-height: 1;
@@ -441,9 +457,9 @@
         }
 
         .chapter-number {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.1em;
             color: #666;
             text-transform: uppercase;
         }
@@ -452,7 +468,7 @@
         .chapter-node {
             position: absolute;
             right: -9px;
-            top: calc(var(--pad-md) + 0.5rem);
+            top: calc(var(--pad-md) + 0.35rem);
             width: 16px;
             height: 16px;
             border-radius: 50%;
@@ -469,221 +485,53 @@
 
         .chapter-right {
             padding: var(--pad-md) 6rem var(--pad-md) 4rem;
-            display: grid;
-            grid-template-columns: 1.2fr 1.1fr;
-            gap: 4rem;
-            background: var(--white);
-        }
-
-        .chapter-story {
-            max-width: 650px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .chapter-title {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            line-height: 1;
-            margin-bottom: 2rem;
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            line-height: 1.1;
+            margin-bottom: 0.75rem;
             font-weight: 400;
             letter-spacing: -0.02em;
             text-transform: uppercase;
         }
 
-        .chapter-narrative p {
-            font-size: 1.15rem;
+        .chapter-desc {
+            font-size: 1.1rem;
             font-weight: 300;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            color: #222;
-        }
-
-        .chapter-narrative p:last-child {
-            margin-bottom: 0;
-        }
-
-        .chapter-humor {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: 1.35rem;
-            color: #444;
-            border-left: 2px solid var(--black);
-            padding-left: 1.25rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
-            line-height: 1.4;
-        }
-
-        .chapter-media {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            gap: 2rem;
-        }
-
-        /* Cards and interactive indicators */
-        .project-card {
-            border: 2px solid var(--black);
-            background: var(--white);
-            padding: 2.25rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--black);
-            position: relative;
-            box-shadow: 4px 4px 0px var(--black);
-        }
-
-        .project-card:hover {
-            background: var(--black);
-            color: var(--white);
-            transform: translate(-2px, -2px);
-            box-shadow: 8px 8px 0px var(--black);
-        }
-
-        .project-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-            gap: 1rem;
-        }
-
-        .project-card-title {
-            font-family: var(--font-serif);
-            font-size: 2.25rem;
-            line-height: 1.05;
-            font-weight: 400;
-        }
-
-        .project-card-type {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            padding: 0.4rem 0.8rem;
-            border: 1px solid var(--black);
-            white-space: nowrap;
-            transition: border-color 0.3s ease;
-        }
-
-        .project-card:hover .project-card-type {
-            border-color: var(--white);
-        }
-
-        .project-card-desc {
-            font-size: 1rem;
-            font-weight: 300;
-            opacity: 0.85;
             line-height: 1.5;
-            margin-bottom: 2rem;
-        }
-
-        .project-card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            border-top: 1px solid currentColor;
-            padding-top: 1rem;
-            margin-top: auto;
-        }
-
-        .project-card-arrow {
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover .project-card-arrow {
-            transform: translateX(6px);
-        }
-
-        /* Achievements Badges */
-        .achievement-card {
-            border: 2px solid var(--black);
-            background: #fafafa;
-            padding: 1.5rem 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            position: relative;
-            box-shadow: 4px 4px 0px var(--black);
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .achievement-card:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px var(--black);
-            background: #f0f0f0;
-        }
-
-        .achievement-icon {
-            font-size: 2.25rem;
-            flex-shrink: 0;
-        }
-
-        .achievement-details h4 {
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 0.25rem;
-            letter-spacing: 0.05em;
-        }
-
-        .achievement-details p {
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: #555;
-            line-height: 1.3;
-        }
-
-        /* Graphics & Art Placeholders */
-        .graphic-placeholder {
-            border: 2px solid var(--black);
-            aspect-ratio: 1.6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fcfcfc;
+            margin-bottom: 1.25rem;
+            color: #333;
+            max-width: 800px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
             overflow: hidden;
-            position: relative;
         }
 
-        .graphic-placeholder::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(45deg, rgba(0,0,0,0.015) 0, rgba(0,0,0,0.015) 2px, transparent 2px, transparent 12px);
-        }
-
-        .graphic-placeholder-inner {
-            z-index: 2;
-            text-align: center;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
+        .chapter-cta {
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-
-        .graphic-placeholder-title {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            font-style: italic;
-            color: #888;
-        }
-
-        .graphic-placeholder-subtitle {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
+            gap: 0.25rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
-            color: #aaa;
+            color: var(--black);
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
+
+        .chapter-cta i {
+            font-size: 1rem;
+            transition: transform 0.25s ease;
+        }
+
+        .chapter:hover .chapter-cta i {
+            transform: translateX(4px);
         }
 
         /* Chapter 9 Blinking cursor loading styling */
@@ -696,18 +544,17 @@
         }
 
         .skeleton-block {
-            border: 2px dashed #999;
-            padding: 2rem;
-            background: transparent;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            opacity: 0.7;
+            gap: 0.5rem;
+            opacity: 0.5;
+            margin-top: 1rem;
+            max-width: 400px;
         }
 
         .skeleton-line {
-            height: 12px;
-            background: #eee;
+            height: 8px;
+            background: #aaa;
             width: 100%;
         }
 
@@ -749,7 +596,7 @@
             flex-direction: column;
             overflow: hidden;
             box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.2);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .bottom-sheet.active {
@@ -796,6 +643,9 @@
             text-transform: uppercase;
             color: #666;
             margin-top: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
         .bottom-sheet-close {
@@ -811,6 +661,9 @@
             margin-right: -0.5rem;
             color: var(--black);
             margin-top: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
         }
 
         .bottom-sheet-content {
@@ -838,7 +691,9 @@
         }
 
         .cs-sheet-type {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             padding: 0.4rem 1.2rem;
             border: 1px solid var(--black);
             font-size: 0.75rem;
@@ -856,7 +711,7 @@
         }
 
         .cs-sheet-section {
-            border-top: 1px solid rgba(0,0,0,0.12);
+            border-top: 1px solid rgba(0, 0, 0, 0.12);
             padding-top: 2rem;
             margin-bottom: 2.5rem;
         }
@@ -868,7 +723,9 @@
             text-transform: uppercase;
             color: #666;
             margin-bottom: 1.5rem;
-            display: block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .cs-sheet-body {
@@ -921,7 +778,7 @@
         }
 
         .cs-sheet-meta-item {
-            border-bottom: 1px solid rgba(0,0,0,0.08);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             padding-bottom: 1.25rem;
         }
 
@@ -937,6 +794,9 @@
             letter-spacing: 0.05em;
             color: #666;
             margin-bottom: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
         .cs-sheet-meta-val {
@@ -975,6 +835,18 @@
             font-weight: 300;
             line-height: 1.6;
             opacity: 0.9;
+        }
+
+        .cs-sheet-humor {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.4rem;
+            color: #555;
+            border-left: 2px solid var(--black);
+            padding-left: 1.25rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.4;
         }
 
         body.sheet-open {
@@ -1059,26 +931,23 @@
         /* Responsive Breakpoints */
         @media (max-width: 1200px) {
             .timeline-line-wrapper {
-                left: 60px;
+                left: 140px;
             }
 
             .chapter {
-                grid-template-columns: 60px 1fr;
+                grid-template-columns: 140px 1fr;
             }
 
             .chapter-left {
-                align-items: flex-start;
-                text-align: left;
-                padding: var(--pad-md) 1rem var(--pad-md) 2rem;
+                padding: var(--pad-md) 2rem var(--pad-md) 1rem;
             }
 
-            .chapter-year {
-                font-size: 1.8rem;
+            .chapter-date {
+                font-size: 1.35rem;
             }
 
             .chapter-node {
-                left: -9px;
-                right: auto;
+                right: -9px;
             }
 
             .chapter-right {
@@ -1098,12 +967,7 @@
             }
 
             .timeline-nav {
-                display: none; /* Hide sidebar nav on smaller devices */
-            }
-
-            .chapter-right {
-                grid-template-columns: 1fr;
-                gap: 3rem;
+                display: none;
             }
 
             .cs-sheet-grid {
@@ -1130,24 +994,33 @@
             }
 
             .chapter {
-                grid-template-columns: 30px 1fr;
+                grid-template-columns: 1fr;
+                padding-left: 3.5rem;
             }
 
             .chapter-left {
-                padding: var(--pad-md) 0.5rem var(--pad-md) 1rem;
+                border-right: none;
+                align-items: flex-start;
+                text-align: left;
+                padding: var(--pad-md) 0 0 0;
             }
 
-            .chapter-year {
-                font-size: 1.4rem;
+            .chapter-date {
+                font-size: 1.25rem;
+                display: block;
+            }
+
+            .chapter-number {
+                display: block;
             }
 
             .chapter-node {
-                left: -9px;
+                left: -24px;
+                top: calc(var(--pad-md) + 0.1rem);
             }
 
             .chapter-right {
-                padding-left: 2rem;
-                padding-right: 1.5rem;
+                padding: 1rem 1.5rem var(--pad-md) 0;
             }
 
             .bottom-sheet-content {
@@ -1181,8 +1054,8 @@
         <nav>
             <a href="#" class="logo uppercase">Ashara</a>
             <div class="nav-links uppercase">
-                <a href="#hero">Timeline</a>
-                <a href="finance.html">Finance 🔒</a>
+                <a href="#hero"><i class="hgi-stroke hgi-route" style="font-size: 1.1rem; margin-right: 0.3rem;"></i>Timeline</a>
+                <a href="finance.html">Finance <i class="hgi-stroke hgi-lock-01" style="font-size: 0.9rem; margin-left: 0.1rem; vertical-align: middle;"></i></a>
                 <a href="#contact">Contact</a>
             </div>
         </nav>
@@ -1196,20 +1069,20 @@
                     <p class="hero-tagline serif">A problem solver who discovered design while building apps.</p>
                     <p class="hero-subtitle">From self-taught developer to AI-powered UX designer.</p>
                     <div class="hero-actions">
-                        <a href="#chapter-01" class="btn uppercase">Start The Journey &rarr;</a>
-                        <a href="#chapter-08" class="btn btn-secondary uppercase">Current Status &rarr;</a>
+                        <a href="#chapter-final" class="btn uppercase">Start The Journey <i class="hgi-stroke hgi-arrow-right-01"></i></a>
+                        <a href="#status-card" class="btn btn-secondary uppercase">Current Status <i class="hgi-stroke hgi-navigation-01"></i></a>
                     </div>
                 </div>
 
                 <!-- Status Card -->
-                <div class="status-card">
+                <div class="status-card" id="status-card">
                     <div class="status-card-header">
                         <span class="status-dot-active"></span>
                         <span class="status-card-label uppercase">Live Tracker</span>
                     </div>
                     <div class="status-card-body">
                         <div class="status-location">
-                            <span class="status-icon">📍</span>
+                            <span class="status-icon"><i class="hgi-stroke hgi-location-01" style="font-size: 1.4rem;"></i></span>
                             <div>
                                 <h3 style="font-family: var(--font-sans); font-weight: 700; font-size: 1.35rem;">Pune, India</h3>
                                 <p style="font-size: 0.85rem; color: #666;">Relocated for study &amp; industry training</p>
@@ -1217,13 +1090,13 @@
                         </div>
                         <div class="status-divider"></div>
                         <div class="status-focus">
-                            <span class="status-label uppercase">Current Focus</span>
+                            <span class="status-label uppercase"><i class="hgi-stroke hgi-book-02" style="font-size: 0.85rem;"></i>Current Focus</span>
                             <h4>Learning AI-Powered UI/UX Design</h4>
                             <p class="status-org">Design Boat</p>
                         </div>
                         <div class="status-divider"></div>
                         <div class="status-timeline">
-                            <span class="status-label uppercase">Timeline</span>
+                            <span class="status-label uppercase"><i class="hgi-stroke hgi-calendar-03" style="font-size: 0.85rem;"></i>Timeline</span>
                             <p>June 2026 &rarr; October 2026</p>
                         </div>
                     </div>
@@ -1231,383 +1104,286 @@
             </div>
         </section>
 
-        <!-- Floating Sidebar Timeline Nav -->
+        <!-- Floating Sidebar Timeline Nav (Reversed Order) -->
         <div class="timeline-nav">
-            <a href="#chapter-01" class="timeline-nav-item">
-                <span class="timeline-nav-label">Chapter 01 (2023)</span>
+            <a href="#chapter-final" class="timeline-nav-item">
+                <span class="timeline-nav-label">Final Chapter (Future)</span>
                 <span class="timeline-nav-dot"></span>
             </a>
-            <a href="#chapter-02" class="timeline-nav-item">
-                <span class="timeline-nav-label">Chapter 02 (2024)</span>
+            <a href="#chapter-12" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 12 (Present)</span>
                 <span class="timeline-nav-dot"></span>
             </a>
-            <a href="#chapter-03" class="timeline-nav-item">
-                <span class="timeline-nav-label">Chapter 03 (2025)</span>
+            <a href="#chapter-11" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 11 (2026)</span>
                 <span class="timeline-nav-dot"></span>
             </a>
-            <a href="#chapter-04" class="timeline-nav-item">
-                <span class="timeline-nav-label">Chapter 04 (2025)</span>
+            <a href="#chapter-10" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 10 (2026)</span>
                 <span class="timeline-nav-dot"></span>
             </a>
-            <a href="#chapter-05" class="timeline-nav-item">
-                <span class="timeline-nav-label">Chapter 05 (2025)</span>
-                <span class="timeline-nav-dot"></span>
-            </a>
-            <a href="#chapter-06" class="timeline-nav-item">
-                <span class="timeline-nav-label">Chapter 06 (2025)</span>
-                <span class="timeline-nav-dot"></span>
-            </a>
-            <a href="#chapter-07" class="timeline-nav-item">
-                <span class="timeline-nav-label">Chapter 07 (2026)</span>
+            <a href="#chapter-09" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 09 (2026)</span>
                 <span class="timeline-nav-dot"></span>
             </a>
             <a href="#chapter-08" class="timeline-nav-item">
                 <span class="timeline-nav-label">Chapter 08 (2026)</span>
                 <span class="timeline-nav-dot"></span>
             </a>
-            <a href="#chapter-09" class="timeline-nav-item">
-                <span class="timeline-nav-label">Chapter 09 (Loading)</span>
+            <a href="#chapter-07" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 07 (2025)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-06" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 06 (2025)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-05" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 05 (2025)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-04" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 04 (2025)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-03" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 03 (2025)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-02" class="timeline-nav-item">
+                <span class="timeline-nav-label">Chapter 02 (2024)</span>
+                <span class="timeline-nav-dot"></span>
+            </a>
+            <a href="#chapter-01" class="timeline-nav-item">
+                <span class="timeline-nav-label">Origins (2023)</span>
                 <span class="timeline-nav-dot"></span>
             </a>
         </div>
 
-        <!-- Continuous Chronological Timeline Container -->
+        <!-- Continuous Chronological Timeline Container (Newest to Oldest) -->
         <div class="timeline-container" id="timeline-container">
             <div class="timeline-line-wrapper">
                 <div class="timeline-progress-line" id="timeline-progress-line"></div>
             </div>
 
-            <!-- CHAPTER 01 -->
-            <section class="chapter" id="chapter-01">
+            <!-- FINAL CHAPTER (Future) -->
+            <section class="chapter" id="chapter-final">
                 <div class="chapter-left">
                     <span class="chapter-node"></span>
-                    <div class="chapter-year">2023</div>
-                    <div class="chapter-number">Chapter 01</div>
+                    <div class="chapter-date">Future</div>
+                    <div class="chapter-number">Final Chapter</div>
                 </div>
                 <div class="chapter-right">
-                    <div class="chapter-story">
-                        <h2 class="chapter-title serif">The Self-Taught Developer</h2>
-                        <div class="chapter-narrative">
-                            <p>Started my Bachelor of Computer Applications (BCA) at Atmiya University. While the lecture halls explained theoretical principles, I realized I wanted to build, deploy, and learn faster than the structured curriculum could move.</p>
-                            <p>I dove into Full Stack Development independently. I turned late nights into coding labs, learning frontend layout logics, backend servers, databases, and continuous hosting environments.</p>
-                        </div>
-                        <div class="chapter-humor">
-                            "While everyone focused on code, I became obsessed with why the button was there."
-                        </div>
-                    </div>
-                    <div class="chapter-media">
-                        <!-- Custom SVG Mockup for Code Space -->
-                        <div class="graphic-placeholder">
-                            <div class="graphic-placeholder-inner">
-                                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5">
-                                    <polyline points="16 18 22 12 16 6"></polyline>
-                                    <polyline points="8 6 2 12 8 18"></polyline>
-                                    <line x1="14" y1="4" x2="10" y2="20"></line>
-                                </svg>
-                                <span class="graphic-placeholder-title">Localhost:3000</span>
-                                <span class="graphic-placeholder-subtitle">Nights Spent Coding</span>
-                            </div>
-                        </div>
+                    <h2 class="chapter-title serif">Loading...<span class="loading-blink">_</span></h2>
+                    <p class="chapter-desc">This chapter has not been written yet. Goal: Building products that solve real-world problems.</p>
+                    <div class="skeleton-block">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
                     </div>
                 </div>
             </section>
 
-            <!-- CHAPTER 02 -->
-            <section class="chapter" id="chapter-02">
+            <!-- CHAPTER 12 (Present) -->
+            <section class="chapter" id="chapter-12" onclick="openSheet('chapter_12')">
                 <div class="chapter-left">
                     <span class="chapter-node"></span>
-                    <div class="chapter-year">2024</div>
-                    <div class="chapter-number">Chapter 02</div>
+                    <div class="chapter-date">Present</div>
+                    <div class="chapter-number">Chapter 12</div>
                 </div>
                 <div class="chapter-right">
-                    <div class="chapter-story">
-                        <h2 class="chapter-title serif">Flutter Changed Everything</h2>
-                        <div class="chapter-narrative">
-                            <p>Mobile applications were growing rapidly, and I decided to pick up Flutter to learn cross-platform development. I designed and coded several functional apps, testing local databases, state management, and device integration.</p>
-                            <p>But the real shift happened under the hood. As I designed the views for these applications, I found myself constantly questioning button alignments, screen density, click flows, and readability metrics.</p>
-                            <p>I stumbled upon UI/UX Design as a discipline. It was the spark that redirected my career trajectory from pure engineering to designing human-centered products.</p>
-                        </div>
-                    </div>
-                    <div class="chapter-media">
-                        <!-- Custom SVG Mockup for Flutter Device -->
-                        <div class="graphic-placeholder">
-                            <div class="graphic-placeholder-inner">
-                                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5">
-                                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-                                    <line x1="12" y1="18" x2="12" y2="18"></line>
-                                </svg>
-                                <span class="graphic-placeholder-title">Interface Prototypes</span>
-                                <span class="graphic-placeholder-subtitle">Flutter &amp; Figma Exploration</span>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 class="chapter-title serif">Career Clout</h2>
+                    <p class="chapter-desc">Currently designing and developing a recruitment and visa consultancy platform.</p>
+                    <a class="chapter-cta">
+                        <span>Open Story</span>
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
                 </div>
             </section>
 
-            <!-- CHAPTER 03 -->
-            <section class="chapter" id="chapter-03">
+            <!-- CHAPTER 11 -->
+            <section class="chapter" id="chapter-11" onclick="openSheet('chapter_11')">
                 <div class="chapter-left">
                     <span class="chapter-node"></span>
-                    <div class="chapter-year">2025</div>
-                    <div class="chapter-number">Chapter 03</div>
+                    <div class="chapter-date">June 2026</div>
+                    <div class="chapter-number">Chapter 11</div>
                 </div>
                 <div class="chapter-right">
-                    <div class="chapter-story">
-                        <h2 class="chapter-title serif">First Professional Experience</h2>
-                        <div class="chapter-narrative">
-                            <p>Joined Hashone Tech LLP as a UI/UX Design Intern. This was my playground to apply theoretical design rules in dynamic commercial environments.</p>
-                            <p>Under professional mentorship, I learned layout architecture, typography grids, component consistency, and collaborated on cross-functional developer hands-offs. I designed my first complete end-to-end product.</p>
-                        </div>
-                    </div>
-                    <div class="chapter-media">
-                        <!-- Interactive Project Card -->
-                        <div class="project-card" onclick="openSheet('substracker')">
-                            <div class="project-card-header">
-                                <h3 class="project-card-title">Subscription Management App</h3>
-                                <span class="project-card-type">Case Study</span>
-                            </div>
-                            <p class="project-card-desc">Simplifying payment tracking, renewals, and financial metrics through clean dashboard structures.</p>
-                            <div class="project-card-footer">
-                                <span>Explore Story</span>
-                                <span class="project-card-arrow">&rarr;</span>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 class="chapter-title serif">Sylvorn Labs</h2>
+                    <p class="chapter-desc">Designed responsive SaaS experiences and introduced comic-style storytelling.</p>
+                    <a class="chapter-cta">
+                        <span>Open Story</span>
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
                 </div>
             </section>
 
-            <!-- CHAPTER 04 -->
-            <section class="chapter" id="chapter-04">
+            <!-- CHAPTER 10 -->
+            <section class="chapter" id="chapter-10" onclick="openSheet('chapter_10')">
                 <div class="chapter-left">
                     <span class="chapter-node"></span>
-                    <div class="chapter-year">Apr 2025</div>
-                    <div class="chapter-number">Chapter 04</div>
+                    <div class="chapter-date">June 2026</div>
+                    <div class="chapter-number">Chapter 10</div>
                 </div>
                 <div class="chapter-right">
-                    <div class="chapter-story">
-                        <h2 class="chapter-title serif">Design Sprint Winner</h2>
-                        <div class="chapter-narrative">
-                            <p>Entered the Design Sprint 2025 hackathon. The challenge was to deliver fast research, mapping, logic, and interface designs in two intensive rounds:</p>
-                            <p><strong>Round 1: HabitO</strong> – Designed a comprehensive habit tracking app for students that connects daily routines, study tracking, and self-care indicators.</p>
-                            <p><strong>Round 2: College Canteen App</strong> – Designed a student pre-ordering platform focused on tracking crowds, slotting collection windows, and reducing wait times.</p>
-                        </div>
-                        <div class="chapter-humor">
-                            "Designed productivity apps while occasionally procrastinating."
-                        </div>
-                    </div>
-                    <div class="chapter-media">
-                        <!-- Award Badge trigger card -->
-                        <div class="achievement-card" onclick="openSheet('habito_canteen')">
-                            <span class="achievement-icon">🏆</span>
-                            <div class="achievement-details">
-                                <h4>1st Rank — Design Sprint 2025</h4>
-                                <p>Rapid research &amp; interactive prototyping win.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHAPTER 05 -->
-            <section class="chapter" id="chapter-05">
-                <div class="chapter-left">
-                    <span class="chapter-node"></span>
-                    <div class="chapter-year">Dec 2025</div>
-                    <div class="chapter-number">Chapter 05</div>
-                </div>
-                <div class="chapter-right">
-                    <div class="chapter-story">
-                        <h2 class="chapter-title serif">Freelancing Journey</h2>
-                        <div class="chapter-narrative">
-                            <p>Started taking on client contracts through Sylvorn Labs. As an independent consultant, I learned client scoping, pricing, responsive system creation, and designed premium corporate assets under constraint.</p>
-                            <p>I took on multiple projects, handling visual storytelling, visa consultancy dashboards, e-commerce customizations, and calming wellness flows.</p>
-                        </div>
-                    </div>
-                    <div class="chapter-media" style="gap: 1.5rem;">
-                        <!-- Project Cards -->
-                        <div class="project-card" onclick="openSheet('sylvornlabs')">
-                            <div class="project-card-header">
-                                <h3 class="project-card-title">Sylvorn Labs</h3>
-                                <span class="project-card-type">SaaS Web</span>
-                            </div>
-                            <p class="project-card-desc">Introducing interactive comic-style branding elements to standard company about pages.</p>
-                            <div class="project-card-footer">
-                                <span>Explore Story</span>
-                                <span class="project-card-arrow">&rarr;</span>
-                            </div>
-                        </div>
-
-                        <div class="project-card" onclick="openSheet('careerclout')">
-                            <div class="project-card-header">
-                                <h3 class="project-card-title">Career Clout</h3>
-                                <span class="project-card-type">SaaS Portal</span>
-                            </div>
-                            <p class="project-card-desc">Premium recruitment agency landing pages and spreadsheet inquiry automation pipelines.</p>
-                            <div class="project-card-footer">
-                                <span>Explore Story</span>
-                                <span class="project-card-arrow">&rarr;</span>
-                            </div>
-                        </div>
-
-                        <div class="project-card" onclick="openSheet('padmshakti')">
-                            <div class="project-card-header">
-                                <h3 class="project-card-title">Padmshakti</h3>
-                                <span class="project-card-type">E-commerce</span>
-                            </div>
-                            <p class="project-card-desc">Luxury gifting e-commerce site with visual personalization workflows and easy search.</p>
-                            <div class="project-card-footer">
-                                <span>Explore Story</span>
-                                <span class="project-card-arrow">&rarr;</span>
-                            </div>
-                        </div>
-
-                        <div class="project-card" onclick="openSheet('soulfultone')">
-                            <div class="project-card-header">
-                                <h3 class="project-card-title">Soulful Tone</h3>
-                                <span class="project-card-type">Web App</span>
-                            </div>
-                            <p class="project-card-desc">Quiet, dark-themed subscription onboarding and blog layout for wellness platforms.</p>
-                            <div class="project-card-footer">
-                                <span>Explore Story</span>
-                                <span class="project-card-arrow">&rarr;</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHAPTER 06 -->
-            <section class="chapter" id="chapter-06">
-                <div class="chapter-left">
-                    <span class="chapter-node"></span>
-                    <div class="chapter-year">2025</div>
-                    <div class="chapter-number">Chapter 06</div>
-                </div>
-                <div class="chapter-right">
-                    <div class="chapter-story">
-                        <h2 class="chapter-title serif">Competitions &amp; Recognition</h2>
-                        <div class="chapter-narrative">
-                            <p>Tested my visual systems and layouts against global designer panels on community hubs.</p>
-                            <p>Designed a gym platform's dynamic onboarding and landing screens, winning the ADSC weekly prompt. Secured first rank at the Multicon Articon challenge.</p>
-                        </div>
-                        <div class="chapter-humor">
-                            "Discovered that good UI cannot fix bad UX."
-                        </div>
-                    </div>
-                    <div class="chapter-media">
-                        <!-- Badges -->
-                        <div class="achievement-card" onclick="openSheet('adsc_articon')" style="margin-bottom: 1rem;">
-                            <span class="achievement-icon">🏆</span>
-                            <div class="achievement-details">
-                                <h4>ADSC Challenge Winner</h4>
-                                <p>Onboarding screen visual design win.</p>
-                            </div>
-                        </div>
-                        <div class="achievement-card" onclick="openSheet('adsc_articon')">
-                            <span class="achievement-icon">🏆</span>
-                            <div class="achievement-details">
-                                <h4>1st Rank — Multicon Articon</h4>
-                                <p>National level design challenge winner.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHAPTER 07 -->
-            <section class="chapter" id="chapter-07">
-                <div class="chapter-left">
-                    <span class="chapter-node"></span>
-                    <div class="chapter-year">May 2026</div>
-                    <div class="chapter-number">Chapter 07</div>
-                </div>
-                <div class="chapter-right">
-                    <div class="chapter-story">
-                        <h2 class="chapter-title serif">InspoAI Redesignathon</h2>
-                        <div class="chapter-narrative">
-                            <p>Entered the regional InspoAI platform redesign challenge. The prompt was to overhaul Atmiya University's legacy Student Information System (SIS).</p>
-                            <p>I focused on removing attendance tables, optimizing layout menus, grading clarity, responsive compatibility, and achieving full AA contrast accessibility metrics.</p>
-                        </div>
-                    </div>
-                    <div class="chapter-media">
-                        <div class="achievement-card" onclick="openSheet('inspoai')">
-                            <span class="achievement-icon">🏆</span>
-                            <div class="achievement-details">
-                                <h4>1st Rank — SIS Redesign 2026</h4>
-                                <p>Overhauling legacy educational platforms.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CHAPTER 08 -->
-            <section class="chapter" id="chapter-08">
-                <div class="chapter-left">
-                    <span class="chapter-node"></span>
-                    <div class="chapter-year">June 2026</div>
-                    <div class="chapter-number">Chapter 08</div>
-                </div>
-                <div class="chapter-right">
-                    <div class="chapter-story">
-                        <h2 class="chapter-title serif">The Pune Chapter</h2>
-                        <div class="chapter-narrative">
-                            <p>Relocated to Pune to begin intensive, advanced AI-Powered UI/UX Design training at Design Boat.</p>
-                            <p>My current objective is mastering advanced metrics, accelerating layout exploration through AI agents, structuring scalable libraries, and detailing complete product roadmap logic.</p>
-                        </div>
-                    </div>
-                    <div class="chapter-media">
-                        <!-- Custom Checklist Box -->
-                        <div class="status-card" style="box-shadow: none; background: #fafafa; border: 2px solid var(--black); padding: 1.75rem;">
-                            <span class="status-label uppercase" style="margin-bottom: 1.25rem;">Active Focus Areas</span>
-                            <div style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.95rem; font-weight:600;">
-                                <div style="display:flex; gap:0.5rem; align-items:center;">
-                                    <span>⚡</span>
-                                    <span>AI-assisted design workflows</span>
-                                </div>
-                                <div style="display:flex; gap:0.5rem; align-items:center;">
-                                    <span>📊</span>
-                                    <span>Advanced UX Research methods</span>
-                                </div>
-                                <div style="display:flex; gap:0.5rem; align-items:center;">
-                                    <span>📐</span>
-                                    <span>Figma design tokens &amp; systems</span>
-                                </div>
-                                <div style="display:flex; gap:0.5rem; align-items:center;">
-                                    <span>💼</span>
-                                    <span>Product Strategy &amp; Scoping</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 class="chapter-title serif">The Pune Chapter</h2>
+                    <p class="chapter-desc">Moved to Pune to specialize in AI-Powered UI/UX Design.</p>
+                    <a class="chapter-cta">
+                        <span>Open Story</span>
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
                 </div>
             </section>
 
             <!-- CHAPTER 09 -->
-            <section class="chapter" id="chapter-09">
+            <section class="chapter" id="chapter-09" onclick="openSheet('chapter_09')">
                 <div class="chapter-left">
                     <span class="chapter-node"></span>
-                    <div class="chapter-year">Future</div>
+                    <div class="chapter-date">May 2026</div>
                     <div class="chapter-number">Chapter 09</div>
                 </div>
                 <div class="chapter-right">
-                    <div class="chapter-story">
-                        <h2 class="chapter-title serif">Loading...<span class="loading-blink">_</span></h2>
-                        <div class="chapter-narrative">
-                            <p>This chapter hasn't been written yet. My ultimate goal is designing clean, fast, and structured products that solve complex user problems.</p>
-                        </div>
-                    </div>
-                    <div class="chapter-media">
-                        <!-- Skeleton loading visual placeholder -->
-                        <div class="skeleton-block">
-                            <span class="status-label uppercase">Up next</span>
-                            <div style="font-family: var(--font-serif); font-size: 1.75rem; line-height: 1.2; font-style: italic;">
-                                "Maybe the next project.<br>Maybe a startup.<br>Maybe your company."
-                            </div>
-                            <div class="skeleton-line"></div>
-                            <div class="skeleton-line short"></div>
-                        </div>
-                    </div>
+                    <h2 class="chapter-title serif">InspoAI Redesignathon</h2>
+                    <p class="chapter-desc">Redesigned Atmiya University's SIS platform. Result: 1st Rank Globally.</p>
+                    <a class="chapter-cta">
+                        <span>Open Story</span>
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- CHAPTER 08 -->
+            <section class="chapter" id="chapter-08" onclick="openSheet('chapter_08')">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-date">Feb 2026</div>
+                    <div class="chapter-number">Chapter 08</div>
+                </div>
+                <div class="chapter-right">
+                    <h2 class="chapter-title serif">Padmshakti</h2>
+                    <p class="chapter-desc">Designed a luxury gifting e-commerce experience. Solved customization challenges and product discovery.</p>
+                    <a class="chapter-cta">
+                        <span>Open Story</span>
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- CHAPTER 07 -->
+            <section class="chapter" id="chapter-07" onclick="openSheet('chapter_07')">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-date">Dec 2025</div>
+                    <div class="chapter-number">Chapter 07</div>
+                </div>
+                <div class="chapter-right">
+                    <h2 class="chapter-title serif">Multicon Ideotechnology</h2>
+                    <p class="chapter-desc">Competition Winner. Designed structured dashboards and visual interface concepts.</p>
+                    <a class="chapter-cta">
+                        <span>Open Story</span>
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- CHAPTER 06 -->
+            <section class="chapter" id="chapter-06" onclick="openSheet('chapter_06')">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-date">Dec 2025</div>
+                    <div class="chapter-number">Chapter 06</div>
+                </div>
+                <div class="chapter-right">
+                    <h2 class="chapter-title serif">ADSC Challenge Winner</h2>
+                    <p class="chapter-desc">Designed a gym onboarding and authentication experience. Result: Winner.</p>
+                    <a class="chapter-cta">
+                        <span>Open Story</span>
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- CHAPTER 05 -->
+            <section class="chapter" id="chapter-05" onclick="openSheet('chapter_05')">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-date">Dec 2025</div>
+                    <div class="chapter-number">Chapter 05</div>
+                </div>
+                <div class="chapter-right">
+                    <h2 class="chapter-title serif">Soulful Tone</h2>
+                    <p class="chapter-desc">Designed a calm subscription onboarding experience for a wellness platform.</p>
+                    <a class="chapter-cta">
+                        <span>Open Story</span>
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- CHAPTER 04 -->
+            <section class="chapter" id="chapter-04" onclick="openSheet('chapter_04')">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-date">Apr 2025</div>
+                    <div class="chapter-number">Chapter 04</div>
+                </div>
+                <div class="chapter-right">
+                    <h2 class="chapter-title serif">Design Sprint 2025</h2>
+                    <p class="chapter-desc">Designed HabitO and a College Canteen App under competition constraints. Result: 1st Rank.</p>
+                    <a class="chapter-cta">
+                        <span>Open Story</span>
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- CHAPTER 03 -->
+            <section class="chapter" id="chapter-03" onclick="openSheet('chapter_03')">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-date">May 2025</div>
+                    <div class="chapter-number">Chapter 03</div>
+                </div>
+                <div class="chapter-right">
+                    <h2 class="chapter-title serif">Hashone Tech LLP</h2>
+                    <p class="chapter-desc">First professional UI/UX experience. Learned UX fundamentals, product thinking, and worked on my first real product.</p>
+                    <a class="chapter-cta">
+                        <span>Open Story</span>
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- CHAPTER 02 -->
+            <section class="chapter" id="chapter-02" onclick="openSheet('chapter_02')">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-date">2024</div>
+                    <div class="chapter-number">Chapter 02</div>
+                </div>
+                <div class="chapter-right">
+                    <h2 class="chapter-title serif">Flutter Changed Everything</h2>
+                    <p class="chapter-desc">Started building mobile apps and became obsessed with understanding why interfaces worked.</p>
+                    <a class="chapter-cta">
+                        <span>Open Story</span>
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- CHAPTER 01 (Origins) -->
+            <section class="chapter" id="chapter-01" onclick="openSheet('chapter_01')">
+                <div class="chapter-left">
+                    <span class="chapter-node"></span>
+                    <div class="chapter-date">2023</div>
+                    <div class="chapter-number">Origins</div>
+                </div>
+                <div class="chapter-right">
+                    <h2 class="chapter-title serif">The Problem Solver</h2>
+                    <p class="chapter-desc">Started BCA at Atmiya University. Technology became a new playground for my curiosity.</p>
+                    <a class="chapter-cta">
+                        <span>Open Story</span>
+                        <i class="hgi-stroke hgi-arrow-right-01"></i>
+                    </a>
                 </div>
             </section>
         </div>
@@ -1615,7 +1391,7 @@
         <!-- Contact Section -->
         <section id="contact" class="contact">
             <h2 class="serif uppercase">Let's write<br>the next chapter</h2>
-            <a href="mailto:hello@example.com" class="btn uppercase">Initiate Contact</a>
+            <a href="mailto:hello@example.com" class="btn uppercase">Initiate Contact <i class="hgi-stroke hgi-mail-01"></i></a>
 
             <div class="social-links uppercase">
                 <a href="#">Email</a>
@@ -1627,8 +1403,8 @@
 
         <!-- Footer -->
         <footer>
-            <span class="uppercase">© 2026 Ashara Hitanshu</span>
-            <span class="uppercase"><a href="finance.html" style="color: inherit; text-decoration: none; border-bottom: 1px solid currentColor;">Finance 🔒</a></span>
+            <span class="uppercase">&copy; 2026 Hitanshu</span>
+            <span class="uppercase"><a href="finance.html" style="color: inherit; text-decoration: none; border-bottom: 1px solid currentColor;">Finance <i class="hgi-stroke hgi-lock-01" style="font-size: 0.9rem; vertical-align: middle;"></i></a></span>
             <span class="uppercase">All Rights Reserved</span>
             <span class="uppercase">Strictly Monochrome</span>
         </footer>
@@ -1640,14 +1416,14 @@
     <div class="bottom-sheet" id="bottom-sheet">
         <div class="bottom-sheet-header" id="sheet-header">
             <div class="bottom-sheet-drag-handle" id="sheet-drag-handle"></div>
-            <span class="bottom-sheet-header-title" id="sheet-header-title">Documentary View</span>
-            <button class="bottom-sheet-close" onclick="closeSheet()">Close &times;</button>
+            <span class="bottom-sheet-header-title" id="sheet-header-title"><i class="hgi-stroke hgi-book-open-01" style="font-size: 0.95rem; vertical-align: middle; margin-right: 0.2rem;"></i>Autobiography Log</span>
+            <button class="bottom-sheet-close" onclick="closeSheet()">Close <i class="hgi-stroke hgi-cancel-01" style="font-size: 0.9rem;"></i></button>
         </div>
         <div class="bottom-sheet-content" id="sheet-content">
-            <span class="cs-sheet-type" id="cs-sheet-type">UI/UX CASE STUDY</span>
-            <h2 class="cs-sheet-title" id="sheet-title">PROJECT TITLE</h2>
-            <p class="cs-sheet-subtitle" id="sheet-subtitle">Project tagline goes here</p>
-            
+            <span class="cs-sheet-type" id="cs-sheet-type"><i class="hgi-stroke hgi-route"></i>Log Entry</span>
+            <h2 class="cs-sheet-title" id="sheet-title">CHAPTER TITLE</h2>
+            <p class="cs-sheet-subtitle" id="sheet-subtitle">Timeline entry subtitle</p>
+
             <div id="sheet-dynamic-content">
                 <!-- Injected dynamically via JavaScript -->
             </div>
@@ -1658,379 +1434,361 @@
     <script>
         // Project Details Database
         const caseStudies = {
-            substracker: {
-                title: "SubStracker",
-                subtitle: "Subscription Management Application",
-                type: "Mobile App Design • Case Study",
-                problem: "With the rise of subscription-based services, users often lose track of their expenses, forget renewal dates, and continue paying for unused services. Existing solutions are either too complex or fail to present information clearly.",
-                solution: "Designed a minimal and user-friendly subscription management app that provides a clear overview of spending, smart renewal tracking, and effortless subscription management through intuitive UI and structured hierarchy.",
+            chapter_01: {
+                title: "The Problem Solver",
+                subtitle: "Chapter 01 • 2023",
+                type: "Observation &amp; Curiosity",
+                problem: "Growing up, I was naturally drawn to figuring out how physical mechanisms and toys fit together. When I entered college, that curiosity naturally shifted to digital products.",
+                solution: "Treated technology as a new playground to test visual and system structures, starting my Bachelor of Computer Applications.",
                 process: `
-                    <span class="cs-sheet-section-title">Sprint Strategy &amp; Core Logic</span>
-                    <p>During the design research phase, I discovered that over 70% of subscription drop-offs and negative ratings on other platforms occur because payments are hidden behind complex account menus.</p>
-                    <div class="cs-details-grid">
-                        <div>
-                            <h4>Key Features</h4>
-                            <ul>
-                                <li>Smart Dashboard showing monthly &amp; yearly spending</li>
-                                <li>Subscription tracking with renewal reminders</li>
-                                <li>Add &amp; manage custom subscriptions</li>
-                                <li>Multiple sorting options (recent, renewal, duration, price)</li>
-                                <li>Category &amp; Payment method management system</li>
-                                <li>Clean and persuasive premium (Pro) upgrade flow</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>Design Style</h4>
-                            <ul>
-                                <li><strong>Tone:</strong> Clean, modern, minimal, structured</li>
-                                <li><strong>Colors:</strong> Soft neutrals with subtle accent highlights</li>
-                                <li><strong>Typography:</strong> Clear, readable, modern sans-serif</li>
-                                <li><strong>Experience Focus:</strong> Clarity, low cognitive load, fast usability</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-search-01"></i>Mindset Shift &amp; Exploration</span>
+                    <p>I realized early in college that the standard lecture materials didn't fully feed my curiosity about how websites and digital products work. I spent my personal hours analyzing digital layouts, dissecting interface structures, and understanding user experiences.
+                    <ul>
+                        <li><strong>Observation:</strong> Studying website spacing and navigation flow logic.</li>
+                        <li><strong>Discovery:</strong> Realizing that apps and sites are ecosystems of critical design choices, not just sets of lines of code.</li>
+                        <li><strong>Growth:</strong> Developing a visual catalog of screen interactions and design solutions.</li>
+                    </ul>
+                    </p>
+                    <p class="cs-sheet-humor">"As a kid, I was always curious about how things worked. Friends would often hand me broken toys or gadgets to figure out. When I entered college, that curiosity shifted toward websites, apps, and digital products."</p>
                 `,
-                role: "Lead UX/UI Designer. Structured user journeys, created visual wireframes, formulated typography scale, and prototyped premium payment gate flows.",
-                outcome: "A complete subscription management experience that simplifies financial tracking, improves user awareness, and provides a structured yet minimal interface for managing recurring expenses efficiently.",
-                learnings: "This project demonstrates functional UX problem-solving combined with system design thinking — not just visual UI. It showcases the ability to design complex data-driven interfaces, structure information clearly, and handle real-world financial use cases.",
-                svgMockup: `
-                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
-                        <rect x="135" y="20" width="130" height="260" rx="16" stroke="black" stroke-width="2" fill="white"/>
-                        <rect x="180" y="28" width="40" height="5" rx="2.5" fill="black"/>
-                        <text x="145" y="55" font-family="Outfit" font-size="8" font-weight="bold" fill="black">SubStracker</text>
-                        <!-- spend card -->
-                        <rect x="145" y="70" width="110" height="50" rx="6" fill="black"/>
-                        <text x="153" y="86" font-family="Outfit" font-size="7" fill="white" opacity="0.7">Monthly Budget</text>
-                        <text x="153" y="106" font-family="Instrument Serif" font-size="18" fill="white">$84.50</text>
-                        <circle cx="235" cy="95" r="8" fill="white" opacity="0.15"/>
-                        <!-- list -->
-                        <text x="145" y="140" font-family="Outfit" font-size="7" font-weight="bold" fill="black">Renewing Tomorrow</text>
-                        <rect x="145" y="150" width="110" height="20" rx="4" stroke="black" stroke-width="1.5" fill="white"/>
-                        <circle cx="155" cy="160" r="4" fill="black"/>
-                        <text x="165" y="163" font-family="Outfit" font-size="6" font-weight="bold" fill="black">Netflix Premium</text>
-                        <text x="245" y="163" font-family="Outfit" font-size="6" font-weight="bold" fill="black" text-anchor="end">$15.49</text>
-
-                        <rect x="145" y="175" width="110" height="20" rx="4" stroke="black" stroke-width="1.5" fill="white"/>
-                        <circle cx="155" cy="185" r="4" stroke="black" fill="white"/>
-                        <text x="165" y="188" font-family="Outfit" font-size="6" font-weight="bold" fill="black">Spotify Duo</text>
-                        <text x="245" y="188" font-family="Outfit" font-size="6" font-weight="bold" fill="black" text-anchor="end">$9.99</text>
-                        
-                        <rect x="145" y="210" width="110" height="25" rx="4" fill="#f0f0f0"/>
-                        <text x="200" y="226" font-family="Outfit" font-size="7" font-weight="bold" fill="black" text-anchor="middle">+ Add Subscription</text>
-                    </svg>
-                `
-            },
-            sylvornlabs: {
-                title: "Sylvorn Labs",
-                subtitle: "SaaS Brand Presence & Interactive Storytelling",
-                type: "SaaS Brand Website • Client Project",
-                problem: "New and emerging tech companies often struggle to present their vision, services, and credibility effectively. Many SaaS websites are either too cluttered or fail to communicate their value clearly, leading to poor user engagement and weak brand perception.",
-                solution: "Designed a clean and scalable website experience that communicates Sylvorn Labs' vision, services, and expertise through structured layouts, minimal design, and strong visual hierarchy — ensuring clarity, trust, and engagement.",
-                process: `
-                    <span class="cs-sheet-section-title">Brand Narrative &amp; Layout grids</span>
-                    <p>I introduced a custom comic-strip branding layout within the client's 'About' page. Instead of using default descriptions, the website tells the founder's growth history as an interactive digital story panel with custom borders.</p>
-                    <div class="cs-details-grid">
-                        <div>
-                            <h4>Key Features</h4>
-                            <ul>
-                                <li>Strong Hero Section with brand messaging and CTA</li>
-                                <li>Multi-page website design structure (Work, Careers, About, solutions)</li>
-                                <li>Service and technology showcase sections</li>
-                                <li>Case study pages with detailed breakdowns</li>
-                                <li>Responsive newsletter captures and launch calendars</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>Design System</h4>
-                            <ul>
-                                <li><strong>Tone:</strong> Minimal, futuristic, and professional</li>
-                                <li><strong>Colors:</strong> High contrast monochrome with dark accent blocks</li>
-                                <li><strong>UI Elements:</strong> Structured grids, thick lines, subtle transitions</li>
-                            </ul>
-                        </div>
-                    </div>
-                `,
-                role: "Web Layout Designer. Built visual structures, designed comic storytelling layouts, formulated components, and delivered Figma assets.",
-                outcome: "A complete SaaS website experience that effectively communicates the company's vision, builds credibility, and provides a scalable foundation for future growth and product expansion.",
-                learnings: "This project highlights brand-driven UX thinking combined with scalable system design. It showcases the ability to design multi-page, content-heavy websites, translate brand vision into a cohesive digital experience, and balance aesthetics with business goals.",
+                role: "Inquisitive Student",
+                outcome: "Secured a strong foundation in digital problem-solving and systematic layout analysis.",
+                learnings: "While everyone focused on code, I became obsessed with why the button was there.",
                 svgMockup: `
                     <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
                         <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="white"/>
                         <line x1="50" y1="65" x2="350" y2="65" stroke="black" stroke-width="1.5"/>
                         <circle cx="65" cy="53" r="3" fill="black"/>
                         <circle cx="75" cy="53" r="3" fill="black"/>
-                        <text x="95" y="56" font-family="Instrument Serif" font-size="10" font-weight="bold" fill="black">Sylvorn Labs</text>
-                        <!-- Grid layout -->
-                        <text x="75" y="100" font-family="Instrument Serif" font-size="16" fill="black">SAAS DESIGN OPERATING SYSTEM</text>
-                        <text x="75" y="115" font-family="Outfit" font-size="8" fill="black" opacity="0.6">Minimalist layout systems built for technical applications.</text>
-                        
-                        <rect x="75" y="135" width="70" height="90" stroke="black" stroke-width="1.5" fill="#fcfcfc"/>
-                        <text x="110" y="180" font-family="Outfit" font-size="8" fill="black" text-anchor="middle" opacity="0.3">Panel 01</text>
-                        <rect x="155" y="135" width="70" height="90" stroke="black" stroke-width="1.5" fill="#fcfcfc"/>
-                        <text x="190" y="180" font-family="Outfit" font-size="8" fill="black" text-anchor="middle" opacity="0.3">Panel 02</text>
-                        <rect x="235" y="135" width="90" height="90" stroke="black" stroke-width="1.5" fill="#fafafa"/>
-                        <text x="280" y="180" font-family="Outfit" font-size="8" fill="black" text-anchor="middle" opacity="0.3">Story Board</text>
+                        <text x="95" y="56" font-family="Outfit" font-size="8" font-weight="bold" fill="black">curiosity-log:3000</text>
+                        <!-- Stylized wireframe details -->
+                        <rect x="75" y="90" width="120" height="60" stroke="black" fill="white" stroke-dasharray="3"/>
+                        <rect x="210" y="90" width="110" height="60" stroke="black" fill="white" stroke-dasharray="3"/>
+                        <path d="M 135 120 L 210 120" stroke="black" stroke-width="1.5" stroke-dasharray="2,2"/>
+                        <circle cx="210" cy="120" r="3" fill="black"/>
                     </svg>
                 `
             },
-            careerclout: {
-                title: "Career Clout",
-                subtitle: "International Recruitment & Visa Platform",
-                type: "Consultancy Landing Page • Client Project",
-                problem: "International visa and recruitment agencies typically have low design budgets, forcing them to use generic website templates that look unprofessional and fail to establish trust with visa applicants. Additionally, managing applicant inquiries manually is slow and error-prone.",
-                solution: "Designed and developed a premium, highly professional international recruitment landing page under tight budget constraints. Integrated user-friendly visa inquiry forms and automated lead routing straight to client spreadsheets to streamline operations.",
+            chapter_02: {
+                title: "Flutter Changed Everything",
+                subtitle: "Chapter 02 • 2024",
+                type: "Interaction Analysis",
+                problem: "Standard mobile templates often feel mechanical or rigid, and understanding what makes an interface feel natural and responsive is a challenge.",
+                solution: "Adopted mobile layout prototyping using Flutter to analyze how moving active buttons and changing screen flows affected usability.",
                 process: `
-                    <span class="cs-sheet-section-title">Workflow Automation &amp; Form Logic</span>
-                    <p>Rather than using expensive SaaS database integrations, I solved the client's low-budget constraints by writing a custom form handler that validates applicant details and posts them directly to Google Sheets using Apps Script. This saved the client hundreds of dollars in operational costs while maintaining high security and zero platform dependencies.</p>
-                    <div class="cs-details-grid">
-                        <div>
-                            <h4>Key Features</h4>
-                            <ul>
-                                <li>High-conversion visa assessment questionnaire</li>
-                                <li>Automated lead management &amp; spreadsheet routing</li>
-                                <li>Responsive international visa roadmap visualization</li>
-                                <li>Interactive country guides (UK, Canada, Europe)</li>
-                                <li>High-trust design layout with secure data encryption information</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-layout-01"></i>Discovery of UX Design</span>
+                    <p>Building mobile components allowed me to observe user responses in real-time:
+                    <ul>
+                        <li><strong>Observation:</strong> Noticed that screen density, button sizing, and touch targets directly determine how fast a user moves.</li>
+                        <li><strong>Discovery:</strong> Realized I spent far more time thinking about user behavior and visual mapping than backend development, leading me to UI/UX Design.</li>
+                        <li><strong>Growth:</strong> Shifted focus entirely to wireframing and interactive screen mapping.</li>
+                    </ul>
+                    </p>
+                    <p class="cs-sheet-humor">"While building Flutter projects, I noticed something unexpected. I spent more time thinking about button placement, screen flows, and user behavior than writing code. That curiosity introduced me to the world of UI/UX Design."</p>
                 `,
-                role: "Product Designer &amp; Tech Lead. Formulated lead collection steps, developed front-end interfaces, and linked sheets integrations.",
-                outcome: "A premium corporate presence that collects, validates, and manages international visa leads instantly, helping the client scale without high recurring software fees.",
-                learnings: "This project taught me how to solve real business constraints creatively. Good design is not just about aesthetics; it is about building cost-effective, high-performing workflows that align with the client's budget and technical capabilities.",
+                role: "Interface Prototyper",
+                outcome: "Designed and mapped multiple cross-platform mobile layouts, centering my pivot into UI/UX Design.",
+                learnings: "Good interface design is the critical bridge that translates system code into intuitive user actions.",
                 svgMockup: `
                     <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
-                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="white"/>
-                        <line x1="50" y1="65" x2="350" y2="65" stroke="black" stroke-width="1.5"/>
-                        <text x="65" y="55" font-family="Outfit" font-weight="bold" font-size="9" fill="black">CareerClout</text>
-                        
-                        <rect x="75" y="90" width="110" height="150" stroke="black" stroke-width="1.5" fill="white"/>
-                        <text x="85" y="105" font-family="Outfit" font-size="8" font-weight="bold" fill="black">Assessment</text>
-                        <rect x="85" y="115" width="90" height="12" stroke="black" stroke-width="1" fill="#f9f9f9"/>
-                        <rect x="85" y="132" width="90" height="12" stroke="black" stroke-width="1" fill="#f9f9f9"/>
-                        <rect x="85" y="149" width="90" height="12" stroke="black" stroke-width="1" fill="#f9f9f9"/>
-                        <rect x="85" y="180" width="90" height="15" fill="black"/>
-                        
-                        <rect x="205" y="90" width="120" height="150" stroke="black" stroke-dasharray="3" fill="#fcfcfc"/>
-                        <text x="265" y="110" font-family="Outfit" font-size="7" font-weight="bold" fill="black" text-anchor="middle">Sheet Database</text>
-                        <line x1="215" y1="125" x2="315" y2="125" stroke="black" stroke-width="1"/>
-                        <line x1="215" y1="145" x2="315" y2="145" stroke="black" stroke-width="1"/>
-                        <line x1="250" y1="125" x2="250" y2="225" stroke="black" stroke-width="1"/>
+                        <rect x="140" y="30" width="120" height="240" rx="14" stroke="black" stroke-width="2" fill="white"/>
+                        <rect x="180" y="38" width="40" height="4" rx="2" fill="black"/>
+                        <text x="200" y="70" font-family="Outfit" font-size="8" font-weight="bold" fill="black" text-anchor="middle">Flow Mockup</text>
+                        <!-- Mobile grids -->
+                        <rect x="150" y="90" width="100" height="60" rx="4" stroke="black" fill="white"/>
+                        <circle cx="200" cy="120" r="10" stroke="black" fill="white"/>
+                        <!-- arrow pointing to button -->
+                        <path d="M 230 180 Q 210 150 200 135" stroke="black" stroke-width="1.5" stroke-dasharray="2"/>
                     </svg>
                 `
             },
-            padmshakti: {
-                title: "Padmshakti",
-                subtitle: "Luxury Gifting E-commerce Experience",
-                type: "E-commerce System • Client Project",
-                problem: "Most gifting platforms are cluttered, generic, and lack emotional connection. Users struggle to find meaningful, customized gifts while businesses need scalable solutions for bulk and corporate gifting.",
-                solution: "Designed a clean, premium e-commerce experience that simplifies gifting through intuitive navigation, curated categories, and personalization-focused flows. The platform blends emotional storytelling with functional shopping.",
+            chapter_03: {
+                title: "Hashone Tech LLP",
+                subtitle: "Chapter 03 • May 2025",
+                type: "UI/UX Design Intern",
+                problem: "With the rise of subscription-based platforms, users struggle to track recurring payments and monthly budgets, causing financial friction.",
+                solution: "Designed a simplified mobile subscription tracker focused on information hierarchy and usability.",
                 process: `
-                    <span class="cs-sheet-section-title">Gift Builder Flow &amp; Customization</span>
-                    <p>The core challenge was allowing corporate and individual buyers to personalize high-end gift sets without overloading the checkout flow. I built an interactive 'gift box builder' that guides users from selecting a theme, box color, selecting premium gifts, to writing a customized calligraphed note card.</p>
-                    <div class="cs-details-grid">
-                        <div>
-                            <h4>Key Features</h4>
-                            <ul>
-                                <li>Smart Product Categorization (Corporate, Event, Personalized)</li>
-                                <li>Advanced Filters &amp; Sorting for quick discovery</li>
-                                <li>Interactive Personalized Gifting Experience</li>
-                                <li>Seamless Cart &amp; Checkout Flow</li>
-                                <li>User Profile &amp; Order Management System</li>
-                                <li>Trust-focused sections (quality, delivery)</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-search-01"></i>Design Method &amp; Execution</span>
+                    <p>Collaborating in a design team environment taught me to structure products under commercial goals:
+                    <ul>
+                        <li><strong>Observation:</strong> Found that users forget renewals when details are hidden behind complex tabs.</li>
+                        <li><strong>Discovery:</strong> Simple calendar grids and upfront pricing comparison cards reduce user dropoffs.</li>
+                        <li><strong>Growth:</strong> Formulated consistent Figma components and handed off layout definitions to engineering.</li>
+                    </ul>
+                    </p>
                 `,
-                role: "Lead UI/UX Designer. Designed gift customization layouts, visual styling rules, checkout loops, and bulk dashboard interfaces.",
-                outcome: "A structured and visually refined e-commerce experience that improves product discovery, enhances user trust, and supports both individual and bulk gifting needs in a seamless way.",
-                learnings: "This project demonstrates end-to-end e-commerce UX thinking — not just UI. It includes complex flows like filtering, checkout, and personalization, which shows strong real-world product design capability beyond basic screens.",
+                role: "UI/UX Design Intern",
+                outcome: "Delivered complete mobile interface designs and consistent UI style components.",
+                learnings: "Creating simplified, clear layouts for heavy data pages reduces user stress and improves financial awareness.",
                 svgMockup: `
                     <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
-                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="white"/>
-                        <line x1="50" y1="65" x2="350" y2="65" stroke="black" stroke-width="1.5"/>
-                        <text x="105" y="56" font-family="Instrument Serif" font-size="10" font-weight="bold" fill="black">PADMSHAKTI</text>
-                        <!-- item grid -->
-                        <rect x="70" y="80" width="100" height="150" stroke="black" stroke-dasharray="2" fill="white"/>
-                        <circle cx="120" cy="140" r="15" stroke="black" stroke-width="1"/>
-                        <text x="120" y="170" font-family="Outfit" font-size="6" fill="black" text-anchor="middle">Premium Box</text>
-                        
-                        <text x="190" y="105" font-family="Instrument Serif" font-size="15" fill="black">Luxury Gift Hamper</text>
-                        <text x="190" y="120" font-family="Outfit" font-size="7" fill="black" opacity="0.6">Personalize calligraphed items.</text>
-                        <text x="190" y="140" font-family="Outfit" font-size="12" font-weight="bold" fill="black">$120.00</text>
-                        
-                        <rect x="190" y="160" width="140" height="30" stroke="black" fill="white"/>
-                        <text x="195" y="178" font-family="Outfit" font-size="7" fill="black">Enter Calligraphy Note...</text>
-                        
-                        <rect x="190" y="200" width="140" height="20" fill="black"/>
-                        <text x="260" y="212" font-family="Outfit" font-size="8" fill="white" text-anchor="middle">ADD TO CART</text>
+                        <rect x="140" y="30" width="120" height="240" rx="14" stroke="black" stroke-width="2" fill="white"/>
+                        <rect x="180" y="38" width="40" height="4" rx="2" fill="black"/>
+                        <text x="150" y="65" font-family="Outfit" font-size="8" font-weight="bold" fill="black">SubStracker</text>
+                        <rect x="150" y="80" width="100" height="45" rx="6" fill="black"/>
+                        <text x="158" y="110" font-family="Instrument Serif" font-size="16" fill="white">$84.50</text>
                     </svg>
                 `
             },
-            soulfultone: {
-                title: "SoulfulTone",
-                subtitle: "Calming Wellness Affirmation Platform",
-                type: "Wellness Web Platform • Client Project",
-                problem: "Wellness and affirmation websites are often clinical or overly commercial. Users struggle to feel calm, focused, and emotionally connected when browsing affirmation platforms, which should inspire mindfulness and tranquility.",
-                solution: "Created a premium subscription-based affirmation platform featuring an immersive, quiet dark-mode visual interface, minimal layout structures, and soft glowing elements that help users explore content in a state of calmness.",
-                process: `
-                    <span class="cs-sheet-section-title">Emotional Layouts &amp; Contrast Systems</span>
-                    <p>I structured this experience heavily around emotional design principles. I spent time exploring typography and contrast ratios to ensure readability at night, when many users practice affirmations.</p>
-                    <div class="cs-details-grid">
-                        <div>
-                            <h4>Key Features</h4>
-                            <ul>
-                                <li>Emotion-driven Hero Section with immersive visuals</li>
-                                <li>Minimal Navigation System for better focus</li>
-                                <li>Clean Login Experience &amp; Subscriber onboarding</li>
-                                <li>Subscription Plan Selection Flow</li>
-                                <li>Informational Blog &amp; About Pages</li>
-                            </ul>
-                        </div>
-                    </div>
-                `,
-                role: "UI/UX Designer. Built visual styles, defined dark-mode layout parameters, engineered subscription cards, and formulated navigation paths.",
-                outcome: "A beautiful, relaxing interface that communicates calmness and clarity while guiding users naturally through content discovery and subscription flows.",
-                learnings: "This project demonstrates the ability to create environments that evoke a specific feeling and comfort. Visual hierarchy is used to guide attention, while spacing and alignment create clarity and separation.",
-                svgMockup: `
-                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
-                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="#111111"/>
-                        <line x1="50" y1="65" x2="350" y2="65" stroke="white" stroke-width="1"/>
-                        <text x="95" y="56" font-family="Instrument Serif" font-size="10" font-weight="bold" fill="white">SoulfulTone</text>
-                        <!-- glow representation -->
-                        <circle cx="200" cy="140" r="30" fill="white" opacity="0.1"/>
-                        <circle cx="200" cy="140" r="15" fill="white" opacity="0.15"/>
-                        <!-- text -->
-                        <text x="200" y="135" font-family="Instrument Serif" font-style="italic" font-size="12" fill="white" text-anchor="middle">"I am grounded, calm,</text>
-                        <text x="200" y="150" font-family="Instrument Serif" font-style="italic" font-size="12" fill="white" text-anchor="middle">and centered."</text>
-                        <!-- play button -->
-                        <circle cx="200" cy="190" r="10" stroke="white" stroke-width="1.5"/>
-                        <polygon points="198,186 204,190 198,194" fill="white"/>
-                    </svg>
-                `
-            },
-            habito_canteen: {
+            chapter_04: {
                 title: "Design Sprint 2025",
-                subtitle: "Rapid UX Prototyping Winner (1st Rank)",
-                type: "48-Hour Rapid Challenge • Competition Milestone",
-                problem: "In high-stress student environments, habit tracking often falls short due to friction, and college canteen rush hours cause massive wait times, resulting in skipped meals and frustrated students.",
-                solution: "Designed two rapid UX prototypes: 'HabitO', which integrates visual productivity, self-care, and academic habit tracking, and the 'College Canteen App', which streamlines order queues via real-time tracking and pre-order slots.",
+                subtitle: "Chapter 04 • April 2025",
+                type: "UX Prototyping Winner",
+                problem: "Rapid design competitions require delivering user mapping and high-fidelity screen layouts in under 48 hours.",
+                solution: "Designed two student app prototypes: HabitO (student routine tracker) and Campus Eats (canteen preorder flow) under strict time pressure.",
                 process: `
-                    <span class="cs-sheet-section-title">Rapid Execution &amp; Design Frameworks</span>
-                    <p>During the sprint, our team mapped student morning routines to find the exact friction points. We structured HabitO around 'click-less check-ins' and the Canteen App around 'pre-packaged ticket codes'.</p>
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-trophy"></i>Round-by-Round Breakdown</span>
                     <div class="cs-details-grid">
                         <div>
                             <h4>Round 1: HabitO</h4>
-                            <p>Designed a student habit tracking experience combining productivity, study habits, and self-care. Used modular cards to separate wellness metrics from grade trackers.</p>
+                            <p>Designed a visual habit tracker that separates self-care, study slots, and wellness indicators into clear, scannable modules.</p>
                         </div>
                         <div>
-                            <h4>Round 2: College Canteen</h4>
-                            <p>Designed a canteen order flow focused on reducing physical waiting times. Introduced traffic checkers showing rush volumes before ordering.</p>
+                            <h4>Round 2: College Canteen App</h4>
+                            <p>Created a pre-order food flow with traffic density checkers, allowing students to preorder meals and bypass canteen lines.</p>
                         </div>
                     </div>
+                    <p class="cs-sheet-humor">"Designed productivity apps while occasionally procrastinating."</p>
                 `,
-                role: "UX Researcher &amp; Rapid Prototyper. Researched student habits, sketched screen cards, built Figma interaction logic, and pitched layouts to the panel.",
-                outcome: "Awarded 1st Rank — Design Sprint 2025 out of multiple design teams for combining high-fidelity aesthetics with solid, research-backed user solutions.",
-                learnings: "Designing under severe time pressure taught me to prioritize core user values over visual perfection. I learned that identifying the single most critical friction point (like canteen wait times) yields the highest impact.",
+                role: "UX Researcher &amp; Prototyper",
+                outcome: "Awarded 1st Rank out of multiple competing design teams for combined user logic and visual execution.",
+                learnings: "Working under severe time limits taught me to prioritize core user value paths over aesthetic decoration.",
                 svgMockup: `
                     <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
-                        <!-- HabitO -->
                         <rect x="75" y="40" width="100" height="200" rx="10" stroke="black" stroke-width="2" fill="white"/>
                         <text x="85" y="60" font-family="Outfit" font-size="8" font-weight="bold" fill="black">HabitO</text>
-                        <rect x="85" y="75" width="80" height="15" rx="3" stroke="black" fill="white"/>
-                        <circle cx="92" cy="825" r="3" fill="black"/>
-                        <text x="100" y="85" font-family="Outfit" font-size="5" fill="black">Hydrate (3L)</text>
-                        <!-- progress circle -->
-                        <circle cx="125" cy="150" r="20" stroke="black" stroke-width="2" stroke-dasharray="80,40" fill="none"/>
+                        <circle cx="125" cy="150" r="22" stroke="black" stroke-width="2" stroke-dasharray="60,30" fill="none"/>
                         
-                        <!-- Canteen -->
                         <rect x="225" y="40" width="100" height="200" rx="10" stroke="black" stroke-width="2" fill="white"/>
                         <text x="235" y="60" font-family="Outfit" font-size="8" font-weight="bold" fill="black">Campus Eats</text>
-                        <rect x="235" y="75" width="80" height="20" fill="black"/>
-                        <text x="240" y="87" font-family="Outfit" font-size="5" fill="white">🟢 LOW CROWD (3m wait)</text>
+                        <rect x="235" y="80" width="80" height="20" fill="black"/>
                     </svg>
                 `
             },
-            inspoai: {
-                title: "InspoAI Redesignathon 2026",
-                subtitle: "SIS Platform Usability Redesign (1st Rank)",
-                type: "UX Overhaul Challenge • Competition Milestone",
-                problem: "University Student Information System (SIS) platforms are notoriously outdated, heavily cluttered, difficult to navigate, and lacking basic mobile accessibility features. Students waste critical time trying to find schedules, grades, and fee records.",
-                solution: "Redesigned Atmiya University's SIS platform from scratch. Introduced a widgetized dashboard, collapsed multi-level menus into a flat gesture-based navigation, resolved key layout problems, and implemented AA-grade color contrast accessibility.",
+            chapter_05: {
+                title: "Soulful Tone",
+                subtitle: "Chapter 05 • December 2025",
+                type: "Wellness Web Platform",
+                problem: "Wellness and affirmation portals often use pushy subscription cards and complex pricing tables, causing user discomfort and dropoffs.",
+                solution: "Designed a quiet dark-themed web platform focused on calm onboarding, minimal checkouts, and airy spacing.",
                 process: `
-                    <span class="cs-sheet-section-title">Usability Mapping &amp; Component Overhaul</span>
-                    <p>The old student portal was built on nested HTML tables which completely broke on mobile screens. My redesign replaced those structures with responsive flex layouts and simplified navigation paths down to two taps.</p>
-                    <div class="cs-details-grid">
-                        <div>
-                            <h4>Key Redesign Actions</h4>
-                            <ul>
-                                <li>Attendance cards showing visual safety boundaries</li>
-                                <li>Centralized schedule dashboard with live updates</li>
-                                <li>Mobile-first tabbed menu navigation systems</li>
-                                <li>Accessible font sizes and dark/light ratios satisfying WCAG metrics</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-quill-write"></i>Visual Strategy &amp; Core Screens</span>
+                    <p>Formulated a visual blueprint to lower user cognitive load:
+                    <ul>
+                        <li><strong>Landing Page:</strong> Clean space layout highlighting affirm value statements.</li>
+                        <li><strong>Onboarding:</strong> Quiet questionnaire cards to personalize user goals.</li>
+                        <li><strong>Pricing:</strong> Simple, flat subscription comparisons.</li>
+                        <li><strong>Reading Feed:</strong> Centered text typography grids built for relaxed consumption.</li>
+                    </ul>
+                    </p>
                 `,
-                role: "UX Designer. Re-mapped system navigation flows, designed grid boards, formulated responsive components, and conducted student interviews.",
-                outcome: "Won 1st Rank at InspoAI Redesignathon 2026. Praised by university officials and technical judges for creating a clean, modern, and highly implementable redesign.",
-                learnings: "This project reinforced the importance of accessibility and simplicity. I learned that designing for complex legacy databases means filtering visual clutter so students only see what is relevant to their immediate context.",
+                role: "Lead UI/UX Designer",
+                outcome: "A quiet subscription platform that balances conversion goals with a calming, trust-building user experience.",
+                learnings: "Generous whitespace, calm typography, and soft contrast are highly effective at building user trust.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="#111111"/>
+                        <line x1="50" y1="65" x2="350" y2="65" stroke="white" stroke-width="1.5"/>
+                        <text x="75" y="56" font-family="Instrument Serif" font-size="10" fill="white">SoulfulTone</text>
+                        <circle cx="200" cy="140" r="30" fill="white" opacity="0.1"/>
+                        <text x="200" y="135" font-family="Instrument Serif" font-style="italic" font-size="12" fill="white" text-anchor="middle">"I am grounded</text>
+                        <text x="200" y="150" font-family="Instrument Serif" font-style="italic" font-size="12" fill="white" text-anchor="middle">and calm."</text>
+                    </svg>
+                `
+            },
+            chapter_06: {
+                title: "ADSC Challenge Winner",
+                subtitle: "Chapter 06 • December 2025",
+                type: "Onboarding Design Challenge",
+                problem: "Long, dry onboarding questionnaires on health apps create high bounce rates during registration.",
+                solution: "Designed a splash screen and visual onboarding loop for a gym app, using heavy kinetic typography and fast inputs.",
+                process: `
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-flash"></i>Visual Identity Formulation</span>
+                    <p>Designed a fast-paced signup funnel:
+                    <ul>
+                        <li><strong>Splash Screen:</strong> High contrast typography that sets an active tone immediately.</li>
+                        <li><strong>Goal Selection:</strong> Cards designed to reduce text entry to simple clicks.</li>
+                    </ul>
+                    </p>
+                    <p class="cs-sheet-humor">"Discovered that good UI cannot fix bad UX."</p>
+                `,
+                role: "Visual Designer",
+                outcome: "First Place in the ADSC Weekly Designer Prompt series.",
+                learnings: "Visual design must work alongside low-friction layout choices to hold user attention.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="140" y="30" width="120" height="240" rx="14" stroke="black" stroke-width="2" fill="#111111"/>
+                        <text x="200" y="80" font-family="Outfit" font-weight="900" font-size="16" fill="white" text-anchor="middle">PULSE</text>
+                        <circle cx="200" cy="140" r="25" stroke="white" stroke-width="1" stroke-dasharray="3" fill="none"/>
+                    </svg>
+                `
+            },
+            chapter_07: {
+                title: "Multicon Ideotechnology",
+                subtitle: "Chapter 07 • December 2025",
+                type: "Dashboard Usability Winner",
+                problem: "Cluttered dashboards overwhelm system operators, making it easy to miss urgent alerts.",
+                solution: "Designed highly organized telemetry dashboards that prioritize critical alerts using strict visual grids.",
+                process: `
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-layout-01"></i>Data-Heavy Layout Strategy</span>
+                    <p>Focused on layout organization:
+                    <ul>
+                        <li><strong>Hierarchy:</strong> Place active errors in prominent locations above standard metrics.</li>
+                        <li><strong>Data Tables:</strong> Clean, thin borders instead of colored backgrounds to separate parameters.</li>
+                    </ul>
+                    </p>
+                `,
+                role: "Telemetry Interface Designer",
+                outcome: "1st Rank Winner in the national Multicon Ideotechnology dashboard category.",
+                learnings: "Layout grids and text weights are critical to organizing dense data sets clearly.",
                 svgMockup: `
                     <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
                         <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="white"/>
                         <line x1="50" y1="65" x2="350" y2="65" stroke="black" stroke-width="1.5"/>
-                        <line x1="120" y1="65" x2="120" y2="260" stroke="black" stroke-width="1"/>
-                        <text x="65" y="85" font-family="Outfit" font-size="8" font-weight="bold" fill="black">SIS Portal</text>
-                        <!-- Attendance card -->
-                        <rect x="135" y="80" width="85" height="60" rx="4" stroke="black" stroke-width="1.5"/>
-                        <text x="145" y="95" font-family="Outfit" font-size="6" font-weight="bold" fill="black">Attendance</text>
-                        <text x="145" y="125" font-family="Instrument Serif" font-size="20" fill="black">87.4%</text>
-                        <!-- grades -->
-                        <rect x="235" y="80" width="100" height="60" rx="4" stroke="black" stroke-width="1.5"/>
-                        <text x="245" y="95" font-family="Outfit" font-size="6" font-weight="bold" fill="black">Current SGPA</text>
-                        <text x="245" y="125" font-family="Instrument Serif" font-size="20" fill="black">9.12</text>
+                        <rect x="70" y="85" width="120" height="60" stroke="black" fill="white"/>
+                        <rect x="210" y="85" width="120" height="60" stroke="black" fill="white"/>
                     </svg>
                 `
             },
-            adsc_articon: {
-                title: "Visual Challenges & Art Wins",
-                subtitle: "Gym App Onboarding & National Concept Art",
-                type: "National & Platform Level Awards",
-                problem: "In competitive UI challenges, stands out by catching the user's attention in the first 3 seconds while communicating a powerful, functional brand logic. Standard layouts fail to leave an impact.",
-                solution: "Crafted a custom splash screen and onboarding loop for a premium Gym Application focused on dark-mode energy and extreme contrast, securing 1st Rank in the ADSC Weekly Challenge. Designed futuristic interfaces for Multicon Articon 2025, securing 1st Rank.",
+            chapter_08: {
+                title: "Padmshakti",
+                subtitle: "Chapter 08 • February 2026",
+                type: "Luxury E-commerce Customizer",
+                problem: "Customers buying premium gifts struggle with customization options and product discovery on cluttered sites.",
+                solution: "Designed a step-by-step gift-box builder that simplifies custom box assembly, wrapping, and ribbon selection.",
                 process: `
-                    <span class="cs-sheet-section-title">Onboarding Mechanics &amp; Styling</span>
-                    <p>For the ADSC challenge, I built a 'Pulse' sports theme with stark typography layouts that make training entries quick and energetic. For Multicon Articon, I designed futuristic concept panels simulating operations screens.</p>
-                    <div class="cs-details-grid">
-                        <div>
-                            <h4>ADSC Win: Pulse Onboarding</h4>
-                            <ul>
-                                <li>High-impact kinetic text splash layout</li>
-                                <li>Fast goal selection screens (Bulk, Cut, Train)</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>Multicon Articon 2025</h4>
-                            <ul>
-                                <li>National level dashboard challenge (1st Rank)</li>
-                                <li>Evaluated visual grids for telemetry screens</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-calendar-03"></i>Design Details &amp; Customizer</span>
+                    <p>Built a custom flow:
+                    <ul>
+                        <li><strong>Customizer:</strong> Users choose premium gift items visually within an e-commerce catalog.</li>
+                        <li><strong>Writing Card:</strong> Integrated calligraphy card previews during box setup.</li>
+                    </ul>
+                    </p>
                 `,
-                role: "Visual Concept Designer. Formulated color parameters, drafted layout wireframes, and designed premium athletic branding assets.",
-                outcome: "Multiple first-place finishes demonstrating the ability to craft compelling visual identity systems, motion hooks, and state-of-the-art visual user experiences.",
-                learnings: "Good UI cannot fix bad UX, but premium visuals are critical to first impressions. These competitions taught me how to combine high-end aesthetic layout systems with fast loading times to keep the user engaged.",
+                role: "E-commerce Designer",
+                outcome: "Delivered a clean, high-conversion gift-builder flow that merges brand story with luxury shopping.",
+                learnings: "Luxury branding is conveyed through ample whitespace and thin-line borders, not heavy decorations.",
                 svgMockup: `
                     <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
-                        <rect x="80" y="30" width="100" height="220" rx="12" stroke="black" stroke-width="2" fill="#111"/>
-                        <text x="130" y="80" font-family="Outfit" font-weight="900" font-size="18" fill="white" text-anchor="middle">PULSE</text>
-                        <circle cx="130" cy="140" r="25" stroke="white" stroke-width="1.5" stroke-dasharray="4" fill="none"/>
-                        <polygon points="127,133 137,140 127,147" fill="white"/>
-                        
-                        <rect x="220" y="50" width="100" height="180" stroke="black" stroke-dasharray="2" fill="white"/>
-                        <path d="M245 80 H295 V110 C295 125 285 135 270 135 C255 135 245 125 245 110 Z" stroke="black" stroke-width="1.5"/>
-                        <text x="270" y="170" font-family="Outfit" font-weight="bold" font-size="9" fill="black" text-anchor="middle">🏆 1st Rank</text>
+                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="white"/>
+                        <line x1="50" y1="65" x2="350" y2="65" stroke="black" stroke-width="1.5"/>
+                        <text x="75" y="56" font-family="Instrument Serif" font-weight="bold" font-size="10" fill="black">PADMSHAKTI</text>
+                        <rect x="75" y="90" width="110" height="140" stroke="black" stroke-dasharray="2" fill="white"/>
+                    </svg>
+                `
+            },
+            chapter_09: {
+                title: "InspoAI Redesignathon",
+                subtitle: "Chapter 09 • May 2026",
+                type: "SIS Platform Usability Redesign",
+                problem: "Outdated Student Information Systems (SIS) feature cluttered tables and confusing navigation paths.",
+                solution: "Redesigned Atmiya University's SIS platform Info Architecture, placing daily routines and attendance upfront.",
+                process: `
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-layout-01"></i>Platform Overhaul and Redesign Actions</span>
+                    <p>Targeted core student routines:
+                    <ul>
+                        <li><strong>Dashboard:</strong> Visual check-ins for attendance, grades, and upcoming exams.</li>
+                        <li><strong>Grid Tables:</strong> Collapsed multi-level menus into a responsive navigation bar.</li>
+                    </ul>
+                    </p>
+                `,
+                role: "Lead UX Designer",
+                outcome: "Won 1st Rank globally in regional redesign category.",
+                learnings: "Educational portals succeed when they prioritize student routines over administration lists.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="white"/>
+                        <line x1="50" y1="65" x2="350" y2="65" stroke="black" stroke-width="1.5"/>
+                        <line x1="110" y1="65" x2="110" y2="260" stroke="black"/>
+                        <rect x="130" y="80" width="90" height="50" rx="4" stroke="black" fill="white"/>
+                        <text x="145" y="112" font-family="Instrument Serif" font-size="16" fill="black">87.4%</text>
+                    </svg>
+                `
+            },
+            chapter_10: {
+                title: "The Pune Chapter",
+                subtitle: "Chapter 10 • June 2026",
+                type: "AI-Powered UI/UX Design Specialization",
+                problem: "Mastering advanced visual systems, user testing, and AI-assisted workflows requires professional industry mentorship.",
+                solution: "Relocated to Pune to train on advanced design tokens and research methodologies at Design Boat.",
+                process: `
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-route"></i>Specialization Areas</span>
+                    <p>Focusing on high-level industry methodologies:
+                    <ul>
+                        <li><strong>AI Workflows:</strong> Using design agents to speed up wireframing and layout exploration.</li>
+                        <li><strong>Advanced UX Research:</strong> Formulating student usability test reports.</li>
+                        <li><strong>Design Systems:</strong> Structuring variables, design tokens, and components in Figma.</li>
+                        <li><strong>Product Strategy:</strong> Mapping wireframe decisions to client budgets.</li>
+                    </ul>
+                    </p>
+                `,
+                role: "Specialist UI/UX Student",
+                outcome: "Currently accelerating design throughput and scaling conceptual wireframe layouts.",
+                learnings: "Modern design tools speed up prototyping, letting designers focus on high-level UX strategy.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="100" y="60" width="200" height="180" stroke="black" stroke-width="2" fill="white"/>
+                        <line x1="120" y1="100" x2="140" y2="100" stroke="black" stroke-width="2"/>
+                        <rect x="150" y="96" width="120" height="8" fill="black"/>
+                        <line x1="120" y1="130" x2="140" y2="130" stroke="black" stroke-width="2"/>
+                        <rect x="150" y="126" width="120" height="8" fill="black"/>
+                    </svg>
+                `
+            },
+            chapter_11: {
+                title: "Sylvorn Labs",
+                subtitle: "Chapter 11 • June 2026",
+                type: "SaaS Brand Identity",
+                problem: "Corporate websites often feel generic, boring, and fail to engage candidates or clients.",
+                solution: "Designed responsive multi-page web layouts introducing a comic-strip style About page.",
+                process: `
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-quill-write"></i>Website Pages Built</span>
+                    <p>Designed a consistent brand presence across:
+                    <ul>
+                        <li><strong>Home Page:</strong> Tech hero layout with clean product statements.</li>
+                        <li><strong>Solutions:</strong> Data sheets presenting specific SaaS offerings.</li>
+                        <li><strong>Careers &amp; Blog:</strong> Clean content layouts with custom grid lines.</li>
+                        <li><strong>About Page:</strong> Dynamic visual cards detailing company timeline logs.</li>
+                    </ul>
+                    </p>
+                `,
+                role: "UI/UX Consultant",
+                outcome: "A detailed SaaS web portal that builds visual authority and increases reader session times.",
+                learnings: "Injecting creative personality into SaaS interfaces increases brand engagement.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="white"/>
+                        <line x1="50" y1="65" x2="350" y2="65" stroke="black" stroke-width="1.5"/>
+                        <rect x="75" y="90" width="70" height="100" stroke="black" fill="white"/>
+                        <rect x="155" y="90" width="70" height="100" stroke="black" fill="white"/>
+                    </svg>
+                `
+            },
+            chapter_12: {
+                title: "Career Clout",
+                subtitle: "Chapter 12 • Present Project",
+                type: "Portal Design &amp; Lead Systems",
+                problem: "Small recruitment consultancy projects need a premium visual presence and lead capture without high database hosting fees.",
+                solution: "Designed Career Clout landing pages and linked inquiries directly to spreadsheets via Apps Script.",
+                process: `
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-settings-02"></i>Automation Scoping</span>
+                    <p>We solved budget limits by mapping inquiry form inputs to Google Sheets via Apps Script, avoiding recurring database hosting fees.
+                    <ul>
+                        <li><strong>UI:</strong> Elegant serif typography combined with compact forms.</li>
+                        <li><strong>Inquiry Flow:</strong> Standard assessment questions capturing client background.</li>
+                    </ul>
+                    </p>
+                `,
+                role: "Lead Product Designer &amp; Dev",
+                outcome: "Ongoing platform hosting, collecting and cataloging visa applications securely at zero operational cost.",
+                learnings: "Under budget constraints, blending layout design with smart automation solves business goals.",
+                svgMockup: `
+                    <svg viewBox="0 0 400 300" width="100%" height="220" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; margin:0 auto;">
+                        <rect x="50" y="40" width="300" height="220" rx="8" stroke="black" stroke-width="2" fill="white"/>
+                        <line x1="50" y1="65" x2="350" y2="65" stroke="black" stroke-width="1.5"/>
+                        <rect x="75" y="90" width="110" height="130" stroke="black" fill="white"/>
+                        <rect x="210" y="90" width="110" height="130" stroke="black" stroke-dasharray="3" fill="white"/>
                     </svg>
                 `
             }
@@ -2042,17 +1800,17 @@
 
         function updateTimelineProgress() {
             if (!timelineContainer || !progressLine) return;
-            
+
             const rect = timelineContainer.getBoundingClientRect();
             const timelineHeight = rect.height;
             const screenCenter = window.innerHeight / 2;
             const containerTopFromCenter = rect.top - screenCenter;
-            
+
             let progress = 0;
             if (containerTopFromCenter < 0) {
                 progress = Math.min(100, Math.max(0, (-containerTopFromCenter / timelineHeight) * 100));
             }
-            
+
             progressLine.style.height = `${progress}%`;
         }
 
@@ -2067,7 +1825,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const id = entry.target.getAttribute('id');
-                    
+
                     // Nav highlight
                     document.querySelectorAll('.timeline-nav-item').forEach(item => {
                         item.classList.remove('active');
@@ -2076,8 +1834,8 @@
                     if (navItem) {
                         navItem.classList.add('active');
                     }
-                    
-                    // Chapter node highlight
+
+                    // Chapter highlight
                     document.querySelectorAll('.chapter').forEach(ch => {
                         ch.classList.remove('active');
                     });
@@ -2097,9 +1855,8 @@
         // iOS Bottom Sheet Logic
         let isDragging = false;
         let startY = 0;
-        let currentY = 0;
         let sheetY = 0;
-        
+
         const sheet = document.getElementById('bottom-sheet');
         const backdrop = document.getElementById('bottom-sheet-backdrop');
         const dragHandle = document.getElementById('sheet-drag-handle');
@@ -2108,64 +1865,67 @@
         function openSheet(studyKey) {
             const data = caseStudies[studyKey];
             if (!data) return;
-            
+
             // Inject details
             document.getElementById('sheet-title').innerText = data.title;
             document.getElementById('sheet-subtitle').innerText = data.subtitle;
-            document.getElementById('cs-sheet-type').innerText = data.type;
-            
+            document.getElementById('cs-sheet-type').innerHTML = `<i class="hgi-stroke hgi-route"></i>${data.type}`;
+
             let htmlContent = '';
-            
+
             if (data.svgMockup) {
                 htmlContent += `<div class="cs-sheet-mockup">${data.svgMockup}</div>`;
             }
-            
+
             htmlContent += `
                 <div class="cs-sheet-grid">
                     <div class="cs-sheet-body">
                         <div class="cs-sheet-section">
-                            <span class="cs-sheet-section-title">Overview &amp; Problem</span>
-                            <p><strong>Problem Statement:</strong> ${data.problem}</p>
-                            <p><strong>Solution:</strong> ${data.solution}</p>
+                            <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-help-circle"></i>Problem Statement</span>
+                            <p>${data.problem}</p>
+                        </div>
+                        <div class="cs-sheet-section">
+                            <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-checkmark-circle-01"></i>The Solution</span>
+                            <p>${data.solution}</p>
                         </div>
                         ${data.process ? `<div class="cs-sheet-section">${data.process}</div>` : ''}
                     </div>
-                    
+
                     <div>
                         <div class="cs-sheet-meta-card">
                             <div class="cs-sheet-meta-item">
-                                <div class="cs-sheet-meta-label">My Role</div>
+                                <div class="cs-sheet-meta-label"><i class="hgi-stroke hgi-briefcase-01"></i>My Role</div>
                                 <div class="cs-sheet-meta-val">${data.role}</div>
                             </div>
                             <div class="cs-sheet-meta-item">
-                                <div class="cs-sheet-meta-label">Discipline</div>
+                                <div class="cs-sheet-meta-label"><i class="hgi-stroke hgi-layout-01"></i>Discipline</div>
                                 <div class="cs-sheet-meta-val">${data.type}</div>
                             </div>
                             <div class="cs-sheet-meta-item">
-                                <div class="cs-sheet-meta-label">Tools</div>
+                                <div class="cs-sheet-meta-label"><i class="hgi-stroke hgi-settings-02"></i>Tools</div>
                                 <div class="cs-sheet-meta-val">Figma</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="cs-sheet-section">
-                    <span class="cs-sheet-section-title">Outcome &amp; Deliverables</span>
+                    <span class="cs-sheet-section-title"><i class="hgi-stroke hgi-star-check"></i>Outcome &amp; Metrics</span>
                     <p style="font-size: 1.3rem; font-weight: 300; line-height: 1.5;">${data.outcome}</p>
                 </div>
             `;
-            
+
             if (data.learnings) {
                 htmlContent += `
                     <div class="cs-sheet-insight">
-                        <h4 class="cs-sheet-insight-title">Design Takeaway</h4>
+                        <h4 class="cs-sheet-insight-title">Design Observations</h4>
                         <p class="cs-sheet-insight-text">${data.learnings}</p>
                     </div>
                 `;
             }
-            
+
             document.getElementById('sheet-dynamic-content').innerHTML = htmlContent;
-            
+
             // Trigger animation
             sheet.style.transform = 'translate(-50%, 0)';
             sheet.classList.add('active');
@@ -2192,22 +1952,22 @@
             if (!isDragging) return;
             const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
             const deltaY = clientY - startY;
-            
+
             if (deltaY > 0) {
                 sheetY = deltaY;
                 sheet.style.transform = `translate(-50%, ${sheetY}px)`;
             } else {
-                // visual dampening when pulling upwards
                 sheetY = deltaY * 0.15;
                 sheet.style.transform = `translate(-50%, ${sheetY}px)`;
             }
         }
 
+        // Mouse Up / Touch End handler
         function dragEnd() {
             if (!isDragging) return;
             isDragging = false;
             sheet.classList.remove('dragging');
-            
+
             if (sheetY > 150) {
                 closeSheet();
             } else {
